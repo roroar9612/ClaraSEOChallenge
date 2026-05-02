@@ -1,0 +1,10 @@
+# robots.txt for clara.com
+# Strategy: Allow all crawlers (search engines + AI bots)
+# Updated: 2026-03-10
+
+# ——— DEFAULT RULE ———
+# Allow all bots to crawl the entire site
+User-agent: *
+Allow: /
+
+Sitemap: https://www.clara.com/sitemap.xml
