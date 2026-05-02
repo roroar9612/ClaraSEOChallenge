@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": ["mcp__webflow__*"]
+  },
+  "extraKnownMarketplaces": {
+    "webflow-skills": {
+      "source": "github",
+      "repo": "webflow/webflow-skills"
+    }
+  },
+  "enabledPlugins": {
+    "webflow-designer-tools@webflow-skills": true,
+    "webflow-skills@webflow-skills": true
+  }
+}
