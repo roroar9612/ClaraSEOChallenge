@@ -1,11 +1,13 @@
 {
   "permissions": {
-    "allow": ["mcp__webflow__*"]
+    "allow": ["mcp__webflow__*", "mcp__git__*"]
   },
   "extraKnownMarketplaces": {
     "webflow-skills": {
-      "source": "github",
-      "repo": "webflow/webflow-skills"
+      "source": {
+        "source": "github",
+        "repo": "webflow/webflow-skills"
+      }
     }
   },
   "enabledPlugins": {

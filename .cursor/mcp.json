@@ -6,10 +6,6 @@
       "env": {
         "WEBFLOW_TOKEN": "<YOUR_WEBFLOW_SITE_TOKEN>"
       }
-    },
-    "git": {
-      "command": "mcp-server-git",
-      "args": []
     }
   }
 }
