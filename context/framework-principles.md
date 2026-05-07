@@ -90,7 +90,6 @@ H3  →  fbl-accordion-1-title-3    (FAQ questions)
 - Beneficios > features: "da autonomía a tu equipo" ≠ "emite tarjetas virtuales"
 - CTAs con verbos de acción: "Regístrate gratis", "Ver cómo funciona", "Empieza ahora"
 - Sin superlativos vacíos: no "la mejor", no "líder en"
-- "sin aval" siempre en minúsculas
 - "PyMEs" con mayúsculas (acrónimo)
 - "empresarial" > "corporativa" como keyword principal
 

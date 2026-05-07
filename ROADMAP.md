@@ -2,161 +2,83 @@
 
 ---
 
-## Estado actual
+## Estado actual (mayo 2026 — iteración 2 completada)
 
-| Part | Documento | Estado en repo |
+| Part | Documento | Estado |
 |---|---|---|
-| A | `part-a/audit.md` | ⏳ Draft listo — pendiente de mover al repo |
-| B | `part-b/keyword-strategy.md` | ⏳ Draft listo — pendiente de mover al repo |
-| C | `part-c/geo-ai-search.md` | ⏳ Draft listo — pendiente de mover al repo |
+| A | `part-a/audit.md` | ✅ En repo |
+| B | `part-b/keyword-strategy.md` | ✅ En repo |
+| C | `part-c/geo-ai-search.md` | ✅ En repo |
 | D | `part-d/before/` + `part-d/after/` + `part-d/notes.md` | ✅ En repo |
 | — | `README.md` | ✅ En repo |
-| — | Webflow MCP setup (`.mcp.json`, `CLAUDE.md`, `context/`) | ✅ En repo — pendiente auth OAuth |
+| — | Webflow MCP setup (`.mcp.json`, `CLAUDE.md`, `context/`) | ✅ En repo |
+| — | Webflow demo publicado | ✅ Live en `clara-seo-challenge.webflow.io` |
+
+### Webflow demo — estado publicado
+
+**corporate-card** (`/corporate-card`):
+- Navbar Clara (componente global) ✅
+- Hero con H1 correcto ✅
+- Stats bar ✅
+- Logos strip — 11 clientes con CSS background-image ✅
+- Features grid ✅
+- Diferenciadores ✅
+- FAQ accordion ✅
+- Interlinking → small-business ✅
+- CTA final ✅
+- Footer Clara (componente global) — logo blanco, 3 awards, 4 columnas, App Store + Google Play ✅
+- SEO: title, meta description (sin "sin aval"), canonical, hreflang, FAQ schema JSON-LD ✅
+
+**small-business** (`/small-business`):
+- Navbar Clara (componente global) ✅
+- Hero sin "sin aval" en copy y meta description ✅
+- Logos strip — 11 clientes ✅
+- Perfil de usuario ✅
+- Features grid ("Alta 100% digital" en lugar de "Sin aval ni historial") ✅
+- Interlinking → corporate-card ✅
+- CTA final ✅
+- Footer Clara (componente global) ✅
+
+### Componentes Webflow creados
+
+| Componente | ID | Grupo |
+|---|---|---|
+| Navbar Clara | `1458fdd9-2ea2-f3f7-2342-cd55a0df2fc4` | Global |
+| Footer Clara | `594c8515-0263-6f17-987b-6375305f4759` | Global |
 
 ---
 
-## Lo que falta ejecutar
+## Lo que falta para la entrega final
 
-### Fase 1 — Setup del repo (30 min)
+### Iteración 3 — Polish visual (prioridad alta)
 
-```bash
-# Crear estructura de carpetas
-mkdir -p clara-seo-challenge/{part-a,part-b,part-c,part-d/{before,after}}
+- [ ] **Imágenes hero** — corporate-card y small-business no tienen imagen en el hero. Asset listo: `69fcec93c6b5fa35b5651982` (Corporate credit cards hero img). Insertar con CSS background-image en el hero section.
+- [ ] **Responsive** — navbar y footer se ven bien en desktop. Revisar mobile portrait y tablet en Webflow Designer (breakpoints medium, small, tiny).
+- [ ] **Open Graph image** (`og:image`) — añadir via Page Settings para ambas páginas. Usar la imagen hero de corporate-card como OG image.
+- [ ] **Formulario de registro** — el CTA final tiene un botón pero no un form funcional. Webflow Forms puede capturar leads sin backend.
+- [ ] **Navbar dropdowns** — el sitio real tiene dropdowns para Productos, Soluciones, Recursos. El demo tiene links planos. Mejorar si el tiempo lo permite.
 
-# Copiar documentos ya producidos
-cp audit.md clara-seo-challenge/part-a/
-cp keyword-strategy.md clara-seo-challenge/part-b/
-cp geo-ai-search.md clara-seo-challenge/part-c/
+### Iteración 3 — Fixes de compliance (bloqueante)
 
-# Inicializar git
-cd clara-seo-challenge
-git init
-git remote add origin [URL del repo en GitHub]
-```
+- [ ] **"sin aval" en copy de corporate-card** — verificar que no quede ninguna instancia en el canvas. Buscar en el FAQ accordion y secciones de diferenciadores.
+- [ ] **hreflang como HTML estático** — actualmente se inyecta via JS custom code. Mover a Page Settings > SEO para que funcione como HTML nativo.
 
----
+### Para la sesión siguiente — cómo retomar
 
-### Fase 2 — Clonar páginas para before/ (15 min)
+1. Abrir Webflow Designer en `clara-seo-challenge.webflow.io`
+2. Verificar que el MCP está corriendo: `npx mcp-remote http://localhost:1339/sse`
+3. Leer este archivo + `part-d/notes.md` sección "Lo que falta"
+4. Leer `context/style-guide.md` y `context/framework-principles.md` antes de tocar el canvas
+5. Usar el skill `designer-tools` para cualquier operación de canvas
 
-```bash
-wget --mirror --convert-links --adjust-extension --no-parent \
-  -P part-d/before/ \
-  https://www.clara.com/es-mx/products/corporate-card
-
-wget --mirror --convert-links --adjust-extension --no-parent \
-  -P part-d/before/ \
-  https://www.clara.com/es-mx/solutions/small-business
-```
-
-Renombrar los archivos resultantes:
-- → `part-d/before/corporate-card.html`
-- → `part-d/before/small-business.html`
-
-Commit: `"feat: add before/ pages — current state of clara.com"`
-
----
-
-### Fase 3 — Implementar cambios con Claude Code MCP (1-2 hrs)
-
-Abrir Claude Code en el repo. Pasarle el `SKILL-claude-code.md` como contexto.
-
-**Orden de ejecución:**
-
-1. Copiar `before/corporate-card.html` → `after/corporate-card.html`
-2. Aplicar cambios en `after/corporate-card.html`:
-   - [ ] Title tag → "Tarjeta Empresarial para Empresas en México | Clara"
-   - [ ] Meta description → versión orientada a beneficios con "sin aval"
-   - [ ] H1 → "La tarjeta empresarial que escala con tu equipo"
-   - [ ] H2 nuevo → "Lo que tu banco no puede darte"
-   - [ ] FAQ schema JSON-LD en `<head>`
-   - [ ] Sección de interlinking → "/es-mx/solutions/small-business"
-3. Copiar `before/small-business.html` → `after/small-business.html`
-4. Aplicar cambios en `after/small-business.html`:
-   - [ ] Title tag → "Tarjeta Empresarial para PyMEs en México | Clara"
-   - [ ] H1 → "El control de gastos que tu PyME necesitaba desde el día uno"
-   - [ ] Sección de perfil de usuario real
-   - [ ] Interlinking de regreso → "/es-mx/products/corporate-card"
-5. Crear `part-d/notes.md` con hipótesis y métricas
-
-Commit: `"feat: implement SEO improvements and narrative interlinking (part-d/after)"`
-
----
-
-### Fase 4 — Webflow (opcional pero recomendado) (2-3 hrs)
-
-Si se quiere mostrar la versión con fidelidad visual:
-
-1. Crear proyecto nuevo en Webflow
-2. Replicar la estructura visual de `after/corporate-card.html` usando los componentes de Clara como referencia
-3. Conectar Webflow al repo via Webflow Git
-4. Publicar desde Webflow → el código se sincroniza automáticamente al repo en `/part-d/after/`
-5. Claude Code aplica los ajustes SEO finales encima del código exportado
-
-**Nota:** La sincronización Webflow → Git es unidireccional. Los cambios de Claude Code que vivan solo en el repo se perderán si se vuelve a publicar desde Webflow. Documentar esto en `notes.md`.
-
----
-
-### Fase 5 — README.md (45 min)
-
-El README es lo primero que lee quien evalúa. No es un índice — es tu voz explicando las decisiones.
-
-Estructura sugerida:
-
-```markdown
-# Clara — Technical Challenge: Website Specialist (SEO)
-
-## Approach
-[2-3 párrafos explicando el hilo conductor: narrative-first architecture,
-por qué el SEO es el resultado y no la estrategia, qué te pareció
-más interesante del problema]
-
-## Assumptions
-[Las mismas del Assumption Log de Part A — centralizadas aquí también]
-
-## Structure
-[Descripción breve de qué hay en cada carpeta]
-
-## Part A — SEO Audit
-[1 párrafo con el hallazgo más importante]
-
-## Part B — Keyword Strategy & Content Architecture
-[1 párrafo con la decisión de arquitectura más importante]
-
-## Part C — GEO / AI Search
-[1 párrafo con el baseline finding y la propuesta]
-
-## Part D — Quick Win
-[1 párrafo explicando por qué trabajaste dos páginas en lugar de una,
-y qué demuestra el before/after]
-
-## Tools used
-- Browser DevTools + view-source
-- Google Trends (CSV export, últimos 12 meses por país)
-- SEMrush (tráfico orgánico)
-- Screaming Frog / Sitemap analysis
-- wget (clonado de páginas)
-- Claude Code MCP (implementación de cambios)
-- Webflow (si aplica)
-- ChatGPT / Perplexity (GEO baseline testing)
-```
-
-Commit: `"docs: add README with approach and decisions"`
-
----
-
-### Fase 6 — Push final y revisión (30 min)
-
-```bash
-git add .
-git commit -m "chore: final review and cleanup"
-git push origin main
-```
-
-Revisar en GitHub que:
-- [ ] El diff entre `before/` y `after/` es legible y muestra exactamente qué cambió
-- [ ] El README se renderiza correctamente
-- [ ] Todos los `.md` tienen formato limpio
-- [ ] No hay archivos temporales o assets innecesarios del wget
+**Contexto crítico para la siguiente sesión:**
+- Site ID Webflow: `69f57ff4021a4f2250a9fbd4`
+- corporate-card page ID: `69f592e365ffb17eb53e7488`
+- small-business page ID: `69fc967c3d0867342deac6eb`
+- Navbar Clara component ID: `1458fdd9-2ea2-f3f7-2342-cd55a0df2fc4`
+- Footer Clara component ID: `594c8515-0263-6f17-987b-6375305f4759`
+- Las imágenes DEBEN insertarse con CSS `background-image` en divs contenedores — los elementos `<img>` (imgraw en Webflow) no persisten el `src` en el modelo de datos y no renderizan en publish.
+- Los assets del proyecto CDN: `https://cdn.prod.website-files.com/69f57ff4021a4f2250a9fbd4/`
 
 ---
 

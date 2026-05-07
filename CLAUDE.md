@@ -17,7 +17,7 @@ Referencia: `part-d/after/corporate-card.html`
 Secciones en orden:
 1. **Hero** — H1: "La tarjeta empresarial que escala con tu equipo", CTA primario "Regístrate gratis"
 2. **Stats bar** — 3 stats de prueba social (30,000+ empresas, México, Colombia, Brasil)
-3. **Features grid** — Control por empleado / Conciliación SAT / Sin aval / Integraciones ERP
+3. **Features grid** — Control por empleado / Conciliación SAT / Crédito a nombre de tu empresa / Integraciones ERP
 4. **"Lo que tu banco no puede darte"** — sección diferenciadores (nueva, sin banco tradicional)
 5. **FAQ accordion** — 8 preguntas del DOM + 4 nuevas sobre diferenciadores clave
 6. **Interlinking** — CTA narrativo hacia `/small-business`
@@ -45,7 +45,7 @@ Secciones en orden:
 ### corporate-card — Head Code
 ```html
 <title>Tarjeta Empresarial para Empresas en México | Clara</title>
-<meta name="description" content="Tarjeta empresarial sin aval para equipos en México. Crédito ilimitado, controles por empleado y conciliación automática con SAT e integración ERP. Más de 30,000 empresas confían en Clara.">
+<meta name="description" content="Tarjeta empresarial para equipos en México. Crédito ilimitado, controles por empleado y conciliación automática con SAT e integración ERP. Más de 30,000 empresas confían en Clara.">
 <link rel="canonical" href="https://www.clara.com/es-mx/products/corporate-card">
 <link rel="alternate" hreflang="es-MX" href="https://www.clara.com/es-mx/products/corporate-card">
 <script type="application/ld+json">
@@ -53,7 +53,7 @@ Secciones en orden:
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type":"Question","name":"¿Necesito aval personal para obtener una tarjeta empresarial Clara?","acceptedAnswer":{"@type":"Answer","text":"No. Clara otorga crédito a la empresa, no al dueño. No se requiere aval personal, garantía patrimonial ni historial crediticio previo."}},
+    {"@type":"Question","name":"¿Cuánto tiempo tarda el proceso de alta en Clara?","acceptedAnswer":{"@type":"Answer","text":"El proceso de alta es 100% digital. En la mayoría de los casos puedes empezar a usar tu tarjeta empresarial el mismo día que completas el registro."}},
     {"@type":"Question","name":"¿Cuántas tarjetas puedo emitir para mi equipo?","acceptedAnswer":{"@type":"Answer","text":"Puedes emitir tarjetas ilimitadas — físicas, virtuales o de un solo uso — con límites y controles individuales por tarjeta."}},
     {"@type":"Question","name":"¿Cómo controlo lo que gasta cada empleado?","acceptedAnswer":{"@type":"Answer","text":"Defines límites por tarjeta, restricciones por categoría de gasto, horarios de uso y flujos de aprobación desde la plataforma."}},
     {"@type":"Question","name":"¿Clara se integra con mi sistema de contabilidad?","acceptedAnswer":{"@type":"Answer","text":"Sí. Integraciones nativas con SAP, NetSuite, QuickBooks, Oracle y Zoho con sincronización automática de transacciones."}}
@@ -65,7 +65,7 @@ Secciones en orden:
 ### small-business — Head Code
 ```html
 <title>Tarjeta Empresarial para PyMEs en México | Clara</title>
-<meta name="description" content="Tarjeta empresarial para PyMEs en México: control de gastos por empleado, conciliación automática con SAT y cero papeleo. Sin aval, sin historial previo. Empieza en minutos.">
+<meta name="description" content="Tarjeta empresarial para PyMEs en México: control de gastos por empleado, conciliación automática con SAT y cero papeleo. Empieza en minutos.">
 <link rel="canonical" href="https://www.clara.com/es-mx/solutions/small-business">
 <link rel="alternate" hreflang="es-MX" href="https://www.clara.com/es-mx/solutions/small-business">
 ```

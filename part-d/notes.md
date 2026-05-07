@@ -25,8 +25,8 @@ Ninguna llevaba a la otra. El `before/` documenta ese estado. El `after/` implem
 
 ### 3. Meta description — orientada a diferenciadores
 **Antes:** Lista de features (emisión al instante, conciliación, SAT)
-**Después:** Incluye "sin aval", beneficio por empleado, prueba social ("30,000 empresas")
-**Por qué:** La descripción anterior no diferenciaba Clara de un banco tradicional. "Sin aval" es el diferenciador más poderoso de Clara y ningún banco puede ofrecer eso. Incluirlo en el snippet aumenta el CTR de usuarios en evaluación activa.
+**Después:** Incluye beneficio por empleado, prueba social ("30,000 empresas") y diferenciadores de control de gasto
+**Por qué:** La descripción anterior no diferenciaba Clara de un banco tradicional. Resaltar controles por empleado y conciliación automática responde directamente la pregunta implícita del prospecto y aumenta el CTR de usuarios en evaluación activa.
 
 ### 4. og:title + twitter:title — consistencia
 Actualizados para coincidir con el nuevo `<title>`. El copy compartido en redes tiene que reflejar el mismo posicionamiento.
@@ -43,12 +43,12 @@ Actualizados para coincidir con el nuevo `<title>`. El copy compartido en redes 
 
 ### 7. FAQ schema — JSON-LD
 **Antes:** 8 preguntas en el DOM (ya existentes) sin marcado estructurado
-**Después:** Bloque `FAQPage` en JSON-LD con las 8 preguntas del accordion + 4 preguntas adicionales sobre diferenciadores clave (aval, integraciones, control de gastos)
-**Por qué:** El schema FAQPage habilita rich results en SERP (preguntas expandibles debajo del snippet), lo que aumenta el CTR orgánico sin modificar el contenido visible. Las preguntas adicionales sobre "sin aval" e integraciones capturan búsquedas informacionales que preceden a la intención de compra.
+**Después:** Bloque `FAQPage` en JSON-LD con las 8 preguntas del accordion + 4 preguntas adicionales sobre diferenciadores clave (proceso de alta, tarjetas ilimitadas, control de gastos, integraciones)
+**Por qué:** El schema FAQPage habilita rich results en SERP (preguntas expandibles debajo del snippet), lo que aumenta el CTR orgánico sin modificar el contenido visible. Las preguntas adicionales sobre el proceso de alta e integraciones capturan búsquedas informacionales que preceden a la intención de compra.
 
 ### 8. Sección "Lo que tu banco no puede darte"
 Nueva sección de contenido insertada antes del FAQ accordion.
-**Por qué:** Captura búsquedas de alta intención como "tarjeta corporativa sin aval" y "tarjeta empresarial sin historial crediticio" — términos que describen el diferenciador principal de Clara y que ninguna página del sitio trabajaba explícitamente.
+**Por qué:** Captura búsquedas de alta intención como "tarjeta corporativa para empresas" y "tarjeta empresarial con control de gastos" — términos que describen los diferenciadores de Clara frente a bancos tradicionales y que ninguna página del sitio trabajaba explícitamente.
 
 ### 9. Interlinking hacia small-business
 Nueva sección con CTA antes del formulario de registro final.
@@ -122,7 +122,7 @@ Estos cambios viven en el repo. En producción, deben implementarse directamente
 
 | Script ID | Versión | Página | Contenido |
 |---|---|---|---|
-| `claraccfaqschema` | 1.0.1 | corporate-card | FAQ JSON-LD (4 preguntas sobre aval, tarjetas, control de gastos, integraciones) |
+| `claraccfaqschema` | 1.0.1 | corporate-card | FAQ JSON-LD (4 preguntas sobre proceso de alta, tarjetas, control de gastos, integraciones) |
 | `claraccseolinks` | 1.0.0 | corporate-card | canonical + hreflang es-MX inyectados via JS |
 | `clarasbseolinks` | 1.0.0 | small-business | canonical + hreflang es-MX inyectados via JS |
 

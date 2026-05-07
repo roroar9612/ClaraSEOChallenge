@@ -64,7 +64,7 @@ Se trabajaron dos páginas en lugar de una porque el problema real no era el con
 **corporate-card.html:**
 - hreflang `es-MX` y canonical → URLs absolutas (bug técnico)
 - Title: "Tarjeta Empresarial para Empresas en México | Clara"
-- Meta description con "sin aval" y prueba social
+- Meta description con diferenciadores y prueba social
 - H1: "La tarjeta empresarial que escala con tu equipo"
 - Segundo H1 → `<h2>` (corrección semántica, cero riesgo visual)
 - FAQ schema JSON-LD (8 preguntas → rich results habilitados)
@@ -90,14 +90,59 @@ Ver `part-d/notes.md` para la justificación detallada de cada cambio y las mét
 - Claude Code + Webflow MCP (construcción del demo visual en Webflow)
 - ChatGPT / Perplexity (GEO baseline testing)
 
+## Descargar assets de una página
+
+Se agregó el script `scripts/download-assets.sh` para clonar una URL y descargar sus assets útiles (CSS, JS, imágenes y fuentes) con `wget`.
+
+```bash
+# URL por defecto: https://www.clara.com/es-mx/products/corporate-card
+./scripts/download-assets.sh
+
+# URL y carpeta custom
+./scripts/download-assets.sh "https://www.clara.com/es-mx/products/corporate-card" "downloads/corporate-card"
+```
+
+El resultado queda dentro de `downloads/` (o la carpeta que indiques).
+
+Para aislar solo las imágenes y preparar una carpeta limpia para subirlas a Webflow con drag and drop:
+
+```bash
+./scripts/prepare-webflow-images.py "downloads/corporate-card" "downloads/webflow-images"
+```
+
+Esto copia las imágenes a `downloads/webflow-images/` y genera `downloads/webflow-images/manifest.csv` con ruta original, extensión y texto alt sugerido.
+
+## Auditar páginas publicadas en Webflow
+
+Para correr una auditoría completa en una sola pasada sobre las páginas del demo publicado:
+
+```bash
+./scripts/audit-webflow-pages.py
+```
+
+El reporte se genera en `reports/webflow-full-published-audit.md` e incluye SEO metadata, canonical/hreflang, JSON-LD, headings, links, imágenes y señales básicas de accesibilidad.
+
+También puedes pasar URLs custom:
+
+```bash
+./scripts/audit-webflow-pages.py \
+  "https://clara-seo-challenge.webflow.io/corporate-card" \
+  "https://clara-seo-challenge.webflow.io/small-business" \
+  --output "reports/webflow-full-published-audit.md"
+```
+
 ## Para retomar este trabajo
 
 Ver `CLAUDE.md` para el setup del Webflow MCP y el estado de la construcción del demo visual.  
 Ver `ROADMAP.md` para el checklist completo de lo que está hecho y lo que falta.
 
-**Estado actual (mayo 2026):**
+**Estado actual (mayo 2026 — iteración 2 publicada):**
 - Parts A, B, C: documentos completos en sus carpetas
 - Part D: `before/` y `after/` implementados, `notes.md` completo
-- Webflow MCP: configurado, pendiente de autenticación OAuth y construcción del demo
-- README: completo
-- Git: pendiente de inicializar y hacer push
+- Webflow demo: publicado en `clara-seo-challenge.webflow.io`
+  - `/corporate-card`: navbar, logos strip (11 clientes), 7 secciones, footer — todos los assets renderizando
+  - `/small-business`: mismos componentes globales, copy sin referencias a "sin aval"
+  - Navbar y Footer convertidos a **componentes reutilizables** en Webflow
+- Git: en repo, rama `main`
+
+Ver `ROADMAP.md` para el checklist detallado de lo hecho y lo pendiente (iteración 3).

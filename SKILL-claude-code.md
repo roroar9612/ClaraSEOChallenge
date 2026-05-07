@@ -107,9 +107,9 @@ fbl-button-icon-23     → CTA secundario con ícono
 <meta name="description" content="Tarjeta Corporativa de crédito empresarial con emisión inmediata...">
 
 <!-- AFTER -->
-<meta name="description" content="Tarjeta empresarial sin aval para equipos en México. Crédito ilimitado, controles por empleado y conciliación automática. Regístrate en minutos.">
+<meta name="description" content="Tarjeta empresarial para equipos en México. Crédito ilimitado, controles por empleado y conciliación automática. Regístrate en minutos.">
 ```
-**Por qué:** La descripción actual lista features. La nueva responde la pregunta implícita del prospecto ("¿por qué Clara y no mi banco?") e incorpora el diferenciador principal — sin aval — que ningún banco tradicional puede ofrecer.
+**Por qué:** La descripción actual lista features. La nueva responde la pregunta implícita del prospecto ("¿por qué Clara y no mi banco?") y destaca los diferenciadores principales — controles por empleado y conciliación automática — que ninguna tarjeta bancaria tradicional ofrece de forma integrada.
 
 ---
 
@@ -138,14 +138,13 @@ Añadir antes del bloque de FAQ existente:
   Lo que tu banco no puede darte
 </h2>
 <p class="fbl-lead-text-26">
-  Clara no requiere aval personal, ni historial crediticio previo, 
-  ni garantías patrimoniales. El crédito se otorga a la empresa, 
-  no al dueño. Y a diferencia de una tarjeta bancaria tradicional, 
-  puedes emitir tarjetas ilimitadas para tu equipo en minutos, 
-  con límites y controles individuales por colaborador.
+  A diferencia de una tarjeta bancaria tradicional, puedes emitir 
+  tarjetas ilimitadas para tu equipo en minutos, con límites y 
+  controles individuales por colaborador. El crédito se otorga 
+  a la empresa, no al dueño.
 </p>
 ```
-**Por qué:** Esta es la oportunidad de capturar búsquedas de alta intención como "tarjeta corporativa sin aval" y "tarjeta empresarial sin historial crediticio" — términos que describen el diferenciador principal de Clara y que ninguna página del sitio trabaja explícitamente hoy.
+**Por qué:** Esta es la oportunidad de capturar búsquedas de alta intención como "tarjeta corporativa para empresas" y "tarjeta empresarial con control de gastos" — términos que describen los diferenciadores de Clara frente a bancos tradicionales y que ninguna página del sitio trabaja explícitamente hoy.
 
 ---
 
@@ -159,10 +158,10 @@ Añadir antes del bloque de FAQ existente:
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "¿Necesito aval personal para obtener una tarjeta empresarial Clara?",
+      "name": "¿Cuánto tiempo tarda el proceso de alta en Clara?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. Clara otorga crédito a la empresa, no al dueño. No se requiere aval personal, garantía patrimonial ni historial crediticio previo."
+        "text": "El proceso de alta es 100% digital. En la mayoría de los casos puedes empezar a usar tu tarjeta empresarial el mismo día que completas el registro."
       }
     },
     {
