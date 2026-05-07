@@ -8,13 +8,13 @@
 
 ## Assumption Log
 
-**Assumption 1 — La `/empresas` page es hipotética.** No existe esa URL en el sitemap. Para la Parte D se trabaja sobre dos páginas reales que sirven el mismo propósito: `/es-mx/products/corporate-card` y `/es-mx/solutions/small-business`. Ambas comparten componentes y copy casi idénticos — lo cual es en sí mismo un hallazgo.
+**Assumption 1 — The `/empresas` page is hypothetical.** That URL does not exist in the sitemap. Part D works on two real pages that serve the same purpose: `/es-mx/products/corporate-card` and `/es-mx/solutions/small-business`. Both share nearly identical components and copy — which is itself a finding.
 
-**Assumption 2 — La estrategia de vocabulario requiere coexistencia, no sustitución.** Clara usa "tarjeta corporativa" como nombre de producto. Google Trends muestra que "tarjeta empresarial" supera a "tarjeta corporativa" en volumen de búsqueda en MX y CO de forma consistente — en Colombia, "corporativa" tiene volumen cercano a cero. El enfoque correcto no es abandonar "corporativa" sino trabajar con los dos términos en capas distintas: "empresarial" como ancla en los elementos de mayor peso SEO (title, H1, meta description), y "corporativa" como señal semántica secundaria en subtítulos y cuerpo de texto. Brasil es la excepción — "cartão corporativo" lidera y el sitio ya lo usa correctamente.
+**Assumption 2 — Vocabulary strategy requires coexistence, not substitution.** Clara uses "tarjeta corporativa" as the official product name. Google Trends shows that "tarjeta empresarial" consistently outperforms "tarjeta corporativa" in search volume in MX and CO — in Colombia, "corporativa" has close to zero search volume. The right approach is not to abandon "corporativa" but to work with both terms in distinct layers: "empresarial" as the anchor in the highest-weight SEO elements (title, H1, meta description), and "corporativa" as a secondary semantic signal in subheadings and body text. Brazil is the exception — "cartão corporativo" leads and the site already uses it correctly.
 
-Esta estrategia resuelve la tensión entre lo que la marca llama al producto y lo que los usuarios buscan, sin crear inconsistencia de marca.
+This strategy resolves the tension between what the brand calls the product and what users actually search for, without creating brand inconsistency.
 
-**Assumption 3 — Los slugs de URL en inglés afectan la señal de localización.** Páginas como `/products/corporate-card` y `/cards/black-card` dentro de rutas en español generan una señal de localización inconsistente. El impacto del slug por sí solo es modesto, pero la inconsistencia amplifica los problemas de hreflang y contenido duplicado que ya existen. Cualquier migración de slugs debe acompañarse de 301 redirects y validación en Google Search Console antes y después del cambio.
+**Assumption 3 — English URL slugs affect localization signals.** Pages like `/products/corporate-card` and `/cards/black-card` within Spanish-language URL paths generate an inconsistent localization signal. The slug impact alone is modest, but the inconsistency amplifies the hreflang and duplicate content issues that already exist. Any slug migration must include 301 redirects and pre/post validation in Google Search Console.
 
 ---
 
@@ -32,108 +32,108 @@ The audit followed a deliberate sequence: symptom first, then manual verificatio
 
 ## 1. Top 3 Critical Technical SEO Issues
 
-### Issue 1 — Hreflang incompleto en páginas internas
+### Issue 1 — Incomplete hreflang on internal pages
 
-Clara opera en tres mercados (MX, CO, BR) con contenido en español y portugués. Stackoptic confirma que la homepage global (`clara.com`) tiene hreflang implementado correctamente — con pares por idioma-país y `x-default` apuntando a la versión global (score 10/10). El problema está en las páginas internas: los atributos `hreflang` y `canonical` usan URLs relativas en lugar de absolutas, lo que hace que Google no pueda resolver a qué versión pertenece cada página ni servir la correcta a cada mercado.
+Clara operates in three markets (MX, CO, BR) with content in Spanish and Portuguese. Stackoptic confirms that the global homepage (`clara.com`) has hreflang correctly implemented — with language-country pairs and `x-default` pointing to the global version (score 10/10). The problem is on internal pages: `hreflang` and `canonical` attributes use relative URLs instead of absolute ones, which prevents Google from resolving which version belongs to each page and serving the correct one per market.
 
-**Por qué es prioritario:** No es un bug aislado — es la causa raíz que amplifica todos los demás problemas de localización. Un CFO en Colombia buscando "tarjeta empresarial" puede recibir la versión mexicana, o la homepage global en inglés, según lo que Google decida. La caída del 11% en tráfico orgánico observada en SEMrush (235,528 visitas, abril 2026) tiene explicación estructural aquí: el sitio canibaliza sus propias versiones.
+**Why it is high priority:** This is not an isolated bug — it is the root cause that amplifies all other localization issues. A CFO in Colombia searching "tarjeta empresarial" may receive the Mexican version, or the global English homepage, depending on what Google resolves. The 11% organic traffic drop observed in SEMrush (235,528 visits, April 2026) has a structural explanation here: the site cannibalizes its own versions.
 
-**Impacto esperado al corregirlo:** Hreflang con URLs absolutas permite a Google indexar y servir la versión correcta a cada mercado. Detiene la canibalización entre `/es-mx/`, `/es-co/` y `/pt-br/` y recupera impresiones orgánicas perdidas por confusión de versión.
+**Expected impact when fixed:** Hreflang with absolute URLs allows Google to index and serve the correct version to each market. It stops cannibalization between `/es-mx/`, `/es-co/`, and `/pt-br/` and recovers organic impressions lost to version confusion.
 
-**Nota de implementación:** Una tag hreflang por página por par idioma-país, con `x-default` apuntando a la versión global. Debe ser consistente tanto en el `<head>` HTML como en el sitemap. En Webflow, esto se gestiona desde Custom Code > Head en Page Settings.
-
----
-
-### Issue 2 — Structured data ausente (score 0/100)
-
-Stackoptic detectó ausencia completa de structured data en las páginas de producto. No hay schema de tipo `Organization`, `FAQPage`, `BreadcrumbList`, ni `LocalBusiness`. El score en esta dimensión es 0/100.
-
-**Por qué importa:** El structured data es la forma en que el sitio le comunica a Google — y a los motores de AI search — qué tipo de entidad es cada página, qué preguntas responde, y cómo se relaciona con el resto del sitio. Sin él, Google no puede mostrar rich results (accordions de FAQ en SERP, breadcrumbs visuales, datos de empresa). Para GEO, la ausencia de schema estructurado reduce la probabilidad de que los modelos de AI citen correctamente la información del sitio — los modelos priorizan contenido estructurado y atribuible.
-
-`FAQPage` schema en la página de tarjeta corporativa es la intervención de mayor retorno inmediato: habilita rich results en la SERP para las preguntas que los prospectos ya están haciendo.
-
-**Impacto esperado al corregirlo:** Rich results en SERP para páginas de producto, mejor señal de entidad para Google Knowledge Graph, y contenido más citable por motores de AI search. El FAQ schema se implementa como JSON-LD en el `<head>` — sin tocar el HTML visible ni requerir cambios de diseño.
+**Implementation note:** One hreflang tag per page per language-country pair, with `x-default` pointing to the global version. Must be consistent in both the HTML `<head>` and the sitemap. In Webflow, this is managed via Custom Code > Head in Page Settings.
 
 ---
 
-### Issue 3 — Señales de localización inconsistentes
+### Issue 2 — Structured data absent (score 0/100)
 
-Este issue tiene múltiples expresiones que apuntan al mismo problema subyacente: el sitio creció rápido en mercados sin un proceso centralizado de localización.
+Stackoptic detected a complete absence of structured data on product pages. No `Organization`, `FAQPage`, `BreadcrumbList`, or `LocalBusiness` schema is present. The score for this dimension is 0/100.
 
-**Nota sobre `html lang`:** Las versiones localizadas del sitio tienen el atributo `lang` correctamente implementado — verificado manualmente con DevTools: `clara.com/es-mx` → `lang="es-MX"`, `clara.com/es-co` → `lang="es-CO"`. El valor `es-MX` es más preciso que un genérico `es` y es la implementación correcta para señalización regional. El hallazgo de `lang="en-US"` aplica específicamente al dominio global `clara.com` y a páginas sin prefijo de localización — no a las versiones por mercado.
+**Why it matters:** Structured data is how the site communicates to Google — and to AI search engines — what type of entity each page is, what questions it answers, and how it relates to the rest of the site. Without it, Google cannot display rich results (FAQ accordions in SERP, visual breadcrumbs, company data). For GEO, the absence of structured schema reduces the probability that AI models will cite site content correctly — models prioritize structured, attributable content.
 
-Las manifestaciones concretas identificadas en el audit incluyen:
+`FAQPage` schema on the corporate card page is the highest-return immediate intervention: it enables rich results in the SERP for the questions prospects are already asking.
 
-- `clara.com` (dominio global) tiene `lang="en-US"` aun cuando sirve como punto de entrada a usuarios de habla hispana y portuguesa, y sus rutas de navegación llevan a versiones en español y portugués.
-- Páginas de error 404 aparecen en inglés dentro de rutas `/es-mx/`, exponiendo texto de CMS: "0 results found for this URL".
-- Nombres de producto en inglés dentro de páginas en portugués en `/pt-br/`.
-- El selector de país en la homepage global mezcla países con idiomas (中文 listado junto a nombres de países), con la mayoría de selecciones redirigiendo a una versión en español diseñada para otro mercado.
-- No hay detección por IP para sugerir la versión correcta del mercado a un visitante nuevo.
+**Expected impact when fixed:** Rich results in the SERP for product pages, stronger entity signal for the Google Knowledge Graph, and more citable content for AI search engines. FAQ schema is implemented as JSON-LD in the `<head>` — no visible HTML changes required, no design changes.
 
-**Por qué importa:** Cada inconsistencia envía una señal contradictoria sobre el idioma y mercado al que sirve cada página. Esto refuerza el problema de hreflang y genera confusión adicional sobre qué versión debería rankear para qué query. Las páginas 404 en inglés dentro de rutas en español también fallan WCAG 3.1.1.
+---
 
-**Impacto esperado al corregirlo:** Corregir `lang` en el dominio global, añadir páginas de error localizadas, corregir el selector de país, e implementar sugerencia de versión por IP reduciría la fricción en cada etapa del journey y fortalecería la señal de localización por mercado.
+### Issue 3 — Inconsistent localization signals
+
+This issue has multiple expressions that point to the same underlying problem: the site grew fast across markets without a centralized localization process.
+
+**Note on `html lang`:** The localized versions of the site have the `lang` attribute correctly implemented — verified manually with DevTools: `clara.com/es-mx` → `lang="es-MX"`, `clara.com/es-co` → `lang="es-CO"`. The value `es-MX` is more precise than a generic `es` and is the correct implementation for regional signaling. The `lang="en-US"` finding applies specifically to the global domain `clara.com` and pages without a localization prefix — not to the per-market versions.
+
+The concrete manifestations identified in the audit include:
+
+- `clara.com` (global domain) has `lang="en-US"` even though it serves as the entry point for Spanish and Portuguese-speaking users, and its navigation paths lead to Spanish and Portuguese versions.
+- 404 error pages appear in English within `/es-mx/` paths, exposing CMS text: "0 results found for this URL".
+- Product names in English within Portuguese-language pages on `/pt-br/`.
+- The country selector on the global homepage mixes countries with languages (中文 listed alongside country names), with most selections redirecting to a Spanish version designed for a different market.
+- No IP-based detection to suggest the correct market version to a new visitor.
+
+**Why it matters:** Each inconsistency sends a contradictory signal about the language and market each page serves. This reinforces the hreflang problem and creates additional confusion about which version should rank for which query. 404 pages in English within Spanish-language paths also fail WCAG 3.1.1.
+
+**Expected impact when fixed:** Correcting `lang` on the global domain, adding localized error pages, fixing the country selector, and implementing IP-based version suggestions would reduce friction at every stage of the journey and strengthen the localization signal per market.
 
 ---
 
 ## 2. On-Page SEO Review — Homepage
 
-Se revisaron dos versiones: `clara.com` (global) y `clara.com/es-mx` (México).
+Two versions reviewed: `clara.com` (global) and `clara.com/es-mx` (Mexico).
 
-### Homepage global — `clara.com`
+### Global homepage — `clara.com`
 
-| Elemento | Estado actual | Evaluación |
+| Element | Current state | Evaluation |
 |---|---|---|
-| Title tag | `Clara \| Spend Management for LatAm` | En inglés. "LatAm" es una abreviatura del sector, no un término de búsqueda que usen usuarios hispanohablantes o lusohablantes. |
-| Meta description | `The financial operating system for Latin America. Corporate cards, expense automation, AP, and banking — built for companies in MX, BR, and CO.` | En inglés. Formato de lista de features. Menciona MX, BR, CO (señal geográfica positiva), pero no está escrita para responder ninguna búsqueda orgánica real. |
-| H1 | `The partner to Latin America's leading finance teams` | En inglés. Statement de posicionamiento, no una frase orientada a búsqueda. "Leading finance teams" señala aspiración enterprise pero no corresponde a ninguna query real. |
+| Title tag | `Clara \| Spend Management for LatAm` | In English. "LatAm" is an industry abbreviation, not a search term used by Spanish or Portuguese-speaking users. |
+| Meta description | `The financial operating system for Latin America. Corporate cards, expense automation, AP, and banking — built for companies in MX, BR, and CO.` | In English. Feature list format. Mentions MX, BR, CO (positive geographic signal), but not written to answer any real organic search query. |
+| H1 | `The partner to Latin America's leading finance teams` | In English. Positioning statement, not a search-oriented phrase. "Leading finance teams" signals enterprise aspiration but does not correspond to any real query. |
 
-**El problema no es que la homepage global esté en inglés.** Es una decisión de marca defendible — la homepage global sirve a inversores, socios y prensa, audiencias para quienes el inglés funciona como idioma compartido en el mundo fintech. El problema es estructural: `clara.com` es la URL de mayor autoridad del dominio, y está completamente desconectada de cualquier intención de búsqueda orgánica en los mercados que generan el tráfico real. Su interlinking no distribuye autoridad eficientemente hacia las páginas en español y portugués que compiten por queries reales.
+**The problem is not that the global homepage is in English.** It is a defensible brand decision — the global homepage serves investors, partners, and press, audiences for whom English functions as a shared language in fintech. The problem is structural: `clara.com` is the highest-authority URL on the domain, and it is completely disconnected from any organic search intent in the markets that generate real traffic. Its internal linking does not efficiently distribute authority toward the Spanish and Portuguese pages that compete for real queries.
 
-### Homepage México — `clara.com/es-mx`
+### Mexico homepage — `clara.com/es-mx`
 
-| Elemento | Estado actual | Evaluación |
+| Element | Current state | Evaluation |
 |---|---|---|
-| Title tag | `Clara \| Gestión Financiera Inteligente para LatAm` | En español. "Gestión Financiera Inteligente" es un tagline de marca, no una búsqueda. No hay keyword target presente. |
-| Meta description | `Tarjetas corporativas, gestión de gastos y banking en una sola plataforma. Clara ayuda a empresas en Latinoamérica a controlar gastos y escalar con confianza.` | En español. Más descriptivo que la versión global. Sigue sin estar escrita alrededor de una intención de búsqueda específica. |
-| H1 | `Gestión de gastos para equipos financieros exigentes` | En español. Describe la plataforma con precisión pero funciona como tagline. "Equipos financieros exigentes" no es una frase que ningún usuario escriba en Google. |
+| Title tag | `Clara \| Gestión Financiera Inteligente para LatAm` | In Spanish. "Gestión Financiera Inteligente" is a brand tagline, not a search query. No keyword target present. |
+| Meta description | `Tarjetas corporativas, gestión de gastos y banking en una sola plataforma. Clara ayuda a empresas en Latinoamérica a controlar gastos y escalar con confianza.` | In Spanish. More descriptive than the global version. Still not written around a specific search intent. |
+| H1 | `Gestión de gastos para equipos financieros exigentes` | In Spanish. Accurately describes the platform but functions as a tagline. "Equipos financieros exigentes" is not a phrase any user types into Google. |
 
-**Qué cambiaría y por qué:**
+**What to change and why:**
 
-El title tag y el H1 deben incorporar el término de búsqueda primario del mercado, preservar el nombre de la marca, y mantener el tono de tuteo característico de Clara. Una propuesta de title: `Clara — Tarjeta corporativa y gestión de gastos para tu empresa en México`. Esto mantiene la marca, usa "tarjeta corporativa" como nombre oficial del producto con señal geográfica, sin repetir el sustantivo en el adjetivo modificador.
+The title tag and H1 must incorporate the primary search term for the market, preserve the brand name, and maintain Clara's characteristic second-person tone. Proposed title: `Clara — Tarjeta corporativa y gestión de gastos para tu empresa en México`. This keeps the brand, uses "tarjeta corporativa" as the official product name with a geographic signal, without repeating the noun in the modifying adjective.
 
-El H1 debe reflejar intención de búsqueda sin sonar genérico. Una dirección que respeta el tono de Clara: `El control de gastos que tu empresa necesitaba desde el primer día`. Habla en segunda persona (tuteo, consistente con la guía de estilo), ancla la página en la categoría real del producto, y comunica el diferenciador de valor sin superlativos vacíos.
+The H1 must reflect search intent without sounding generic. A direction that respects Clara's tone: `El control de gastos que tu empresa necesitaba desde el primer día`. Second-person address (tuteo, consistent with the style guide), anchors the page in the real product category, and communicates the value differentiator without empty superlatives.
 
-La meta description debe funcionar como un activo de conversión en la SERP: `Emite tarjetas para tu equipo, automatiza reembolsos y cierra el mes sin caos. Sin aval, sin historial crediticio. Más de 30,000 empresas ya lo hacen con Clara.`
+The meta description must function as a conversion asset in the SERP: `Emite tarjetas para tu equipo, automatiza reembolsos y cierra el mes sin caos. Sin aval, sin historial crediticio. Más de 30,000 empresas ya lo hacen con Clara.`
 
-El **interlinking interno** de la homepage de México está orientado principalmente al registro. No hay links prominentes hacia páginas de producto (`/products/corporate-card`) ni páginas de solución, lo que limita la distribución de autoridad y acorta el journey de descubrimiento para usuarios que aún no están listos para registrarse.
+The **internal linking** on the Mexico homepage is oriented primarily toward registration. There are no prominent links to product pages (`/products/corporate-card`) or solution pages, which limits authority distribution and shortens the discovery journey for users who are not yet ready to sign up.
 
 ---
 
-## 3. Hallazgos adicionales de Stackoptic
+## 3. Additional Stackoptic Findings
 
-**Flesch Reading Ease: 18/100.** El texto del sitio tiene un nivel de complejidad extremadamente alto — equivalente a un paper académico. Para una plataforma dirigida a directores financieros de PyMEs y startups, este nivel crea fricción innecesaria. El tono de Clara en su guía de estilo apunta a lo contrario: beneficios concretos sobre features, tuteo, sin superlativos. "Tu equipo gasta, tú apruebas, el sistema reconcilia" — no "la solución optimiza los flujos de gestión del gasto empresarial". El Flesch score es también una señal indirecta de SEO: tiempo en página y scroll depth caen cuando el texto es difícil de leer.
+**Flesch Reading Ease: 18/100.** The site copy has an extremely high complexity level — equivalent to an academic paper. For a platform targeting finance directors at SMEs and startups, this creates unnecessary friction. Clara's style guide points in the opposite direction: concrete benefits over features, second-person address, no superlatives. "Tu equipo gasta, tú apruebas, el sistema reconcilia" — not "la solución optimiza los flujos de gestión del gasto empresarial". The Flesch score is also an indirect SEO signal: time on page and scroll depth drop when copy is hard to read.
 
-**Font sizes en `vw` puro.** Unidades de tamaño de fuente definidas exclusivamente en `vw` sin `clamp()` ni fallback en `rem` rompen el zoom del navegador. Falla WCAG 1.4.4 (Resize Text). La corrección es técnica y no afecta el diseño visual.
+**Font sizes in pure `vw`.** Font size units defined exclusively in `vw` without `clamp()` or `rem` fallback break browser zoom. Fails WCAG 1.4.4 (Resize Text). The fix is technical and does not affect visual design.
 
-**Madurez del marketing tech stack: 32/100.** Stackoptic solo detectó Google Analytics y GTM activos en el sitio. No hay herramientas de heatmaps, A/B testing ni CRO. Para un equipo de growth que toma decisiones sobre cambios en el sitio, la ausencia de datos de comportamiento del usuario limita la capacidad de validar hipótesis — incluyendo las planteadas en este challenge.
+**Marketing tech stack maturity: 32/100.** Stackoptic only detected Google Analytics and GTM active on the site. No heatmap, A/B testing, or CRO tools present. For a growth team making decisions about site changes, the absence of user behavior data limits the ability to validate hypotheses — including those raised in this challenge.
 
 ---
 
 ## 4. Two Content Opportunities in MX and BR
 
-### Opportunity 1 — Capturar demanda de "tarjeta empresarial" en MX y CO
+### Opportunity 1 — Capturing demand for "tarjeta empresarial" in MX and CO
 
-Google Trends de los últimos 12 meses muestra una brecha consistente y significativa entre el volumen de búsqueda de "tarjeta empresarial" y "tarjeta corporativa" en México y Colombia. "Tarjeta empresarial" supera a "tarjeta corporativa" en todos los meses del período. En Colombia, "tarjeta corporativa" registra volumen cercano a cero. Brasil es la excepción — "cartão corporativo" lidera y el sitio ya lo usa correctamente.
+Google Trends over the last 12 months shows a consistent and significant gap between search volume for "tarjeta empresarial" and "tarjeta corporativa" in Mexico and Colombia. "Tarjeta empresarial" outperforms "tarjeta corporativa" in every month of the period. In Colombia, "tarjeta corporativa" registers near-zero volume. Brazil is the exception — "cartão corporativo" leads and the site already uses it correctly.
 
-La URL `/es-mx/landing/tarjeta-de-credito-empresarial` ya existe y señala que la oportunidad fue identificada parcialmente, pero existe como landing page aislada sin arquitectura de contenido coherente detrás.
+The URL `/es-mx/landing/tarjeta-de-credito-empresarial` already exists and signals the opportunity was partially identified, but it exists as an isolated landing page without a coherent content architecture behind it.
 
-Términos de alto intent sin trabajar actualmente: "tarjeta empresarial sin aval", "tarjeta corporativa sin historial crediticio", "tarjeta de gastos para empleados México". Estos describen los diferenciadores específicos de Clara frente a los bancos tradicionales y tienen baja competencia orgánica.
+High-intent terms currently unaddressed: "tarjeta empresarial sin aval", "tarjeta corporativa sin historial crediticio", "tarjeta de gastos para empleados México". These describe Clara's specific differentiators against traditional banks and have low organic competition.
 
-### Opportunity 2 — Contenido mid-funnel sobre procesos de gestión de gastos
+### Opportunity 2 — Mid-funnel content around expense management processes
 
-Un comprador potencial que tiene el problema que Clara resuelve pero aún no conoce Clara no busca "Clara tarjeta empresarial". Busca: "cómo reembolsar gastos a empleados en México", "proceso de reembolso de viáticos empresas", "cómo controlar gastos de equipo en campo". Ninguna de estas queries tiene respuesta en ninguna página del sitio hoy.
+A prospective buyer who has the problem Clara solves but does not yet know Clara does not search "Clara tarjeta empresarial". They search: "cómo reembolsar gastos a empleados en México", "proceso de reembolso de viáticos empresas", "cómo controlar gastos de equipo en campo". None of these queries is answered by any page on the site today.
 
-El blog de product releases contiene descripciones precisas de exactamente los features que responden estas preguntas — pero está escrito como anuncios internos de producto, no como respuestas a búsquedas de usuarios. La oportunidad es construir una capa de contenido mid-funnel entre el blog y las páginas de producto, escrita alrededor de problemas operativos específicos con el vocabulario de la búsqueda.
+The product release blog contains precise descriptions of exactly the features that answer these questions — but written as internal product announcements, not as responses to user searches. The opportunity is to build a mid-funnel content layer between the blog and the product pages, written around specific operational problems using the vocabulary of search.
 
-Brasil es un foco adicional. El sitio `/pt-br/` tiene el vocabulario correcto ("cartão corporativo") pero la misma ausencia de contenido mid-funnel. Búsquedas como "como reembolsar despesas de funcionários" o "controle de gastos empresariais Brasil" representan demanda real que ninguna página captura actualmente.
+Brazil is an additional focus. The `/pt-br/` site has the correct vocabulary ("cartão corporativo") but the same absence of mid-funnel content. Searches like "como reembolsar despesas de funcionários" or "controle de gastos empresariais Brasil" represent real demand that no page currently captures.
