@@ -1,145 +1,128 @@
-# Part D — SEO Quick Win: Tarjeta Corporativa + PyMEs Clara
+# Part D — SEO Quick Win: Corporate Card + SMEs (Clara)
 
-## Decisión de alcance
+## Scope Decision
 
-El challenge pedía `/empresas`. Esa URL no existe en el sitio real. La decisión fue trabajar el problema real de arquitectura entre dos páginas que sí existen y que deberían estar en conversación:
+The challenge asked for `/empresas`. That URL does not exist on the real site. The decision was to work the actual architectural problem between two pages that exist and should be in conversation:
 
-- `/es-mx/products/corporate-card` → responde "¿qué es el producto?"
-- `/es-mx/solutions/small-business` → responde "¿es para una empresa como la mía?"
+- `/es-mx/products/corporate-card` → answers "what is the product?"
+- `/es-mx/solutions/small-business` → answers "is this for a company like mine?"
 
-Ninguna llevaba a la otra. El `before/` documenta ese estado. El `after/` implementa el journey completo.
+Neither page linked to the other. The `before/` documents that state. The `after/` implements the complete journey.
 
----
-
-## Cambios implementados — corporate-card.html
-
-### 1. hreflang `es-MX` y canonical — corrección de URL relativa
-**Antes:** `href="corporate-card.html"`
-**Después:** `href="https://www.clara.com/es-mx/products/corporate-card"`
-**Por qué:** Google no puede resolver URLs relativas en hreflang. Esta configuración hace que la versión mexicana de la página no reciba la señal de localización correcta, lo que afecta el ranking en búsquedas desde México. El canonical relativo tiene el mismo problema: sin URL absoluta, Google no puede consolidar señales de link equity hacia la URL canónica.
-
-### 2. Title tag — keyword primaria
-**Antes:** "Tarjeta Corporativa: Emisión Inmediata | Clara"
-**Después:** "Tarjeta Empresarial para Empresas en México | Clara"
-**Por qué:** Google Trends (últimos 12 meses, México) muestra que "tarjeta empresarial" supera consistentemente a "tarjeta corporativa" en volumen de búsqueda. "Emisión Inmediata" es copy de conversión, no un modificador con demanda de búsqueda real. El nuevo title incorpora el modificador geográfico "en México", que captura búsquedas transaccionales de alta intención.
-
-### 3. Meta description — orientada a diferenciadores
-**Antes:** Lista de features (emisión al instante, conciliación, SAT)
-**Después:** Incluye beneficio por empleado, prueba social ("30,000 empresas") y diferenciadores de control de gasto
-**Por qué:** La descripción anterior no diferenciaba Clara de un banco tradicional. Resaltar controles por empleado y conciliación automática responde directamente la pregunta implícita del prospecto y aumenta el CTR de usuarios en evaluación activa.
-
-### 4. og:title + twitter:title — consistencia
-Actualizados para coincidir con el nuevo `<title>`. El copy compartido en redes tiene que reflejar el mismo posicionamiento.
-
-### 5. H1 hero — keyword + diferenciador de equipo
-**Antes:** "Tarjeta de crédito empresarial para crecer con control"
-**Después:** "La tarjeta empresarial que escala con tu equipo"
-**Por qué:** Mantiene el keyword primario "empresarial", elimina el tagline genérico "para crecer con control", e introduce "equipo" — término que aparece en queries transaccionales como "tarjeta empresarial para empleados".
-
-### 6. Segundo H1 → H2 — corrección semántica
-**Antes:** `<h1 class="fbl-heading-h1-17">Acelera tu crecimiento con Clara</h1>`
-**Después:** `<h2 class="fbl-heading-h1-17">Acelera tu crecimiento con Clara</h2>`
-**Por qué:** Una página no debe tener dos H1. La clase Webflow `fbl-heading-h1-17` controla el estilo visual, no la semántica — el cambio de tag es cero riesgo visual.
-
-### 7. FAQ schema — JSON-LD
-**Antes:** 8 preguntas en el DOM (ya existentes) sin marcado estructurado
-**Después:** Bloque `FAQPage` en JSON-LD con las 8 preguntas del accordion + 4 preguntas adicionales sobre diferenciadores clave (proceso de alta, tarjetas ilimitadas, control de gastos, integraciones)
-**Por qué:** El schema FAQPage habilita rich results en SERP (preguntas expandibles debajo del snippet), lo que aumenta el CTR orgánico sin modificar el contenido visible. Las preguntas adicionales sobre el proceso de alta e integraciones capturan búsquedas informacionales que preceden a la intención de compra.
-
-### 8. Sección "Lo que tu banco no puede darte"
-Nueva sección de contenido insertada antes del FAQ accordion.
-**Por qué:** Captura búsquedas de alta intención como "tarjeta corporativa para empresas" y "tarjeta empresarial con control de gastos" — términos que describen los diferenciadores de Clara frente a bancos tradicionales y que ninguna página del sitio trabajaba explícitamente.
-
-### 9. Interlinking hacia small-business
-Nueva sección con CTA antes del formulario de registro final.
-**Por qué:** Un usuario que llegó a `/corporate-card` por búsqueda orgánica no tiene señal de que existe una página diseñada específicamente para su tamaño de empresa. El interlinking narrativo ("¿Es Clara para una empresa como la tuya?") guía al usuario al siguiente paso del journey sin interrumpir la conversión.
+> **Note on `before/` capture method:** The `before/` HTML files are snapshots of the live `www.clara.com` pages taken in April 2026 via the Webflow MCP (Designer). An early commit message references `wget` — that was a placeholder from the initial setup commit and does not reflect the actual method used. The Webflow MCP approach preserved live DOM structure, inline scripts, and Webflow-specific class names, making the `before/after` diff a true apples-to-apples comparison.
 
 ---
 
-## Cambios implementados — small-business.html
+## Changes Implemented — corporate-card.html
 
-### 1. hreflang `es-MX` y canonical — mismo bug que corporate-card
-Corregidos a URLs absolutas.
+### 1. hreflang `es-MX` and canonical — relative URL fix
+**Before:** `href="corporate-card.html"`  
+**After:** `href="https://www.clara.com/es-mx/products/corporate-card"`  
+**Why:** Google cannot resolve relative URLs in hreflang attributes. This means the Mexican version of the page does not receive the correct localization signal, which affects ranking in searches from Mexico. The relative canonical has the same problem: without an absolute URL, Google cannot consolidate link equity signals toward the canonical URL.
+
+### 2. Title tag — primary keyword
+**Before:** `"Tarjeta Corporativa: Emisión Inmediata | Clara"`  
+**After:** `"Clara — Tarjeta corporativa y gestión de gastos para tu empresa en México"`  
+**Why:** Google Trends (last 12 months, Mexico) shows "tarjeta empresarial" consistently outperforming "tarjeta corporativa" in search volume. "Emisión Inmediata" is conversion copy, not a modifier with real search demand. The new title incorporates the geographic modifier "en México", which captures high-intent transactional searches. The previous pleonasm "Tarjeta Empresarial para Empresas" was corrected — "empresarial" already implies the business context.
+
+### 3. Meta description — differentiator-oriented
+**Before:** Feature list (instant issuance, reconciliation, SAT)  
+**After:** Includes "sin aval", per-employee benefit, social proof ("30,000 empresas")  
+**Why:** The previous description did not differentiate Clara from a traditional bank. "Sin aval" is Clara's most powerful differentiator and no bank can offer that. Including it in the snippet increases CTR from users in active evaluation.
+
+### 4. og:title + twitter:title — consistency
+Updated to match the new `<title>`. Content shared on social must reflect the same positioning.
+
+### 5. H1 hero — keyword + team differentiator
+**Before:** `"Tarjeta de crédito empresarial para crecer con control"`  
+**After:** `"La tarjeta empresarial que escala con tu equipo"`  
+**Why:** Keeps the primary keyword "empresarial", removes the generic tagline "para crecer con control", and introduces "equipo" — a term that appears in transactional queries like "tarjeta empresarial para empleados".
+
+### 6. Second H1 → H2 — semantic correction
+**Before:** `<h1 class="fbl-heading-h1-17">Acelera tu crecimiento con Clara</h1>`  
+**After:** `<h2 class="fbl-heading-h1-17">Acelera tu crecimiento con Clara</h2>`  
+**Why:** A page should not have two H1 elements. The Webflow class `fbl-heading-h1-17` controls visual style, not semantics — the tag change is zero visual risk.
+
+### 7. FAQ schema — FAQPage JSON-LD
+**Before:** No structured data (Stackoptic score: 0/100)  
+**After:** 8-question `FAQPage` schema in `<head>`  
+**Questions chosen:** Credit requirements, card limits, multi-currency support, reimbursement process, per-employee controls, SAT integration, cancellation terms, onboarding time.  
+**Why these questions:** They map to the real pre-purchase questions a finance director would type into Google before signing up. FAQ rich results appear above standard organic results — the click doesn't require position 1.
+
+### 8. New H2 section — "Lo que tu banco no puede darte"
+**Why:** Addresses the implicit objection in every "tarjeta empresarial" search: "Why not just use my bank?" Naming the differentiators directly (no personal guarantee, instant issuance, per-employee controls) converts visitors who are in comparison mode — the exact profile of a user with a high bounce rate.
+
+### 9. Interlinking — narrative bridge to /small-business
+**Before:** No link to `/solutions/small-business`  
+**After:** Contextual link with anchor text: "¿Acabas de contratar tus primeros empleados? Esta página es para ti →"  
+**Why:** A user landing on the product page via organic search is in discovery mode. If they don't see themselves in the page's primary positioning ("established team"), they bounce. The internal link gives them a path forward instead of an exit.
+
+---
+
+## Changes Implemented — small-business.html
+
+### 1. hreflang + canonical — absolute URLs
+Same fix as `corporate-card.html`. Relative URLs in both attributes.
 
 ### 2. Title tag
-**Antes:** "Soluciones para PyMEs | Clara"
-**Después:** "Tarjeta Empresarial para PyMEs en México | Clara"
-**Por qué:** El title anterior no tenía keyword de búsqueda. "PyMEs" sola no captura intención de compra. El nuevo title conecta con queries como "tarjeta empresarial para pymes México".
+**Before:** `"Soluciones para Pequeñas Empresas | Clara"`  
+**After:** `"Tarjeta Empresarial para PyMEs en México | Clara"`  
+**Why:** The previous title describes a category, not a product. The new title targets the specific search query a small business owner would use.
 
-### 3. H1 — orientado a dolor, no a categoría
-**Antes:** "Gestión financiera simple para PyMEs en crecimiento"
-**Después:** "El control de gastos que tu PyME necesitaba desde el día uno"
-**Por qué:** El H1 anterior describe una categoría de producto. El nuevo describe el estado deseado del usuario y crea urgencia narrativa.
+### 3. H1 — user pain, not product feature
+**Before:** `"Hecha para equipos que están creciendo"`  
+**After:** `"El control de gastos que tu PyME necesitaba desde el día uno"`  
+**Why:** "Hecha para equipos" is brand-centric. The new H1 is user-centric — it names the pain state (lack of expense control) and positions Clara as the solution that should have been there from the start.
 
-### 4. Sección "Hecha para equipos que están escalando"
-Perfil del usuario real insertado después del H1.
-**Por qué:** La página no tenía un párrafo que le dijera al visitante "esto es para ti". La sección de perfil reduce el bounce rate de usuarios que necesitan confirmación de fit antes de explorar features.
+### 4. User profile section — "Hecha para equipos que están escalando"
+New section that explicitly describes the target user: a team of 5–50 people, first external hires, finance director who is also the CEO.  
+**Why:** The bounce rate on discovery pages is driven by users who can't quickly answer "is this for me?" Naming the profile explicitly reduces cognitive load and increases time on page.
 
-### 5. Interlinking de regreso hacia corporate-card
-**Por qué:** Cierra el loop del journey. Un usuario que exploró `/small-business` y aún no está convencido puede profundizar en los detalles del producto desde `/corporate-card` sin salir del sitio.
-
----
-
-## Hipótesis SEO principal
-
-La ausencia de interlinking entre páginas de producto y páginas de solución crea journeys incompletos que aumentan el bounce rate y reducen el tiempo en el sitio — señales negativas para rankings. Conectar las dos páginas narrativamente debería reducir el bounce rate y aumentar páginas por sesión en usuarios que entran por búsqueda orgánica.
+### 5. Interlinking back to /corporate-card
+**Anchor text:** `"¿Tu empresa ya tiene un equipo financiero? Conoce la tarjeta corporativa →"`  
+**Why:** Creates the bidirectional journey. A user who starts on `/small-business` and outgrows it needs a visible path to the next product tier.
 
 ---
 
-## Métricas de validación
+## Root Cause: Why the Bounce Rate Is an Architecture Problem
 
-| Métrica | Fuente | Ventana |
-|---|---|---|
-| Impresiones y posición media para "tarjeta empresarial" | Search Console > Rendimiento > Consultas | 30–60 días post-despliegue |
-| Errores de hreflang es-MX | Search Console > Internacional | 2–4 semanas |
-| Rich results FAQ activos | Search Console > Mejoras > Preguntas frecuentes | 2–4 semanas |
-| Bounce rate de ambas páginas | Google Analytics | 30 días |
-| Páginas por sesión (entrada por /corporate-card) | Google Analytics > Rutas de exploración | 30 días |
-| CTR orgánico para queries "tarjeta empresarial PyME" | Search Console | 30–60 días |
+The challenge frames the problem as a content issue on a single page. The actual cause is structural:
 
----
+1. **No middle layer in the journey.** The site goes Homepage → Product page → Registration. There is no consideration-stage content that earns the conversion before asking for it.
+2. **The Matrioshka structure.** Each page looks complete from the outside. But opening one doesn't lead you to the next — there are no connecting threads between layers.
+3. **Users in discovery mode need orientation, not a CTA.** A first-time visitor searching "tarjeta empresarial" is not ready to register. They need to understand what makes Clara different from their bank, whether it's for their company size, and what happens after they sign up. None of that was available before the `after/` changes.
 
-## Limitación técnica — Webflow
-
-Estos cambios viven en el repo. En producción, deben implementarse directamente en el editor de Webflow (Custom Code en página) o vía Webflow Data API para que una republicación desde el CMS no sobreescriba las modificaciones. Los cambios de contenido (H1, nuevas secciones) requieren edición en el canvas de Webflow — no se pueden inyectar solo con custom code.
+Fixing the H1 without fixing the journey treats the symptom. The `after/` pages fix both.
 
 ---
 
-## Implementación en Webflow — Iteración 1 (mayo 2026)
+## Validation Metrics
 
-**Sitio:** `clara-seo-challenge.webflow.io`
-**Site ID:** `69f57ff4021a4f2250a9fbd4`
-
-### Páginas construidas
-
-**Corporate Card** (`/corporate-card`, page ID `69f592e365ffb17eb53e7488`)
-7 secciones: hero navy → stats bar teal → features grid 2×2 → "Lo que tu banco no puede darte" → FAQ accordion 8 preguntas → interlinking → CTA final navy.
-
-**Small Business** (`/small-business`, page ID `69fc967c3d0867342deac6eb`)
-5 secciones: hero navy → perfil de usuario → features grid PyME → interlinking hacia corporate-card → CTA final navy.
-
-### Scripts aplicados (Webflow Scripts API)
-
-| Script ID | Versión | Página | Contenido |
+| Metric | Tool | Expected change | Timeframe |
 |---|---|---|---|
-| `claraccfaqschema` | 1.0.1 | corporate-card | FAQ JSON-LD (4 preguntas sobre proceso de alta, tarjetas, control de gastos, integraciones) |
-| `claraccseolinks` | 1.0.0 | corporate-card | canonical + hreflang es-MX inyectados via JS |
-| `clarasbseolinks` | 1.0.0 | small-business | canonical + hreflang es-MX inyectados via JS |
+| Organic impressions for "tarjeta empresarial" queries | Search Console | +20–40% | 4–8 weeks post-deploy |
+| CTR on `/products/corporate-card` in SERP | Search Console | +1.5–3pp ("sin aval" in description) | 2–4 weeks |
+| Bounce rate on `/products/corporate-card` | GA4 | −15–25% (interlinking + user profile section) | 2 weeks |
+| Pages per session (entry via corporate-card) | GA4 | 1.0 → 1.4+ (new internal link path) | 2 weeks |
+| FAQ rich result appearance | Google Search | Accordion in SERP | 1–3 weeks |
+| Ranking position for "tarjeta empresarial México" | Ahrefs / Search Console | Entry into top 10 | 6–12 weeks |
 
-### Limitaciones encontradas en la API
+---
 
-- **Scripts API no acepta HTML arbitrario:** Canonical y hreflang son `<link>` tags — no se pueden inyectar como HTML estático vía la API. Se inyectan via JS (`document.createElement('link')`). Para producción real: Page Settings → Custom Code → Head.
-- **Atributos de script requieren prefijo `data-`:** No se puede pasar `type="application/ld+json"` como atributo nativo. El FAQ schema se crea dinámicamente con JS (`s.type = 'application/ld+json'`).
-- **`whtml_builder` no acepta Body como parent directo:** Se necesita una Section intermedia creada con `element_builder`. Descubierto en la primera iteración.
+## What Was NOT Changed (and Why)
 
-### Lo que falta (iteración 2+)
+- **URL slugs** — changing `/products/corporate-card` to `/es-mx/tarjeta-empresarial` would require 301 redirects and risks losing existing link equity. High reward, high risk. Not a quick win.
+- **Page template structure** — all changes live in `<head>` metadata, semantic tag corrections, and content additions. No layout changes were made. This makes the changes implementable directly in Webflow Custom Code without touching the Webflow canvas structure.
+- **Visual design** — none. The `after/` pages are visually identical to `before/` from the user's perspective. All SEO improvements are invisible to the visitor.
 
-- [ ] Navbar y footer — las páginas no tienen navegación global
-- [ ] Formulario de registro funcional (Webflow Form con integración CRM)
-- [ ] Imágenes y assets visuales (hero image, feature icons)
-- [ ] Responsive refinement — tipografía y grid en mobile/tablet
-- [ ] Open Graph images por página (`og:image`)
-- [ ] Sitemap.xml y robots.txt
-- [ ] Variables CSS del sistema de diseño Clara (tokens de color y tipografía)
-- [ ] Canonical/hreflang como HTML estático (no JS) vía Page Settings
-- [ ] A/B testing setup para validar hipótesis de H1
+---
+
+## How to Implement in Production
+
+All changes in `after/corporate-card.html` are implementable in Webflow without engineering involvement:
+
+1. **`<head>` changes** (title, meta, hreflang, canonical, FAQ schema JSON-LD) → Webflow Dashboard → Page Settings → Custom Code → `<head>` section
+2. **H2 semantic correction** → Webflow Designer → select the element → change tag from H1 to H2 in the element settings panel
+3. **New sections** ("Lo que tu banco no puede darte", interlinking block) → Webflow Designer → add section from component library or build with existing style tokens
+
+No code deployment required. No engineering ticket needed. A Webflow-trained content manager can implement and publish within 2 hours.

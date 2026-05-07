@@ -1,102 +1,138 @@
-# Roadmap de ejecución — Clara SEO Challenge
+# Execution Roadmap — Clara SEO Challenge
 
 ---
 
-## Estado actual (mayo 2026 — iteración 2 completada)
+## Current Status
 
-| Part | Documento | Estado |
+| Part | Document | Repo status |
 |---|---|---|
-| A | `part-a/audit.md` | ✅ En repo |
-| B | `part-b/keyword-strategy.md` | ✅ En repo |
-| C | `part-c/geo-ai-search.md` | ✅ En repo |
-| D | `part-d/before/` + `part-d/after/` + `part-d/notes.md` | ✅ En repo |
-| — | `README.md` | ✅ En repo |
-| — | Webflow MCP setup (`.mcp.json`, `CLAUDE.md`, `context/`) | ✅ En repo |
-| — | Webflow demo publicado | ✅ Live en `clara-seo-challenge.webflow.io` |
-
-### Webflow demo — estado publicado
-
-**corporate-card** (`/corporate-card`):
-- Navbar Clara (componente global) ✅
-- Hero con H1 correcto ✅
-- Stats bar ✅
-- Logos strip — 11 clientes con CSS background-image ✅
-- Features grid ✅
-- Diferenciadores ✅
-- FAQ accordion ✅
-- Interlinking → small-business ✅
-- CTA final ✅
-- Footer Clara (componente global) — logo blanco, 3 awards, 4 columnas, App Store + Google Play ✅
-- SEO: title, meta description (sin "sin aval"), canonical, hreflang, FAQ schema JSON-LD ✅
-
-**small-business** (`/small-business`):
-- Navbar Clara (componente global) ✅
-- Hero sin "sin aval" en copy y meta description ✅
-- Logos strip — 11 clientes ✅
-- Perfil de usuario ✅
-- Features grid ("Alta 100% digital" en lugar de "Sin aval ni historial") ✅
-- Interlinking → corporate-card ✅
-- CTA final ✅
-- Footer Clara (componente global) ✅
-
-### Componentes Webflow creados
-
-| Componente | ID | Grupo |
-|---|---|---|
-| Navbar Clara | `1458fdd9-2ea2-f3f7-2342-cd55a0df2fc4` | Global |
-| Footer Clara | `594c8515-0263-6f17-987b-6375305f4759` | Global |
+| A | `part-a/audit.md` | ✅ In repo |
+| B | `part-b/keyword-strategy.md` | ⏳ Draft ready — pending commit |
+| C | `part-c/geo-ai-search.md` | ⏳ Draft ready — pending commit |
+| D | `part-d/before/` + `part-d/after/` + `part-d/notes.md` | ✅ In repo |
+| — | `README.md` | ✅ In repo |
+| — | Webflow MCP setup (`.mcp.json`, `CLAUDE.md`, `context/`) | ✅ In repo — OAuth auth pending |
 
 ---
 
-## Lo que falta para la entrega final
+## Pending Execution
 
-### Iteración 3 — Polish visual (prioridad alta)
+### Phase 1 — Repo setup (30 min)
 
-- [ ] **Imágenes hero** — corporate-card y small-business no tienen imagen en el hero. Asset listo: `69fcec93c6b5fa35b5651982` (Corporate credit cards hero img). Insertar con CSS background-image en el hero section.
-- [ ] **Responsive** — navbar y footer se ven bien en desktop. Revisar mobile portrait y tablet en Webflow Designer (breakpoints medium, small, tiny).
-- [ ] **Open Graph image** (`og:image`) — añadir via Page Settings para ambas páginas. Usar la imagen hero de corporate-card como OG image.
-- [ ] **Formulario de registro** — el CTA final tiene un botón pero no un form funcional. Webflow Forms puede capturar leads sin backend.
-- [ ] **Navbar dropdowns** — el sitio real tiene dropdowns para Productos, Soluciones, Recursos. El demo tiene links planos. Mejorar si el tiempo lo permite.
+```bash
+mkdir -p clara-seo-challenge/{part-a,part-b,part-c,part-d/{before,after}}
 
-### Iteración 3 — Fixes de compliance (bloqueante)
+cp audit.md clara-seo-challenge/part-a/
+cp keyword-strategy.md clara-seo-challenge/part-b/
+cp geo-ai-search.md clara-seo-challenge/part-c/
 
-- [ ] **"sin aval" en copy de corporate-card** — verificar que no quede ninguna instancia en el canvas. Buscar en el FAQ accordion y secciones de diferenciadores.
-- [ ] **hreflang como HTML estático** — actualmente se inyecta via JS custom code. Mover a Page Settings > SEO para que funcione como HTML nativo.
-
-### Para la sesión siguiente — cómo retomar
-
-1. Abrir Webflow Designer en `clara-seo-challenge.webflow.io`
-2. Verificar que el MCP está corriendo: `npx mcp-remote http://localhost:1339/sse`
-3. Leer este archivo + `part-d/notes.md` sección "Lo que falta"
-4. Leer `context/style-guide.md` y `context/framework-principles.md` antes de tocar el canvas
-5. Usar el skill `designer-tools` para cualquier operación de canvas
-
-**Contexto crítico para la siguiente sesión:**
-- Site ID Webflow: `69f57ff4021a4f2250a9fbd4`
-- corporate-card page ID: `69f592e365ffb17eb53e7488`
-- small-business page ID: `69fc967c3d0867342deac6eb`
-- Navbar Clara component ID: `1458fdd9-2ea2-f3f7-2342-cd55a0df2fc4`
-- Footer Clara component ID: `594c8515-0263-6f17-987b-6375305f4759`
-- Las imágenes DEBEN insertarse con CSS `background-image` en divs contenedores — los elementos `<img>` (imgraw en Webflow) no persisten el `src` en el modelo de datos y no renderizan en publish.
-- Los assets del proyecto CDN: `https://cdn.prod.website-files.com/69f57ff4021a4f2250a9fbd4/`
+cd clara-seo-challenge
+git init
+git remote add origin [repo URL]
+```
 
 ---
 
-## Para la sesión en vivo
+### Phase 2 — Capture before/ pages (15 min)
 
-Lo que te van a pedir con mayor probabilidad:
+Pages were captured directly via the Webflow Designer MCP — not via `wget`. This gives the `before/` files the real production structure with intact CSS classes and component context, not a static snapshot with broken assets.
 
-**"Explica por qué elegiste estas dos páginas y no una sola."**
-→ Porque el problema real no es el contenido de una página — es que las páginas no están en conversación. El challenge dice `/empresas` pero el sitio no tiene esa URL. Tomé la decisión de trabajar el problema real de arquitectura en lugar de simular una página hipotética.
+Commit: `"feat: add before/ pages — current state of clara.com via Webflow MCP"`
 
-**"¿Cómo validarías que estos cambios funcionaron?"**
-→ Search Console para impresiones y CTR en queries con "tarjeta empresarial". Google Analytics para bounce rate y páginas por sesión en usuarios que entraron por `/products/corporate-card`. Comparar 30 días antes vs 30 días después del cambio.
+---
 
-**"¿Por qué cambiaste 'corporativa' por 'empresarial'?"**
-→ Google Trends con exportación CSV de los últimos 12 meses muestra que "tarjeta empresarial" supera consistentemente a "tarjeta corporativa" en México y Colombia. No es una opinión — es un dato. La estrategia no es eliminar "corporativa" del sitio sino usar "empresarial" como keyword primario en los elementos de mayor peso SEO (title, H1) y dejar "corporativa" como señal semántica secundaria en el cuerpo.
+### Phase 3 — Implement changes with Claude Code MCP (1–2 hrs)
 
-**"Muéstrame el FAQ schema que implementaste."**
-→ Abrir `after/corporate-card.html`, buscar `application/ld+json`, explicar cada campo y por qué esas preguntas específicas.
+Open Claude Code in the repo with `SKILL-claude-code.md` as context.
 
-**"¿Qué harías diferente si tuvieras más tiempo?"**
-→ Construir la página de plataforma / "cómo funciona" que describe el lifecycle completo del gasto — esa es la pieza que más falta en el sitio y la que más impacto tendría en GEO. También trabajaría el `llms.txt` en español y portugués con las correcciones de accuracy que identificamos (Mastercard vs Visa en la respuesta de Perplexity).
+**Execution order:**
+
+1. Copy `before/corporate-card.html` → `after/corporate-card.html`
+2. Apply changes to `after/corporate-card.html`:
+   - [x] Title tag → `Clara — Tarjeta corporativa y gestión de gastos para tu empresa en México`
+   - [x] Meta description → benefits-oriented with "sin aval" and social proof
+   - [x] H1 → "La tarjeta empresarial que escala con tu equipo"
+   - [x] New H2 → "Lo que tu banco no puede darte"
+   - [x] FAQ schema JSON-LD in `<head>`
+   - [x] Interlinking section → `/es-mx/solutions/small-business`
+3. Copy `before/small-business.html` → `after/small-business.html`
+4. Apply changes to `after/small-business.html`:
+   - [x] Title tag → "Tarjeta Empresarial para PyMEs en México | Clara"
+   - [x] H1 → "El control de gastos que tu PyME necesitaba desde el día uno"
+   - [x] User profile section
+   - [x] Interlinking back → `/es-mx/products/corporate-card`
+5. `part-d/notes.md` with hypotheses and validation metrics
+
+Commit: `"feat: implement SEO improvements and narrative interlinking (part-d/after)"`
+
+---
+
+### Phase 4 — Webflow (optional but recommended) (2–3 hrs)
+
+1. Create new project in Webflow
+2. Replicate the visual structure of `after/corporate-card.html` using Clara's components as reference
+3. Connect Webflow to the repo via Webflow Git
+4. Publish from Webflow → code syncs to `/part-d/after/`
+5. Claude Code applies final SEO adjustments on top of exported code
+
+**Note:** Webflow → Git sync is one-directional. Changes made by Claude Code that only live in the repo will be overwritten if a new Webflow publish happens.
+
+---
+
+### Phase 5 — README.md (45 min)
+
+The README is the first thing the evaluator reads. It is not an index — it is your voice explaining decisions.
+
+Structure used:
+
+```markdown
+# Clara — Technical Challenge: Website Specialist (SEO)
+
+## Challenge Requirements — Compliance Checklist
+## The Actual Problem: A Matrioshka Site
+## Audit Approach: Symptom → Verification → Diagnosis
+## Keyword Strategy: Coexistence, Not Substitution
+## GEO Baseline Finding
+## Part D: What Was Built and Why
+## Toolchain
+## Repository Structure
+```
+
+Commit: `"docs: add README with approach and decisions"`
+
+---
+
+### Phase 6 — Final push and review (30 min)
+
+```bash
+git add .
+git commit -m "chore: final review and cleanup"
+git push origin main
+```
+
+Verify on GitHub:
+- [ ] The diff between `before/` and `after/` is readable and shows exactly what changed
+- [ ] README renders correctly
+- [ ] All `.md` files are clean and in English
+- [ ] No temporary files or unnecessary assets
+
+---
+
+## For the Live Session
+
+Most likely questions:
+
+**"Why did you work on two pages instead of one?"**
+→ Because the real problem is not the content of a single page — it's that the pages aren't in conversation. The challenge mentions `/empresas` but that URL doesn't exist on the site. I chose to work the real architectural problem instead of simulating a hypothetical URL.
+
+**"How would you validate that these changes worked?"**
+→ Search Console for impressions and CTR on queries containing "tarjeta empresarial". Google Analytics for bounce rate and pages per session for users who entered via `/products/corporate-card`. Compare 30 days before vs 30 days after the change.
+
+**"Why did you replace 'corporativa' with 'empresarial'?"**
+→ Google Trends with 12-month CSV exports by country shows "tarjeta empresarial" consistently outperforming "tarjeta corporativa" in Mexico and Colombia. It's not an opinion — it's data. The strategy is not to remove "corporativa" from the site but to use "empresarial" as the primary keyword in the highest-weight SEO elements (title, H1) and keep "corporativa" as a secondary semantic signal in body copy.
+
+**"Show me the FAQ schema you implemented."**
+→ Open `after/corporate-card.html`, find `application/ld+json`, explain each field and why those specific questions were chosen.
+
+**"What would you do differently with more time?"**
+→ Build the platform / "how it works" page that describes the complete expense lifecycle. That's the piece the site is most missing and the one with the highest GEO impact. I'd also work on a `llms.txt` in Spanish and Portuguese with the accuracy corrections identified in the GEO baseline (Mastercard vs Visa in Perplexity's response about Clara).

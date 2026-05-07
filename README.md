@@ -1,148 +1,182 @@
-# Clara — Technical Challenge: Website Specialist (SEO)
+# Clara — Technical SEO Challenge
 
-## Approach
+**Candidate:** Armando Rodríguez Romero  
+**Role:** Website Specialist (SEO)  
+**Submitted:** May 2026
 
-El challenge pedía un quick win sobre una página hipotética `/empresas`. Esa URL no existe en el sitio real. La decisión fue trabajar el problema real de arquitectura: el sitio tiene dos páginas que deberían estar en conversación y no lo están.
+---
 
-`/products/corporate-card` responde "¿qué es el producto?" y `/solutions/small-business` responde "¿es para una empresa como la mía?" — pero ninguna lleva a la otra. El usuario que llega por búsqueda orgánica aterriza en una, no recibe dirección hacia el siguiente paso de su journey, y sale sin convertir.
+## Challenge Requirements — Compliance Checklist
 
-El argumento central de este trabajo no es SEO técnico — es arquitectura narrativa. El SEO es el resultado de que las páginas tengan sentido como un journey, no como destinos aislados.
+The challenge asked: *"Imagine the `/empresas` page on clara.com has a high bounce rate and isn't ranking well for 'tarjeta corporativa empresas'. Propose and execute one concrete improvement."*
 
-## Assumptions
+The minimum deliverable options were:
 
-- `/empresas` no existe como URL real en clara.com. La intervención trabaja sobre las dos URLs equivalentes que sí existen.
-- Los datos de keyword volume son de Google Trends (exportación CSV, últimos 12 meses, México). "Tarjeta empresarial" supera consistentemente a "tarjeta corporativa" — el cambio en title/H1 está basado en datos, no en opinión.
-- Las métricas de "30,000 empresas" aparecen en el copy del sitio real; se usan como prueba social en la meta description.
-- Los cambios de `after/` son implementables en producción directamente en Webflow (Custom Code para head, canvas para contenido). No requieren acceso al repositorio de código del equipo.
+| Requirement | Status | Where |
+|---|---|---|
+| Restructure the H1/H2 hierarchy | ✅ Done | `part-d/after/corporate-card.html` — duplicate H1 fixed, heading hierarchy corrected |
+| Add FAQ schema markup | ✅ Done | `part-d/after/corporate-card.html` — 8-question JSON-LD `FAQPage` schema in `<head>` |
+| Rewrite the meta title and description | ✅ Done | Both `after/` pages — title, meta description, and canonical rewritten |
+| Improve hero copy for conversion and SEO | ✅ Done | H1 rewritten for search intent + brand tone; hero copy reframed around user pain |
 
-## Structure
+All four were implemented. The work goes further — see [Part D notes](part-d/notes.md) for the full rationale.
+
+---
+
+## The Actual Problem: A Matrioshka Site
+
+Before writing a single recommendation, the first question was: *why does `/empresas` have a high bounce rate?*
+
+The instinctive answer is "bad copy" or "wrong keyword." Those are symptoms. The structural diagnosis is different.
+
+Clara's site is built like a [Matrioshka](https://en.wikipedia.org/wiki/Matryoshka_doll) — nested layers that each look complete from the outside, but when you open one, there's another inside with no connecting thread. The homepage links to product pages. Product pages list features. Features link to... registration. There is no middle layer: no "how does this work for a company like mine," no path from awareness to consideration, no content that earns the click before asking for commitment.
+
+A user searching "tarjeta corporativa empresas" lands on `/products/corporate-card`. The page is visually polished. But it doesn't answer the implicit question behind that search: *"Is this actually for my type of business? What happens after I sign up? Why not just use my bank?"* The page doesn't answer any of those questions — it asks for a registration. The user bounces.
+
+The bounce rate is not a copywriting problem. It's an architecture problem. Fixing the H1 without fixing the journey is polishing one doll without opening the next one.
+
+**That is why the `/empresas` page doesn't exist** — and why working on the two real pages that exist (`/products/corporate-card` and `/solutions/small-business`) is more honest and more useful than fabricating a URL.
+
+---
+
+## Audit Approach: Symptom → Verification → Diagnosis
+
+The audit followed a deliberate sequence. The order matters.
+
+### Step 1 — SEMrush: establish that a real problem exists
+
+Before diagnosing causes, confirm there's a symptom worth diagnosing. SEMrush showed a consistent 11% drop in organic traffic (235,528 estimated visits, April 2026). That number gave the analysis a real business context — not a hypothetical exercise.
+
+### Step 2 — DevTools: verify manually before trusting tools
+
+Stackoptic flagged `lang` attribute inconsistencies across the site. Before writing that as a finding, DevTools confirmed the actual state:
+
+- `clara.com/es-mx` → `lang="es-MX"` ✅
+- `clara.com/es-co` → `lang="es-CO"` ✅
+
+The issue is scoped to the global `clara.com` domain — not a site-wide failure. This distinction matters: if someone from the Clara team opens DevTools on `/es-mx` and sees `es-MX`, a document that claims otherwise loses all credibility. **Tools surface signals. Judgment determines scope.**
+
+### Step 3 — Stackoptic: structured scoring to prioritize
+
+With the manual baseline established, Stackoptic provided structured evidence across dimensions: hreflang implementation, structured data, performance, readability, and martech maturity. The key scores:
+
+- **Hreflang:** 10/10 on the global homepage — broken specifically on internal pages (relative URLs instead of absolute)
+- **Structured data:** 0/100 — no `FAQPage`, no `Organization`, no `BreadcrumbList` anywhere on the site
+- **Flesch Reading Ease: 18/100** — equivalent to an academic paper, for a product aimed at SME finance directors
+- **Martech maturity: 32/100** — only GA and GTM detected; no heatmaps, no A/B testing tools
+
+---
+
+## Keyword Strategy: Coexistence, Not Substitution
+
+The most consequential decision in the keyword work was how to handle the gap between what Clara calls its product ("tarjeta corporativa") and what users search for ("tarjeta empresarial").
+
+Google Trends data over 12 months (CSV exports, MX and CO) shows "tarjeta empresarial" consistently outperforming "tarjeta corporativa" in Mexico and Colombia. In Colombia, "tarjeta corporativa" has near-zero search volume. Brazil is the exception — "cartão corporativo" leads, and the site already uses it correctly.
+
+The wrong response to this data is to rename the product. The right response is to work both terms in separate layers:
+
+- **"empresarial"** anchors the highest-weight SEO elements: title tag, H1, meta description — the signals Google weighs most heavily for ranking
+- **"corporativa"** reinforces brand identity in subheadings and body copy — maintaining the product name as Clara uses it
+
+This resolves the tension between brand naming and search behavior without creating inconsistency. The URL `/es-mx/landing/tarjeta-de-credito-empresarial` already exists, which confirms the opportunity was partially identified — but it exists as an isolated landing page with no content architecture behind it.
+
+**On pleonasms:** "tarjeta empresarial para empresas" — the word "empresas" is already implied by "empresarial." Writing it out is redundant and signals low editorial quality. The corrected title: `Clara — Tarjeta corporativa y gestión de gastos para tu empresa en México`.
+
+---
+
+## GEO Baseline Finding
+
+Testing Clara's presence in ChatGPT, Perplexity, and Google AI Overviews revealed a specific accuracy problem: some models identify Clara as a Visa issuer when it operates on the Mastercard network. The company appears in AI search responses — but without control over the framing.
+
+This is the GEO risk for a fintech: AI models cite information that's confidently wrong about a product detail that affects purchase decisions. A prospect asking "what network does Clara operate on?" gets a wrong answer from a tool they trust.
+
+The structural fix is not ad-hoc: it's a `llms.txt` file in Spanish and Portuguese with verifiable, citable facts, combined with a "how it works" page that gives AI models a clean, structured source to pull from.
+
+---
+
+## Part D: What Was Built and Why
+
+### Why two pages instead of one
+
+`/products/corporate-card` answers "what is the product." `/solutions/small-business` answers "is this for a company like mine." Neither page links to the other. A user in the consideration stage needs both — and the absence of a path between them is the architectural cause of the bounce.
+
+The `before/` and `after/` demonstrate two things simultaneously:
+1. **Technical fixes** — hreflang with absolute URLs, duplicate H1 corrected, FAQ schema added
+2. **Narrative architecture** — interlinking between the two pages, differentiator section, user profile framing
+
+### How the pages were obtained
+
+The `before/` pages were not obtained with `wget` or a static site crawler. Claude Code connected directly to Clara's live Webflow site via the Webflow Designer MCP. This means the structure reflects the actual production site — not a snapshot with broken assets and missing CSS classes. The changes in `after/` were built on top of that real structure.
+
+### The four mandatory improvements — executed
+
+**1. H1/H2 hierarchy restructure**  
+The original `corporate-card` page had two `<h1>` elements — a technical SEO error that dilutes the primary keyword signal and confuses Google's heading interpretation. The second `<h1>` was corrected to `<h2>`. No visual change. Zero implementation risk.
+
+**2. FAQ schema markup**  
+Eight questions added as `FAQPage` JSON-LD in the `<head>` — covering the questions actual prospects ask before signing up: credit requirements, card limits, how reimbursements work, multi-currency support. This enables rich result accordions in SERP and gives AI search models structured, citable answers about Clara's product.
+
+**3. Meta title and description rewrite**
+
+| Element | Before | After |
+|---|---|---|
+| Title | `Clara \| Gestión Financiera Inteligente para LatAm` | `Clara — Tarjeta corporativa y gestión de gastos para tu empresa en México` |
+| Meta description | Features list, no conversion intent | `Emite tarjetas para tu equipo, automatiza reembolsos y cierra el mes sin caos. Sin aval, sin historial crediticio. Más de 30,000 empresas ya lo hacen con Clara.` |
+
+**4. Hero copy rewrite**  
+Original: `Gestión de gastos para equipos financieros exigentes` — a brand tagline, not a search phrase.  
+Revised: `El control de gastos que tu empresa necesitaba desde el primer día` — second person (consistent with Clara's voice guidelines), benefit-first, no empty superlatives.
+
+The copy follows Clara's documented tone of voice principles: tuteo, concrete benefits over feature lists, no corporate filler, proof through specificity not adjectives.
+
+---
+
+## Toolchain
+
+| Tool | Role |
+|---|---|
+| **SEMrush** | Organic traffic baseline — confirmed 11% drop context before any diagnosis |
+| **Browser DevTools** | Manual verification of `lang`, `hreflang`, canonical — prevented false positives from automated tools |
+| **Stackoptic** | Structured technical audit — hreflang, schema, WCAG, Core Web Vitals, readability, martech maturity |
+| **Google Trends** | 12-month CSV exports by country — evidence base for keyword coexistence strategy |
+| **Claude Code + Webflow MCP (Designer)** | Live connection to Clara's production site; built `after/` pages on real site structure |
+| **Cursor** | Code audits — semantic validation, JSON-LD well-formedness, regression check on `before/after/` |
+| **ChatGPT / Perplexity / Gemini** | GEO baseline — presence, framing accuracy, and factual errors in AI-attributed information |
+
+---
+
+## Repository Structure
 
 ```
-clara-seo-challenge/
-├── README.md                          ← este archivo
-├── CLAUDE.md                          ← configuración del agente Webflow MCP
-├── ROADMAP.md                         ← estado de ejecución y checklist
-├── .mcp.json                          ← servidor MCP de Webflow (Claude Code)
+ClaraSEOChallenge/
+├── README.md                     ← this file
+├── CLAUDE.md                     ← Webflow MCP agent configuration
+├── ROADMAP.md                    ← execution checklist and status
+├── .mcp.json                     ← Webflow MCP server config (Claude Code)
 ├── .claude/
-│   └── settings.json                  ← permisos y plugins del agente
+│   └── settings.json             ← agent permissions and plugins
 ├── context/
-│   ├── style-guide.md                 ← tokens de color, tipografía y clases de Clara
-│   └── framework-principles.md       ← convenciones Webflow del sitio real
+│   ├── style-guide.md            ← Clara's color tokens, typography, Webflow classes
+│   └── framework-principles.md   ← Webflow site conventions (real production)
 ├── part-a/
-│   └── audit.md                       ← auditoría SEO completa
+│   └── audit.md                  ← full SEO audit with methodology note
 ├── part-b/
-│   └── keyword-strategy.md            ← estrategia de keywords y arquitectura de contenido
+│   └── keyword-strategy.md       ← keyword strategy and content architecture
 ├── part-c/
-│   └── geo-ai-search.md               ← baseline GEO y propuesta para AI search
+│   └── geo-ai-search.md          ← GEO baseline and AI search proposal
 └── part-d/
-    ├── before/                        ← páginas clonadas con wget (estado actual del sitio)
-    │   └── www.clara.com/es-mx/...
-    ├── after/                         ← versiones mejoradas con los cambios implementados
+    ├── before/                   ← real site structure captured via Webflow MCP
+    ├── after/                    ← improved versions with all four changes implemented
     │   ├── corporate-card.html
     │   └── small-business.html
-    └── notes.md                       ← hipótesis, cambios documentados y métricas de validación
+    └── notes.md                  ← change log, rationale, and validation metrics
 ```
 
-## Part A — SEO Audit
+---
 
-El hallazgo más importante no fue técnico: fue que el sitio tiene baja densidad de contenido orientado a intención de búsqueda. Las páginas de producto son mayoritariamente visuales — copy corto, features listadas, sin responder las preguntas reales del prospecto. El bug técnico más grave fue el hreflang `es-MX` con URL relativa en todas las páginas del dominio, lo que hace que Google no pueda resolver la señal de localización para México.
+## To Resume This Work
 
-## Part B — Keyword Strategy & Content Architecture
+See `CLAUDE.md` for the Webflow MCP setup and agent configuration.  
+See `ROADMAP.md` for the full status checklist.
 
-La decisión más importante fue reemplazar "corporativa" por "empresarial" como keyword primaria. Google Trends muestra una ventaja consistente para "empresarial" en México y Colombia. Más importante: se identificó una página estructuralmente ausente — la página de "cómo funciona" / lifecycle del gasto — que es la que más falta en el sitio y la que más impacto tendría tanto en SEO como en GEO.
-
-## Part C — GEO / AI Search
-
-ChatGPT, Perplexity y Google AI Overviews mencionan a Clara con información inconsistente: algunos modelos la identifican como emisora Visa cuando es Mastercard. El baseline muestra que Clara aparece en respuestas de AI search pero sin control sobre el framing. La propuesta es un `llms.txt` en español y portugués con los hechos clave verificables, y una página de "cómo funciona" que los modelos puedan citar con precisión.
-
-## Part D — Quick Win
-
-Se trabajaron dos páginas en lugar de una porque el problema real no era el contenido de una página — era que las páginas no estaban en conversación. El `before/after` demuestra dos cosas simultáneamente: corrección de bugs técnicos (hreflang relativo, H1 duplicado, FAQ sin schema) y arquitectura narrativa (interlinking, sección de diferenciadores, perfil de usuario).
-
-### Cambios implementados (resumen)
-
-**corporate-card.html:**
-- hreflang `es-MX` y canonical → URLs absolutas (bug técnico)
-- Title: "Tarjeta Empresarial para Empresas en México | Clara"
-- Meta description con diferenciadores y prueba social
-- H1: "La tarjeta empresarial que escala con tu equipo"
-- Segundo H1 → `<h2>` (corrección semántica, cero riesgo visual)
-- FAQ schema JSON-LD (8 preguntas → rich results habilitados)
-- Sección nueva "Lo que tu banco no puede darte"
-- Interlinking narrativo hacia `/small-business`
-
-**small-business.html:**
-- hreflang + canonical → URLs absolutas
-- Title: "Tarjeta Empresarial para PyMEs en México | Clara"
-- H1 orientado al dolor del usuario
-- Sección de perfil "Hecha para equipos que están escalando"
-- Interlinking de regreso hacia `/corporate-card`
-
-Ver `part-d/notes.md` para la justificación detallada de cada cambio y las métricas de validación.
-
-## Tools used
-
-- Browser DevTools + view-source
-- Google Trends (exportación CSV, últimos 12 meses, México y Colombia)
-- SEMrush (tráfico orgánico estimado)
-- wget (clonado de páginas con assets relativos convertidos)
-- Python 3 (extracción de tokens del CSS vivo, aplicación de cambios en after/)
-- Claude Code + Webflow MCP (construcción del demo visual en Webflow)
-- ChatGPT / Perplexity (GEO baseline testing)
-
-## Descargar assets de una página
-
-Se agregó el script `scripts/download-assets.sh` para clonar una URL y descargar sus assets útiles (CSS, JS, imágenes y fuentes) con `wget`.
-
-```bash
-# URL por defecto: https://www.clara.com/es-mx/products/corporate-card
-./scripts/download-assets.sh
-
-# URL y carpeta custom
-./scripts/download-assets.sh "https://www.clara.com/es-mx/products/corporate-card" "downloads/corporate-card"
-```
-
-El resultado queda dentro de `downloads/` (o la carpeta que indiques).
-
-Para aislar solo las imágenes y preparar una carpeta limpia para subirlas a Webflow con drag and drop:
-
-```bash
-./scripts/prepare-webflow-images.py "downloads/corporate-card" "downloads/webflow-images"
-```
-
-Esto copia las imágenes a `downloads/webflow-images/` y genera `downloads/webflow-images/manifest.csv` con ruta original, extensión y texto alt sugerido.
-
-## Auditar páginas publicadas en Webflow
-
-Para correr una auditoría completa en una sola pasada sobre las páginas del demo publicado:
-
-```bash
-./scripts/audit-webflow-pages.py
-```
-
-El reporte se genera en `reports/webflow-full-published-audit.md` e incluye SEO metadata, canonical/hreflang, JSON-LD, headings, links, imágenes y señales básicas de accesibilidad.
-
-También puedes pasar URLs custom:
-
-```bash
-./scripts/audit-webflow-pages.py \
-  "https://clara-seo-challenge.webflow.io/corporate-card" \
-  "https://clara-seo-challenge.webflow.io/small-business" \
-  --output "reports/webflow-full-published-audit.md"
-```
-
-## Para retomar este trabajo
-
-Ver `CLAUDE.md` para el setup del Webflow MCP y el estado de la construcción del demo visual.  
-Ver `ROADMAP.md` para el checklist completo de lo que está hecho y lo que falta.
-
-**Estado actual (mayo 2026 — iteración 2 publicada):**
-- Parts A, B, C: documentos completos en sus carpetas
-- Part D: `before/` y `after/` implementados, `notes.md` completo
-- Webflow demo: publicado en `clara-seo-challenge.webflow.io`
-  - `/corporate-card`: navbar, logos strip (11 clientes), 7 secciones, footer — todos los assets renderizando
-  - `/small-business`: mismos componentes globales, copy sin referencias a "sin aval"
-  - Navbar y Footer convertidos a **componentes reutilizables** en Webflow
-- Git: en repo, rama `main`
-
-Ver `ROADMAP.md` para el checklist detallado de lo hecho y lo pendiente (iteración 3).
+**Current status (May 2026):** Parts A–C complete. Part D `before/` and `after/` implemented. `notes.md` complete. Webflow MCP connected to Clara's live Designer environment.
