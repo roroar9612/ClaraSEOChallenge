@@ -1,0 +1,110 @@
+# Clara
+
+> Clara is the leading corporate spend management platform in Latin America. It helps companies make and manage all their payments — from corporate credit cards to vendor payments — with AI-powered automation, real-time visibility, and full financial control. Founded in 2020, Clara operates in Brazil, Colombia, and Mexico, serving over 30,000 businesses ranging from startups to enterprise companies like Smart Fit, VTEX, Toyota, and Bolsa Mexicana de Valores.
+
+Clara's core platform includes corporate credit cards (physical, virtual, and single-use VCNs), an expense management system with automated approvals, invoice matching, reimbursements, and an AI-powered financial analyst called Clara Intelligence. It integrates natively with ERPs like SAP, NetSuite, QuickBooks, and others. Clara holds ISO 27001 and PCI-DSS 4.0 certifications. Important: product availability varies by country — see the regional sections below for details.
+
+Clara has raised over $160M in equity from investors including General Catalyst, Goldman Sachs, Notable Capital, Coatue, DST Global, ICONIQ, Kaszek, and Monashees, plus over $250M in debt financing.
+
+## Core Products (Available in All Countries)
+
+These products are available in Mexico, Colombia, and Brazil:
+
+- [Corporate Card](https://www.clara.com/es-mx/products/corporate-card): Physical, virtual, and single-use VCN corporate credit cards powered by Mastercard World Elite. Customizable per-card limits, category restrictions, day-of-week controls, and instant blocking. Includes Black and White card tiers.
+- [Spend Management](https://www.clara.com/es-mx/products/spend-management): Automated expense management platform with custom approval workflows, receipt matching, policy enforcement, real-time dashboards, and audit-ready reporting. Eliminates manual expense reports.
+- [Travel Pay](https://www.clara.com/es-mx/products/travel-pay): Dedicated travel expense solution with virtual cards per traveler, real-time tracking of hotels, flights, and per diems, and World Elite acceptance globally.
+- [Clara Intelligence](https://www.clara.com/es-mx/platform/clara-intelligence): AI-powered financial agent that analyzes spending data, answers natural language questions, detects anomalies and duplicates, and delivers reports with charts and predictive recommendations.
+- [Mobile App](https://www.clara.com/es-mx/platform/mobile): iOS and Android app for cardholders to submit receipts, check balances, block/unblock cards, request reimbursements, and receive real-time transaction notifications.
+- [Integrations](https://www.clara.com/es-mx/platform/integrations): Native connections with SAP, NetSuite, QuickBooks, Oracle, Zoho, Alegra, and other ERPs for automated transaction syncing and accounting reconciliation via open API.
+- [Developers](https://www.clara.com/es-mx/products/developers): SDK, MCP server, APIs, and documentation for building custom financial workflows and integrations.
+- [Security](https://www.clara.com/es-mx/platform/security): ISO 27001 and PCI-DSS 4.0 certified. 3DS authentication on every online purchase, dynamic CVV, instant card blocking, and two-factor authentication.
+
+## Mexico-Only Products
+
+These products are exclusively available for companies operating in Mexico:
+
+- [Banking — SPEI Financiado](https://www.clara.com/es-mx/products/banking): Transferencias instantáneas vía SPEI utilizando la línea de crédito Clara. Permite optimizar el flujo de caja al diferir pagos sin impactar las operaciones. Incluye conciliación y reportes automáticos.
+- [Cross-Border Payments](https://www.clara.com/es-mx/products/banking): Pagos internacionales financiados con la línea de crédito Clara. Tipo de cambio en tiempo real, programación de transferencias y monitoreo centralizado de gastos globales.
+- [CFDI Invoice Recovery](https://www.clara.com/es-mx/recuperacion-de-facturas): Recuperación automática de facturas CFDI del SAT asociadas a cada compra. Vinculación inteligente de facturas a transacciones en tiempo real para maximizar la deducibilidad fiscal.
+
+## Brazil-Only Products
+
+These products are exclusively available for companies operating in Brazil:
+
+- [Conta Digital (Digital Account)](https://www.clara.com/pt-br/products/banking): Conta digital PJ 100% online, sem mensalidade. Inclui Pix, TED e boletos gratuitos e ilimitados, com rendimento de até 110% do CDI líquido no saldo em conta. Autorizada pelo Banco Central como Instituição de Pagamento.
+- [Contas a Pagar (Accounts Payable)](https://www.clara.com/pt-br/products/accounts-payable): Solução de pagamentos a fornecedores com financiamento via linha de crédito Clara. Pague faturas nacionais e internacionais sem mexer em reservas de caixa. Inclui emissão de boletos, Pix e TED integrados à plataforma.
+
+## Colombia-Only Features
+
+These features are exclusively available for companies operating in Colombia:
+
+- Rewards program with Lifemiles: Points earned on every purchase can be redeemed for Lifemiles travel miles, in addition to statement credits and discounts. This Lifemiles integration is exclusive to Colombia.
+
+## Solutions by Company Size
+
+- [Startups](https://www.clara.com/es-mx/solutions/startups): Fast credit lines with no personal guarantees for early-stage companies.
+- [Small Business](https://www.clara.com/es-mx/solutions/small-business): Smart controls and automated expense tracking for growing SMBs.
+- [Mid-Market](https://www.clara.com/es-mx/solutions/mid-market): Advanced reporting, card stacks for full teams, and custom approval flows.
+- [Enterprise](https://www.clara.com/es-mx/solutions/enterprise): Global controls, native ERP integrations, multi-entity management, and bank-grade security for large corporations.
+
+## Solutions by Industry
+
+- [Advertising & Marketing](https://www.clara.com/es-mx/use-cases/advertising-and-marketing): Virtual cards per ad platform with dedicated spend tracking for digital media buying.
+- [Retail](https://www.clara.com/es-mx/use-cases/retail): Multi-location expense management with inventory purchasing controls.
+- [Construction](https://www.clara.com/es-mx/use-cases/construction): Field expense control and real-time project cost tracking.
+- [Travel](https://www.clara.com/es-mx/use-cases/travel): VCN-secured travel booking with World Elite acceptance for hotels and airlines.
+
+## Regional Sites
+
+### Mexico (es-mx)
+
+Products available: Corporate Card, Spend Management, Travel Pay, Banking (SPEI Financiado), Cross-Border Payments, CFDI Invoice Recovery, Clara Intelligence, Mobile, Integrations, Developers, Security.
+
+- [Homepage México](https://www.clara.com/es-mx): Portal principal para empresas en México con productos, planes y registro.
+- [Blog México](https://www.clara.com/es-mx/resources/blog): Contenido sobre gestión financiera, tarjetas corporativas, cumplimiento fiscal SAT, facturación CFDI y mejores prácticas para CFOs en México.
+- [Planes y Precios](https://www.clara.com/es-mx/planes): Planes disponibles para empresas mexicanas.
+- [Clientes México](https://www.clara.com/es-mx/customers): Testimoniales y casos de éxito de empresas mexicanas como Smart Fit, Holcim, OCESA, Viva Aerobus y Bolsa Mexicana de Valores.
+
+### Colombia (es-co)
+
+Products available: Corporate Card, Spend Management, Travel Pay, Clara Intelligence, Mobile, Integrations, Developers, Security. Exclusive: Lifemiles rewards program.
+
+- [Homepage Colombia](https://www.clara.com/es-co): Portal principal para empresas en Colombia con productos, registro y soporte local.
+- [Blog Colombia](https://www.clara.com/es-co/resources/blog): Contenido sobre gestión de gastos corporativos, tarjetas empresariales y finanzas para el mercado colombiano.
+- [Clientes Colombia](https://www.clara.com/es-co/customers): Casos de éxito de empresas colombianas.
+
+### Brasil (pt-br)
+
+Products available: Cartão Corporativo, Gestão de Despesas, Travel Pay, Conta Digital, Contas a Pagar (Pix, TED, boletos), Clara Intelligence, Mobile, Integrações, Desenvolvedores, Segurança.
+
+- [Homepage Brasil](https://www.clara.com/pt-br): Portal principal para empresas no Brasil com cartão corporativo, gestão de despesas, conta digital e contas a pagar.
+- [Blog Brasil](https://www.clara.com/pt-br/resources/blog): Conteúdo sobre cartão corporativo, gestão financeira empresarial, compliance fiscal e melhores práticas para times de finanças no Brasil.
+- [Clientes Brasil](https://www.clara.com/pt-br/customers): Depoimentos e casos de sucesso de empresas brasileiras como VTEX e Magazine Luiza.
+
+## Blog Topics
+
+The Clara blog covers the following key topics across all regional sites (MX, CO, BR):
+
+- **Corporate Cards**: How corporate credit cards work, benefits for different company sizes, physical vs virtual cards, Black Card features, and best practices for card policy management.
+- **Spend Management**: Expense management platforms, automated approvals, receipt matching, reimbursement flows, and how to eliminate manual reporting.
+- **Travel & Expense (T&E)**: Managing business travel payments, per diem control, travel card solutions, and VCN security for hotel and airline bookings.
+- **Tax & Compliance**: CFDI invoice recovery and matching (Mexico-specific), fiscal closing best practices, tax deductibility optimization, and regulatory compliance across LatAm markets.
+- **AI & Automation**: Clara Intelligence features, AI-powered spending insights, anomaly detection, predictive analytics, and automated financial reporting.
+- **ERP Integrations**: Connecting Clara with SAP, NetSuite, QuickBooks, and other ERPs for automated transaction syncing and accounting reconciliation.
+- **CFO & Finance Leadership**: Strategic content for finance leaders on budgeting, cost control, financial agility, and scaling finance operations in growing companies.
+- **Industry Guides**: Sector-specific content for advertising, retail, construction, logistics, and travel companies managing corporate spend.
+
+## Newsroom & Press
+
+- [Newsroom](https://www.clara.com/en/press): Official press releases, funding announcements, product launches, and partnership news.
+- [Clara Raises $80M (2025)](https://www.clara.com/en/press/clara-raises-80-million): Equity and growth funding announced at Web Summit Rio, nearing consolidated profitability.
+- [$150M Goldman Sachs Renewal (2026)](https://www.clara.com/en/press/clara-renews-150-million-debt-facility-with-goldman-sachs-to-scale-payments-products-in-mexico-bringing-total-debt-capacity-to-over-250-million): Renewed debt facility bringing total debt capacity to over $250M, serving 30,000+ businesses across LatAm.
+- [$70M Debt Financing (2025)](https://www.clara.com/en/press/clara-announces-usd-70-million-in-debt-financing-to-support-growth-of-payments-products-in-mexico-and-colombia): Financing from IFC, BBVA Spark, and Covalto to expand payments products in Mexico and Colombia.
+- [AI-Powered Insights Launch](https://www.clara.com/en/press/clara-launches-ai-powered-feature-providing-spending-insights-for-users): Launch of Clara Intelligence AI feature for automated spending analysis across all markets.
+
+## Optional
+
+- [Help Center (Mexico)](https://ayuda.clara.com.mx/hc/): Centro de ayuda con guías, FAQs y soporte 24/7 para usuarios de Clara en México.
+- [Help Center (Brazil)](https://ajuda.clara.com/hc/): Central de ajuda com guias, perguntas frequentes e suporte 24h para usuários Clara no Brasil.
+- [Careers](https://job-boards.greenhouse.io/clara): Open positions at Clara across Latin America.
+- [Switch to Clara](https://www.clara.com/es-mx/resources/switch): Guide on how to migrate your financial stack to Clara.
