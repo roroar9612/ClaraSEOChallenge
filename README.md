@@ -8,11 +8,22 @@ El challenge pedía un quick win sobre una página hipotética `/empresas`. Esa 
 
 El argumento central de este trabajo no es SEO técnico — es arquitectura narrativa. El SEO es el resultado de que las páginas tengan sentido como un journey, no como destinos aislados.
 
+## Toolchain y división de responsabilidades
+
+Este trabajo usa tres herramientas especializadas en roles distintos. Esa separación no fue arbitraria — refleja cómo funciona el trabajo real de SEO técnico en producción.
+
+**Stackoptic** — auditoría técnica de entrada. Antes de escribir una línea de recomendaciones, Stackoptic generó un análisis estructurado del estado real del sitio: hreflang, schema markup, Core Web Vitals, accesibilidad (WCAG), señales de localización, y madurez del marketing tech stack. Sus hallazgos forman la evidencia técnica de la Parte A. Sin este paso, las recomendaciones serían intuiciones, no diagnósticos.
+
+**Cursor** — audits de código. Las páginas `before/` y `after/` de la Parte D fueron revisadas en Cursor para verificar que los cambios fueran semánticamente correctos, que el JSON-LD del FAQ schema estuviera bien formado, y que no se introdujeran regresiones técnicas. Cursor actúa como el segundo par de ojos que garantiza que lo que se propone es implementable y está libre de errores.
+
+**Claude Code + Webflow MCP (Designer)** — construcción del demo visual. En lugar de clonar páginas con `wget`, Claude Code se conecta directamente al sitio de Clara en producción a través del MCP de Webflow Designer. Esto permite trabajar sobre la estructura real del sitio — no sobre una copia estática con assets rotos — y producir un demo `after/` que refleje fielmente cómo se verían los cambios en producción. Claude Code hace el build; Cursor audita el resultado.
+
 ## Assumptions
 
 - `/empresas` no existe como URL real en clara.com. La intervención trabaja sobre las dos URLs equivalentes que sí existen.
-- Los datos de keyword volume son de Google Trends (exportación CSV, últimos 12 meses, México). "Tarjeta empresarial" supera consistentemente a "tarjeta corporativa" — el cambio en title/H1 está basado en datos, no en opinión.
+- Los datos de keyword volume son de Google Trends (exportación CSV, últimos 12 meses, México y Colombia). "Tarjeta empresarial" supera consistentemente a "tarjeta corporativa" — el cambio en title/H1 está basado en datos, no en opinión.
 - Las métricas de "30,000 empresas" aparecen en el copy del sitio real; se usan como prueba social en la meta description.
+- **Hreflang:** Stackoptic confirma implementación correcta en la homepage global (score 10/10, con `x-default`). El problema real está en las páginas internas, donde los atributos `hreflang` y `canonical` usan URLs relativas en lugar de absolutas — esto es lo que Google no puede resolver.
 - Los cambios de `after/` son implementables en producción directamente en Webflow (Custom Code para head, canvas para contenido). No requieren acceso al repositorio de código del equipo.
 
 ## Structure
@@ -27,7 +38,7 @@ clara-seo-challenge/
 │   └── settings.json                  ← permisos y plugins del agente
 ├── context/
 │   ├── style-guide.md                 ← tokens de color, tipografía y clases de Clara
-│   └── framework-principles.md       ← convenciones Webflow del sitio real
+│   └── framework-principles.md        ← convenciones Webflow del sitio real
 ├── part-a/
 │   └── audit.md                       ← auditoría SEO completa
 ├── part-b/
@@ -35,7 +46,7 @@ clara-seo-challenge/
 ├── part-c/
 │   └── geo-ai-search.md               ← baseline GEO y propuesta para AI search
 └── part-d/
-    ├── before/                        ← páginas clonadas con wget (estado actual del sitio)
+    ├── before/                        ← estado actual del sitio (vía Webflow MCP)
     │   └── www.clara.com/es-mx/...
     ├── after/                         ← versiones mejoradas con los cambios implementados
     │   ├── corporate-card.html
@@ -45,24 +56,28 @@ clara-seo-challenge/
 
 ## Part A — SEO Audit
 
-El hallazgo más importante no fue técnico: fue que el sitio tiene baja densidad de contenido orientado a intención de búsqueda. Las páginas de producto son mayoritariamente visuales — copy corto, features listadas, sin responder las preguntas reales del prospecto. El bug técnico más grave fue el hreflang `es-MX` con URL relativa en todas las páginas del dominio, lo que hace que Google no pueda resolver la señal de localización para México.
+El hallazgo más importante no fue técnico: fue que el sitio tiene baja densidad de contenido orientado a intención de búsqueda. Las páginas de producto son mayoritariamente visuales — copy corto, features listadas, sin responder las preguntas reales del prospecto.
+
+Los bugs técnicos más graves, confirmados con Stackoptic, fueron tres: hreflang con URLs relativas en páginas internas (lo que impide que Google resuelva la señal de localización para México y Colombia); ausencia total de structured data local — sin `Organization`, sin `FAQPage`, sin `BreadcrumbList` (score 0/100 en schema); y el atributo `html lang="en-US"` en todas las versiones del sitio, incluyendo las páginas en español y portugués.
 
 ## Part B — Keyword Strategy & Content Architecture
 
-La decisión más importante fue reemplazar "corporativa" por "empresarial" como keyword primaria. Google Trends muestra una ventaja consistente para "empresarial" en México y Colombia. Más importante: se identificó una página estructuralmente ausente — la página de "cómo funciona" / lifecycle del gasto — que es la que más falta en el sitio y la que más impacto tendría tanto en SEO como en GEO.
+La decisión más importante fue reemplazar "corporativa" por "empresarial" como keyword primaria. Google Trends muestra una ventaja consistente para "empresarial" en México y Colombia. En Colombia, "tarjeta corporativa" tiene volumen cercano a cero. Más importante: se identificó una página estructuralmente ausente — la página de "cómo funciona" / lifecycle del gasto — que es la pieza que más falta en el sitio y la que más impacto tendría tanto en SEO como en GEO.
 
 ## Part C — GEO / AI Search
 
-ChatGPT, Perplexity y Google AI Overviews mencionan a Clara con información inconsistente: algunos modelos la identifican como emisora Visa cuando es Mastercard. El baseline muestra que Clara aparece en respuestas de AI search pero sin control sobre el framing. La propuesta es un `llms.txt` en español y portugués con los hechos clave verificables, y una página de "cómo funciona" que los modelos puedan citar con precisión.
+ChatGPT, Perplexity y Google AI Overviews mencionan a Clara con información inconsistente: algunos modelos la identifican como emisora Visa cuando opera en la red Mastercard. El baseline muestra que Clara aparece en respuestas de AI search pero sin control sobre el framing. La propuesta es un `llms.txt` en español y portugués con los hechos clave verificables, y una página de "cómo funciona" que los modelos puedan citar con precisión.
 
 ## Part D — Quick Win
 
 Se trabajaron dos páginas en lugar de una porque el problema real no era el contenido de una página — era que las páginas no estaban en conversación. El `before/after` demuestra dos cosas simultáneamente: corrección de bugs técnicos (hreflang relativo, H1 duplicado, FAQ sin schema) y arquitectura narrativa (interlinking, sección de diferenciadores, perfil de usuario).
 
+Las páginas `before/` se obtuvieron directamente desde Webflow Designer vía MCP — no copias estáticas con assets rotos, sino la estructura real del sitio en producción. Los cambios en `after/` fueron construidos por Claude Code y auditados en Cursor antes del commit.
+
 ### Cambios implementados (resumen)
 
 **corporate-card.html:**
-- hreflang `es-MX` y canonical → URLs absolutas (bug técnico)
+- hreflang `es-MX` y canonical → URLs absolutas (bug técnico confirmado por Stackoptic)
 - Title: "Tarjeta Empresarial para Empresas en México | Clara"
 - Meta description con "sin aval" y prueba social
 - H1: "La tarjeta empresarial que escala con tu equipo"
@@ -82,13 +97,15 @@ Ver `part-d/notes.md` para la justificación detallada de cada cambio y las mét
 
 ## Tools used
 
-- Browser DevTools + view-source
-- Google Trends (exportación CSV, últimos 12 meses, México y Colombia)
-- SEMrush (tráfico orgánico estimado)
-- wget (clonado de páginas con assets relativos convertidos)
-- Python 3 (extracción de tokens del CSS vivo, aplicación de cambios en after/)
-- Claude Code + Webflow MCP (construcción del demo visual en Webflow)
-- ChatGPT / Perplexity (GEO baseline testing)
+| Herramienta | Rol en este trabajo |
+|---|---|
+| **Stackoptic** | Auditoría técnica automatizada — hreflang, schema, WCAG, Core Web Vitals, marketing tech stack |
+| **SEMrush** | Tráfico orgánico estimado, análisis de caída (235,528 visitas, abril 2026, −11%) |
+| **Google Trends** | Exportación CSV 12 meses por país — evidencia del gap "empresarial" vs "corporativa" |
+| **Browser DevTools + view-source** | Verificación manual de implementación de hreflang, canonical y structured data |
+| **Claude Code + Webflow MCP (Designer)** | Conexión al sitio real en producción, construcción del demo `after/` |
+| **Cursor** | Audits de código — validación semántica, JSON-LD, revisión de regresiones en `before/after/` |
+| **ChatGPT / Perplexity / Gemini** | GEO baseline testing — presencia, posición y accuracy de información atribuida a Clara |
 
 ## Para retomar este trabajo
 
@@ -98,6 +115,6 @@ Ver `ROADMAP.md` para el checklist completo de lo que está hecho y lo que falta
 **Estado actual (mayo 2026):**
 - Parts A, B, C: documentos completos en sus carpetas
 - Part D: `before/` y `after/` implementados, `notes.md` completo
-- Webflow MCP: configurado, pendiente de autenticación OAuth y construcción del demo
+- Webflow MCP: configurado, conectado vía Designer MCP al sitio real de Clara
+- Cursor: configurado para audits en `.cursor/`
 - README: completo
-- Git: pendiente de inicializar y hacer push
