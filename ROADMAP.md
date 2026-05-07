@@ -2,137 +2,121 @@
 
 ---
 
-## Current Status
+## Current Status (May 7, 2026)
 
-| Part | Document | Repo status |
+| Part | Document | Status |
 |---|---|---|
-| A | `part-a/audit.md` | ✅ In repo |
-| B | `part-b/keyword-strategy.md` | ⏳ Draft ready — pending commit |
-| C | `part-c/geo-ai-search.md` | ⏳ Draft ready — pending commit |
-| D | `part-d/before/` + `part-d/after/` + `part-d/notes.md` | ✅ In repo |
-| — | `README.md` | ✅ In repo |
-| — | Webflow MCP setup (`.mcp.json`, `CLAUDE.md`, `context/`) | ✅ In repo — OAuth auth pending |
+| A | `part-a/audit.md` | ✅ Complete |
+| B | `part-b/keyword-strategy.md` | ✅ Complete |
+| C | `part-c/geo-ai-search.md` | ✅ Complete |
+| D | `part-d/before/` + `part-d/after/` + `part-d/notes.md` | ✅ Complete |
+| — | `README.md` | ✅ Complete |
+| — | Webflow demo | ✅ Published at `clara-seo-challenge.webflow.io` |
 
 ---
 
-## Pending Execution
+## Webflow Demo — Published State
 
-### Phase 1 — Repo setup (30 min)
+**Site URL:** `clara-seo-challenge.webflow.io`  
+**Site ID:** `69f57ff4021a4f2250a9fbd4`
 
-```bash
-mkdir -p clara-seo-challenge/{part-a,part-b,part-c,part-d/{before,after}}
+### Pages
 
-cp audit.md clara-seo-challenge/part-a/
-cp keyword-strategy.md clara-seo-challenge/part-b/
-cp geo-ai-search.md clara-seo-challenge/part-c/
+| Page | Slug | Webflow Page ID |
+|---|---|---|
+| Corporate Card | `/corporate-card` | `69f592e365ffb17eb53e7488` |
+| Small Business | `/small-business` | `69fc967c3d0867342deac6eb` |
 
-cd clara-seo-challenge
-git init
-git remote add origin [repo URL]
+### Reusable Components
+
+| Component | Webflow Component ID |
+|---|---|
+| Navbar Clara | `1458fdd9-2ea2-f3f7-2342-cd55a0df2fc4` |
+| Footer Clara | `594c8515-0263-6f17-987b-6375305f4759` |
+
+### Sections built (corporate-card)
+
+1. ✅ Hero — H1, CTA "Regístrate gratis", lead copy
+2. ✅ Logos strip — 11 enterprise clients (Telefónica, Schneider, MAPFRE, Krispy Kreme, MINISO, SmartFit, GNC, Rappi, Pan American, Viva, OCESA)
+3. ✅ Features grid — 4 features (Control por empleado, Conciliación SAT, Crédito a nombre de empresa, Integraciones ERP)
+4. ✅ "Lo que tu banco no puede darte" — differentiators section
+5. ✅ FAQ accordion — 8 questions
+6. ✅ Interlinking CTA → `/small-business`
+7. ✅ CTA final (registro form placeholder)
+8. ✅ Navbar Clara component
+9. ✅ Footer Clara component (with logos, awards, app store badges via CSS background-image)
+
+### Sections built (small-business)
+
+1. ✅ Hero — H1, CTA, lead copy (no compliance issues)
+2. ✅ Logos strip — same 11 enterprise clients
+3. ✅ Perfil de usuario — "Hecha para equipos que están escalando"
+4. ✅ Features PyME — adapted for SME context
+5. ✅ Interlinking CTA → `/corporate-card`
+6. ✅ CTA final
+7. ✅ Navbar Clara component
+8. ✅ Footer Clara component
+
+### Custom Code injected (Page Settings > Head)
+
+Both pages have canonical, hreflang, and meta description via Webflow Page Settings.  
+Corporate-card also has `FAQPage` JSON-LD schema injected via custom script.
+
+---
+
+## Iteration 3 — Pending
+
+### High priority (before live session)
+
+- [ ] **Hero image** — corporate-card hero background image not wired. Asset uploaded to project CDN (`69fcec93c6b5fa35b5651982`). Apply via CSS `background-image` on hero section div.
+- [ ] **Compliance pass** — verify no "sin aval" or "sin historial crediticio" remaining in FAQ accordion text or differentiadores section on corporate-card.
+- [ ] **og:image** — add Open Graph image for both pages via Page Settings (Webflow: SEO tab → OG image).
+- [ ] **hreflang as HTML** — currently injected via JS. Move to Page Settings > Custom Code > Head as static `<link rel="alternate" hreflang="es-MX" ...>`.
+
+### Medium priority
+
+- [ ] **Navbar dropdowns** — real Clara navbar has dropdowns for Productos, Soluciones, Recursos. Current version has placeholder links only.
+- [ ] **Registro form** — CTA final has a form placeholder. Wire up a real form (Webflow native form or HubSpot embed).
+- [ ] **Responsive review** — check navbar and footer at tablet and mobile breakpoints in Webflow Designer.
+
+### Low priority
+
+- [ ] **parts B and C** — confirm `part-b/keyword-strategy.md` and `part-c/geo-ai-search.md` are in repo with correct content.
+
+---
+
+## Critical Context for Next Session
+
+### Ghost element pattern
+`remove_element` in Webflow MCP sometimes reports success but elements persist across sessions. At session start, always query the page's body direct children to distinguish true standalone elements from component-internal elements before attempting any delete.
+
+### imgraw limitation
+`whtml_builder` converts `<img>` tags to `imgraw` DOM elements. The `src` attribute is **not stored** in Webflow's data model — images will be blank in the Designer and in published output. Fix: use CSS `background-image` on div containers. All current images on both pages use this pattern.
+
+### CSS background-image pattern (project CDN)
 ```
-
----
-
-### Phase 2 — Capture before/ pages (15 min)
-
-Pages were captured directly via the Webflow Designer MCP — not via `wget`. This gives the `before/` files the real production structure with intact CSS classes and component context, not a static snapshot with broken assets.
-
-Commit: `"feat: add before/ pages — current state of clara.com via Webflow MCP"`
-
----
-
-### Phase 3 — Implement changes with Claude Code MCP (1–2 hrs)
-
-Open Claude Code in the repo with `SKILL-claude-code.md` as context.
-
-**Execution order:**
-
-1. Copy `before/corporate-card.html` → `after/corporate-card.html`
-2. Apply changes to `after/corporate-card.html`:
-   - [x] Title tag → `Clara — Tarjeta corporativa y gestión de gastos para tu empresa en México`
-   - [x] Meta description → benefits-oriented with "sin aval" and social proof
-   - [x] H1 → "La tarjeta empresarial que escala con tu equipo"
-   - [x] New H2 → "Lo que tu banco no puede darte"
-   - [x] FAQ schema JSON-LD in `<head>`
-   - [x] Interlinking section → `/es-mx/solutions/small-business`
-3. Copy `before/small-business.html` → `after/small-business.html`
-4. Apply changes to `after/small-business.html`:
-   - [x] Title tag → "Tarjeta Empresarial para PyMEs en México | Clara"
-   - [x] H1 → "El control de gastos que tu PyME necesitaba desde el día uno"
-   - [x] User profile section
-   - [x] Interlinking back → `/es-mx/products/corporate-card`
-5. `part-d/notes.md` with hypotheses and validation metrics
-
-Commit: `"feat: implement SEO improvements and narrative interlinking (part-d/after)"`
-
----
-
-### Phase 4 — Webflow (optional but recommended) (2–3 hrs)
-
-1. Create new project in Webflow
-2. Replicate the visual structure of `after/corporate-card.html` using Clara's components as reference
-3. Connect Webflow to the repo via Webflow Git
-4. Publish from Webflow → code syncs to `/part-d/after/`
-5. Claude Code applies final SEO adjustments on top of exported code
-
-**Note:** Webflow → Git sync is one-directional. Changes made by Claude Code that only live in the repo will be overwritten if a new Webflow publish happens.
-
----
-
-### Phase 5 — README.md (45 min)
-
-The README is the first thing the evaluator reads. It is not an index — it is your voice explaining decisions.
-
-Structure used:
-
-```markdown
-# Clara — Technical Challenge: Website Specialist (SEO)
-
-## Challenge Requirements — Compliance Checklist
-## The Actual Problem: A Matrioshka Site
-## Audit Approach: Symptom → Verification → Diagnosis
-## Keyword Strategy: Coexistence, Not Substitution
-## GEO Baseline Finding
-## Part D: What Was Built and Why
-## Toolchain
-## Repository Structure
+https://cdn.prod.website-files.com/69f57ff4021a4f2250a9fbd4/{asset_id}_{original_filename}
 ```
+Asset IDs for key images can be found in the `asset_tool` or from uploaded asset metadata.
 
-Commit: `"docs: add README with approach and decisions"`
-
----
-
-### Phase 6 — Final push and review (30 min)
-
-```bash
-git add .
-git commit -m "chore: final review and cleanup"
-git push origin main
-```
-
-Verify on GitHub:
-- [ ] The diff between `before/` and `after/` is readable and shows exactly what changed
-- [ ] README renders correctly
-- [ ] All `.md` files are clean and in English
-- [ ] No temporary files or unnecessary assets
+### Compliance rule (HARD)
+Never use "sin aval", "sin historial crediticio", "sin garantías patrimoniales" or any variant. This is a compliance risk, not a style preference. Use verified differentiators: control de gastos por empleado, conciliación automática SAT, tarjetas ilimitadas, integración ERP, proceso 100% digital.
 
 ---
 
 ## For the Live Session
 
-Most likely questions:
-
-**"Why did you work on two pages instead of one?"**
+**"Why did you work on two pages instead of one?"**  
 → Because the real problem is not the content of a single page — it's that the pages aren't in conversation. The challenge mentions `/empresas` but that URL doesn't exist on the site. I chose to work the real architectural problem instead of simulating a hypothetical URL.
 
-**"How would you validate that these changes worked?"**
-→ Search Console for impressions and CTR on queries containing "tarjeta empresarial". Google Analytics for bounce rate and pages per session for users who entered via `/products/corporate-card`. Compare 30 days before vs 30 days after the change.
+**"How would you validate that these changes worked?"**  
+→ Search Console for impressions and CTR on queries containing "tarjeta empresarial". Google Analytics for bounce rate and pages per session for users who entered via `/products/corporate-card`. Compare 30 days before vs 30 days after.
 
-**"Why did you replace 'corporativa' with 'empresarial'?"**
-→ Google Trends with 12-month CSV exports by country shows "tarjeta empresarial" consistently outperforming "tarjeta corporativa" in Mexico and Colombia. It's not an opinion — it's data. The strategy is not to remove "corporativa" from the site but to use "empresarial" as the primary keyword in the highest-weight SEO elements (title, H1) and keep "corporativa" as a secondary semantic signal in body copy.
+**"Why did you replace 'corporativa' with 'empresarial'?"**  
+→ Google Trends 12-month CSV exports show "tarjeta empresarial" consistently outperforming "tarjeta corporativa" in Mexico and Colombia. The strategy is not to remove "corporativa" — it's coexistence: "empresarial" anchors the highest-weight SEO elements (title, H1, meta description), "corporativa" stays in body copy as a secondary semantic signal and brand name.
 
-**"Show me the FAQ schema you implemented."**
-→ Open `after/corporate-card.html`, find `application/ld+json`, explain each field and why those specific questions were chosen.
+**"Show me the FAQ schema you implemented."**  
+→ Open `after/corporate-card.html`, find `application/ld+json`, explain each question and why those were chosen. Or open the Webflow demo and view source.
 
-**"What would you do differently with more time?"**
-→ Build the platform / "how it works" page that describes the complete expense lifecycle. That's the piece the site is most missing and the one with the highest GEO impact. I'd also work on a `llms.txt` in Spanish and Portuguese with the accuracy corrections identified in the GEO baseline (Mastercard vs Visa in Perplexity's response about Clara).
+**"What would you do differently with more time?"**  
+→ Build the platform / "how it works" page that describes the complete expense lifecycle. That's the piece the site is most missing and the one with the highest GEO impact. I'd also write a `llms.txt` in Spanish and Portuguese with the accuracy corrections identified in the GEO baseline (Mastercard vs Visa in Perplexity's response about Clara).

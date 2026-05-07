@@ -121,13 +121,26 @@ Eight questions added as `FAQPage` JSON-LD in the `<head>` — covering the ques
 | Element | Before | After |
 |---|---|---|
 | Title | `Clara \| Gestión Financiera Inteligente para LatAm` | `Clara — Tarjeta corporativa y gestión de gastos para tu empresa en México` |
-| Meta description | Features list, no conversion intent | `Emite tarjetas para tu equipo, automatiza reembolsos y cierra el mes sin caos. Sin aval, sin historial crediticio. Más de 30,000 empresas ya lo hacen con Clara.` |
+| Meta description | Features list, no conversion intent | `Tarjeta empresarial para equipos en México. Crédito ilimitado, controles por empleado y conciliación automática con SAT e integración ERP. Más de 30,000 empresas confían en Clara.` |
 
 **4. Hero copy rewrite**  
 Original: `Gestión de gastos para equipos financieros exigentes` — a brand tagline, not a search phrase.  
 Revised: `El control de gastos que tu empresa necesitaba desde el primer día` — second person (consistent with Clara's voice guidelines), benefit-first, no empty superlatives.
 
 The copy follows Clara's documented tone of voice principles: tuteo, concrete benefits over feature lists, no corporate filler, proof through specificity not adjectives.
+
+---
+
+## Live Demo
+
+**Webflow demo site:** [clara-seo-challenge.webflow.io](https://clara-seo-challenge.webflow.io)
+
+| Page | URL |
+|---|---|
+| Corporate Card (after) | `clara-seo-challenge.webflow.io/corporate-card` |
+| Small Business (after) | `clara-seo-challenge.webflow.io/small-business` |
+
+The demo is built in a real Webflow project using Clara's production CSS classes (`fbl-`/`uui-` naming system). Both pages include the four mandatory improvements plus full narrative interlinking, a logos strip (11 enterprise clients), and reusable Navbar/Footer components.
 
 ---
 
@@ -139,7 +152,7 @@ The copy follows Clara's documented tone of voice principles: tuteo, concrete be
 | **Browser DevTools** | Manual verification of `lang`, `hreflang`, canonical — prevented false positives from automated tools |
 | **Stackoptic** | Structured technical audit — hreflang, schema, WCAG, Core Web Vitals, readability, martech maturity |
 | **Google Trends** | 12-month CSV exports by country — evidence base for keyword coexistence strategy |
-| **Claude Code + Webflow MCP (Designer)** | Live connection to Clara's production site; built `after/` pages on real site structure |
+| **Claude Code + Webflow MCP (Designer)** | Live connection to Clara's production site; built `before/` pages on real site structure. Built Webflow demo pages using MCP Designer Tools. |
 | **Cursor** | Code audits — semantic validation, JSON-LD well-formedness, regression check on `before/after/` |
 | **ChatGPT / Perplexity / Gemini** | GEO baseline — presence, framing accuracy, and factual errors in AI-attributed information |
 
@@ -179,4 +192,4 @@ ClaraSEOChallenge/
 See `CLAUDE.md` for the Webflow MCP setup and agent configuration.  
 See `ROADMAP.md` for the full status checklist.
 
-**Current status (May 2026):** Parts A–C complete. Part D `before/` and `after/` implemented. `notes.md` complete. Webflow MCP connected to Clara's live Designer environment.
+**Current status (May 2026):** Parts A–D complete. Webflow demo published at `clara-seo-challenge.webflow.io` with both pages live. Navbar and Footer extracted as reusable Webflow components. See `ROADMAP.md` for iteration 3 checklist.
