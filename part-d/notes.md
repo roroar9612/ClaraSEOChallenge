@@ -9,6 +9,8 @@ The challenge asked for `/empresas`. That URL does not exist on the real site. T
 
 Neither page linked to the other. The `before/` documents that state. The `after/` implements the complete journey.
 
+> **Note on `before/` capture method:** The `before/` HTML files are snapshots of the live `www.clara.com` pages taken in April 2026 via the Webflow MCP (Designer). An early commit message references `wget` — that was a placeholder from the initial setup commit and does not reflect the actual method used. The Webflow MCP approach preserved live DOM structure, inline scripts, and Webflow-specific class names, making the `before/after` diff a true apples-to-apples comparison.
+
 ---
 
 ## Changes Implemented — corporate-card.html
