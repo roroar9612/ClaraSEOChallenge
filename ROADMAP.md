@@ -1,150 +1,108 @@
-# Roadmap de ejecución — Clara SEO Challenge
+# Execution Roadmap — Clara SEO Challenge
 
 ---
 
-## Estado actual
+## Current Status
 
-| Part | Documento | Estado en repo |
+| Part | Document | Repo status |
 |---|---|---|
-| A | `part-a/audit.md` | ⏳ Draft listo — pendiente de mover al repo |
-| B | `part-b/keyword-strategy.md` | ⏳ Draft listo — pendiente de mover al repo |
-| C | `part-c/geo-ai-search.md` | ⏳ Draft listo — pendiente de mover al repo |
-| D | `part-d/before/` + `part-d/after/` + `part-d/notes.md` | ✅ En repo |
-| — | `README.md` | ✅ En repo |
-| — | Webflow MCP setup (`.mcp.json`, `CLAUDE.md`, `context/`) | ✅ En repo — pendiente auth OAuth |
+| A | `part-a/audit.md` | ✅ In repo |
+| B | `part-b/keyword-strategy.md` | ⏳ Draft ready — pending commit |
+| C | `part-c/geo-ai-search.md` | ⏳ Draft ready — pending commit |
+| D | `part-d/before/` + `part-d/after/` + `part-d/notes.md` | ✅ In repo |
+| — | `README.md` | ✅ In repo |
+| — | Webflow MCP setup (`.mcp.json`, `CLAUDE.md`, `context/`) | ✅ In repo — OAuth auth pending |
 
 ---
 
-## Lo que falta ejecutar
+## Pending Execution
 
-### Fase 1 — Setup del repo (30 min)
+### Phase 1 — Repo setup (30 min)
 
 ```bash
-# Crear estructura de carpetas
 mkdir -p clara-seo-challenge/{part-a,part-b,part-c,part-d/{before,after}}
 
-# Copiar documentos ya producidos
 cp audit.md clara-seo-challenge/part-a/
 cp keyword-strategy.md clara-seo-challenge/part-b/
 cp geo-ai-search.md clara-seo-challenge/part-c/
 
-# Inicializar git
 cd clara-seo-challenge
 git init
-git remote add origin [URL del repo en GitHub]
+git remote add origin [repo URL]
 ```
 
 ---
 
-### Fase 2 — Clonar páginas para before/ (15 min)
+### Phase 2 — Capture before/ pages (15 min)
 
-```bash
-wget --mirror --convert-links --adjust-extension --no-parent \
-  -P part-d/before/ \
-  https://www.clara.com/es-mx/products/corporate-card
+Pages were captured directly via the Webflow Designer MCP — not via `wget`. This gives the `before/` files the real production structure with intact CSS classes and component context, not a static snapshot with broken assets.
 
-wget --mirror --convert-links --adjust-extension --no-parent \
-  -P part-d/before/ \
-  https://www.clara.com/es-mx/solutions/small-business
-```
-
-Renombrar los archivos resultantes:
-- → `part-d/before/corporate-card.html`
-- → `part-d/before/small-business.html`
-
-Commit: `"feat: add before/ pages — current state of clara.com"`
+Commit: `"feat: add before/ pages — current state of clara.com via Webflow MCP"`
 
 ---
 
-### Fase 3 — Implementar cambios con Claude Code MCP (1-2 hrs)
+### Phase 3 — Implement changes with Claude Code MCP (1–2 hrs)
 
-Abrir Claude Code en el repo. Pasarle el `SKILL-claude-code.md` como contexto.
+Open Claude Code in the repo with `SKILL-claude-code.md` as context.
 
-**Orden de ejecución:**
+**Execution order:**
 
-1. Copiar `before/corporate-card.html` → `after/corporate-card.html`
-2. Aplicar cambios en `after/corporate-card.html`:
-   - [ ] Title tag → "Tarjeta Empresarial para Empresas en México | Clara"
-   - [ ] Meta description → versión orientada a beneficios con "sin aval"
-   - [ ] H1 → "La tarjeta empresarial que escala con tu equipo"
-   - [ ] H2 nuevo → "Lo que tu banco no puede darte"
-   - [ ] FAQ schema JSON-LD en `<head>`
-   - [ ] Sección de interlinking → "/es-mx/solutions/small-business"
-3. Copiar `before/small-business.html` → `after/small-business.html`
-4. Aplicar cambios en `after/small-business.html`:
-   - [ ] Title tag → "Tarjeta Empresarial para PyMEs en México | Clara"
-   - [ ] H1 → "El control de gastos que tu PyME necesitaba desde el día uno"
-   - [ ] Sección de perfil de usuario real
-   - [ ] Interlinking de regreso → "/es-mx/products/corporate-card"
-5. Crear `part-d/notes.md` con hipótesis y métricas
+1. Copy `before/corporate-card.html` → `after/corporate-card.html`
+2. Apply changes to `after/corporate-card.html`:
+   - [x] Title tag → `Clara — Tarjeta corporativa y gestión de gastos para tu empresa en México`
+   - [x] Meta description → benefits-oriented with "sin aval" and social proof
+   - [x] H1 → "La tarjeta empresarial que escala con tu equipo"
+   - [x] New H2 → "Lo que tu banco no puede darte"
+   - [x] FAQ schema JSON-LD in `<head>`
+   - [x] Interlinking section → `/es-mx/solutions/small-business`
+3. Copy `before/small-business.html` → `after/small-business.html`
+4. Apply changes to `after/small-business.html`:
+   - [x] Title tag → "Tarjeta Empresarial para PyMEs en México | Clara"
+   - [x] H1 → "El control de gastos que tu PyME necesitaba desde el día uno"
+   - [x] User profile section
+   - [x] Interlinking back → `/es-mx/products/corporate-card`
+5. `part-d/notes.md` with hypotheses and validation metrics
 
 Commit: `"feat: implement SEO improvements and narrative interlinking (part-d/after)"`
 
 ---
 
-### Fase 4 — Webflow (opcional pero recomendado) (2-3 hrs)
+### Phase 4 — Webflow (optional but recommended) (2–3 hrs)
 
-Si se quiere mostrar la versión con fidelidad visual:
+1. Create new project in Webflow
+2. Replicate the visual structure of `after/corporate-card.html` using Clara's components as reference
+3. Connect Webflow to the repo via Webflow Git
+4. Publish from Webflow → code syncs to `/part-d/after/`
+5. Claude Code applies final SEO adjustments on top of exported code
 
-1. Crear proyecto nuevo en Webflow
-2. Replicar la estructura visual de `after/corporate-card.html` usando los componentes de Clara como referencia
-3. Conectar Webflow al repo via Webflow Git
-4. Publicar desde Webflow → el código se sincroniza automáticamente al repo en `/part-d/after/`
-5. Claude Code aplica los ajustes SEO finales encima del código exportado
-
-**Nota:** La sincronización Webflow → Git es unidireccional. Los cambios de Claude Code que vivan solo en el repo se perderán si se vuelve a publicar desde Webflow. Documentar esto en `notes.md`.
+**Note:** Webflow → Git sync is one-directional. Changes made by Claude Code that only live in the repo will be overwritten if a new Webflow publish happens.
 
 ---
 
-### Fase 5 — README.md (45 min)
+### Phase 5 — README.md (45 min)
 
-El README es lo primero que lee quien evalúa. No es un índice — es tu voz explicando las decisiones.
+The README is the first thing the evaluator reads. It is not an index — it is your voice explaining decisions.
 
-Estructura sugerida:
+Structure used:
 
 ```markdown
 # Clara — Technical Challenge: Website Specialist (SEO)
 
-## Approach
-[2-3 párrafos explicando el hilo conductor: narrative-first architecture,
-por qué el SEO es el resultado y no la estrategia, qué te pareció
-más interesante del problema]
-
-## Assumptions
-[Las mismas del Assumption Log de Part A — centralizadas aquí también]
-
-## Structure
-[Descripción breve de qué hay en cada carpeta]
-
-## Part A — SEO Audit
-[1 párrafo con el hallazgo más importante]
-
-## Part B — Keyword Strategy & Content Architecture
-[1 párrafo con la decisión de arquitectura más importante]
-
-## Part C — GEO / AI Search
-[1 párrafo con el baseline finding y la propuesta]
-
-## Part D — Quick Win
-[1 párrafo explicando por qué trabajaste dos páginas en lugar de una,
-y qué demuestra el before/after]
-
-## Tools used
-- Browser DevTools + view-source
-- Google Trends (CSV export, últimos 12 meses por país)
-- SEMrush (tráfico orgánico)
-- Screaming Frog / Sitemap analysis
-- wget (clonado de páginas)
-- Claude Code MCP (implementación de cambios)
-- Webflow (si aplica)
-- ChatGPT / Perplexity (GEO baseline testing)
+## Challenge Requirements — Compliance Checklist
+## The Actual Problem: A Matrioshka Site
+## Audit Approach: Symptom → Verification → Diagnosis
+## Keyword Strategy: Coexistence, Not Substitution
+## GEO Baseline Finding
+## Part D: What Was Built and Why
+## Toolchain
+## Repository Structure
 ```
 
 Commit: `"docs: add README with approach and decisions"`
 
 ---
 
-### Fase 6 — Push final y revisión (30 min)
+### Phase 6 — Final push and review (30 min)
 
 ```bash
 git add .
@@ -152,29 +110,29 @@ git commit -m "chore: final review and cleanup"
 git push origin main
 ```
 
-Revisar en GitHub que:
-- [ ] El diff entre `before/` y `after/` es legible y muestra exactamente qué cambió
-- [ ] El README se renderiza correctamente
-- [ ] Todos los `.md` tienen formato limpio
-- [ ] No hay archivos temporales o assets innecesarios del wget
+Verify on GitHub:
+- [ ] The diff between `before/` and `after/` is readable and shows exactly what changed
+- [ ] README renders correctly
+- [ ] All `.md` files are clean and in English
+- [ ] No temporary files or unnecessary assets
 
 ---
 
-## Para la sesión en vivo
+## For the Live Session
 
-Lo que te van a pedir con mayor probabilidad:
+Most likely questions:
 
-**"Explica por qué elegiste estas dos páginas y no una sola."**
-→ Porque el problema real no es el contenido de una página — es que las páginas no están en conversación. El challenge dice `/empresas` pero el sitio no tiene esa URL. Tomé la decisión de trabajar el problema real de arquitectura en lugar de simular una página hipotética.
+**"Why did you work on two pages instead of one?"**
+→ Because the real problem is not the content of a single page — it's that the pages aren't in conversation. The challenge mentions `/empresas` but that URL doesn't exist on the site. I chose to work the real architectural problem instead of simulating a hypothetical URL.
 
-**"¿Cómo validarías que estos cambios funcionaron?"**
-→ Search Console para impresiones y CTR en queries con "tarjeta empresarial". Google Analytics para bounce rate y páginas por sesión en usuarios que entraron por `/products/corporate-card`. Comparar 30 días antes vs 30 días después del cambio.
+**"How would you validate that these changes worked?"**
+→ Search Console for impressions and CTR on queries containing "tarjeta empresarial". Google Analytics for bounce rate and pages per session for users who entered via `/products/corporate-card`. Compare 30 days before vs 30 days after the change.
 
-**"¿Por qué cambiaste 'corporativa' por 'empresarial'?"**
-→ Google Trends con exportación CSV de los últimos 12 meses muestra que "tarjeta empresarial" supera consistentemente a "tarjeta corporativa" en México y Colombia. No es una opinión — es un dato. La estrategia no es eliminar "corporativa" del sitio sino usar "empresarial" como keyword primario en los elementos de mayor peso SEO (title, H1) y dejar "corporativa" como señal semántica secundaria en el cuerpo.
+**"Why did you replace 'corporativa' with 'empresarial'?"**
+→ Google Trends with 12-month CSV exports by country shows "tarjeta empresarial" consistently outperforming "tarjeta corporativa" in Mexico and Colombia. It's not an opinion — it's data. The strategy is not to remove "corporativa" from the site but to use "empresarial" as the primary keyword in the highest-weight SEO elements (title, H1) and keep "corporativa" as a secondary semantic signal in body copy.
 
-**"Muéstrame el FAQ schema que implementaste."**
-→ Abrir `after/corporate-card.html`, buscar `application/ld+json`, explicar cada campo y por qué esas preguntas específicas.
+**"Show me the FAQ schema you implemented."**
+→ Open `after/corporate-card.html`, find `application/ld+json`, explain each field and why those specific questions were chosen.
 
-**"¿Qué harías diferente si tuvieras más tiempo?"**
-→ Construir la página de plataforma / "cómo funciona" que describe el lifecycle completo del gasto — esa es la pieza que más falta en el sitio y la que más impacto tendría en GEO. También trabajaría el `llms.txt` en español y portugués con las correcciones de accuracy que identificamos (Mastercard vs Visa en la respuesta de Perplexity).
+**"What would you do differently with more time?"**
+→ Build the platform / "how it works" page that describes the complete expense lifecycle. That's the piece the site is most missing and the one with the highest GEO impact. I'd also work on a `llms.txt` in Spanish and Portuguese with the accuracy corrections identified in the GEO baseline (Mastercard vs Visa in Perplexity's response about Clara).
