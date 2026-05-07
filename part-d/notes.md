@@ -102,3 +102,44 @@ La ausencia de interlinking entre páginas de producto y páginas de solución c
 ## Limitación técnica — Webflow
 
 Estos cambios viven en el repo. En producción, deben implementarse directamente en el editor de Webflow (Custom Code en página) o vía Webflow Data API para que una republicación desde el CMS no sobreescriba las modificaciones. Los cambios de contenido (H1, nuevas secciones) requieren edición en el canvas de Webflow — no se pueden inyectar solo con custom code.
+
+---
+
+## Implementación en Webflow — Iteración 1 (mayo 2026)
+
+**Sitio:** `clara-seo-challenge.webflow.io`
+**Site ID:** `69f57ff4021a4f2250a9fbd4`
+
+### Páginas construidas
+
+**Corporate Card** (`/corporate-card`, page ID `69f592e365ffb17eb53e7488`)
+7 secciones: hero navy → stats bar teal → features grid 2×2 → "Lo que tu banco no puede darte" → FAQ accordion 8 preguntas → interlinking → CTA final navy.
+
+**Small Business** (`/small-business`, page ID `69fc967c3d0867342deac6eb`)
+5 secciones: hero navy → perfil de usuario → features grid PyME → interlinking hacia corporate-card → CTA final navy.
+
+### Scripts aplicados (Webflow Scripts API)
+
+| Script ID | Versión | Página | Contenido |
+|---|---|---|---|
+| `claraccfaqschema` | 1.0.1 | corporate-card | FAQ JSON-LD (4 preguntas sobre aval, tarjetas, control de gastos, integraciones) |
+| `claraccseolinks` | 1.0.0 | corporate-card | canonical + hreflang es-MX inyectados via JS |
+| `clarasbseolinks` | 1.0.0 | small-business | canonical + hreflang es-MX inyectados via JS |
+
+### Limitaciones encontradas en la API
+
+- **Scripts API no acepta HTML arbitrario:** Canonical y hreflang son `<link>` tags — no se pueden inyectar como HTML estático vía la API. Se inyectan via JS (`document.createElement('link')`). Para producción real: Page Settings → Custom Code → Head.
+- **Atributos de script requieren prefijo `data-`:** No se puede pasar `type="application/ld+json"` como atributo nativo. El FAQ schema se crea dinámicamente con JS (`s.type = 'application/ld+json'`).
+- **`whtml_builder` no acepta Body como parent directo:** Se necesita una Section intermedia creada con `element_builder`. Descubierto en la primera iteración.
+
+### Lo que falta (iteración 2+)
+
+- [ ] Navbar y footer — las páginas no tienen navegación global
+- [ ] Formulario de registro funcional (Webflow Form con integración CRM)
+- [ ] Imágenes y assets visuales (hero image, feature icons)
+- [ ] Responsive refinement — tipografía y grid en mobile/tablet
+- [ ] Open Graph images por página (`og:image`)
+- [ ] Sitemap.xml y robots.txt
+- [ ] Variables CSS del sistema de diseño Clara (tokens de color y tipografía)
+- [ ] Canonical/hreflang como HTML estático (no JS) vía Page Settings
+- [ ] A/B testing setup para validar hipótesis de H1

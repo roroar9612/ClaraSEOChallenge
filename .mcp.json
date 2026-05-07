@@ -1,10 +1,10 @@
 {
   "mcpServers": {
     "webflow": {
-      "command": "npx",
-      "args": ["-y", "webflow-mcp-server"],
+      "command": "/home/victus/.nvm/versions/node/v22.22.2/bin/npx",
+      "args": ["mcp-remote", "https://mcp.webflow.com/sse"],
       "env": {
-        "WEBFLOW_TOKEN": "<YOUR_WEBFLOW_SITE_TOKEN>"
+        "PATH": "/home/victus/.nvm/versions/node/v22.22.2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       }
     },
     "git": {

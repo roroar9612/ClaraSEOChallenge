@@ -6,7 +6,7 @@ Eres un agente de implementación Webflow para el challenge de SEO de Clara. Tu 
 ## Protocolo obligatorio al iniciar
 1. Lee `context/style-guide.md` SIEMPRE antes de crear o modificar cualquier elemento
 2. Lee `context/framework-principles.md` si vas a usar designer-tools
-3. Lee `part-d/claude-code-prompt.md` para el brief completo de cambios SEO
+3. Lee `claude-code-prompt.md` (raíz del repo) para el brief completo de cambios SEO
 4. Lee `part-d/notes.md` para el contexto de las hipótesis y las métricas
 
 ## Páginas a construir
@@ -71,8 +71,38 @@ Secciones en orden:
 ```
 
 ## Skills disponibles
-- `webflow-designer-tools@webflow-skills` — DOM y gestión de estilos en el canvas
-- `webflow-skills@webflow-skills` — operaciones generales del sitio
+
+Fuente oficial: https://github.com/webflow/webflow-skills
+
+### Plugin: `webflow-designer-tools@webflow-skills`
+> ⚠️ Requiere Webflow Designer abierto y conectado al MCP en `localhost:1339`
+
+| Skill | Cuándo usarlo |
+|---|---|
+| `designer-tools` | Construir/editar páginas, elementos, componentes y estilos en el Designer. Crear secciones, layouts, headings, botones, acordeones. |
+
+### Plugin: `webflow-skills@webflow-skills`
+> ✅ Funciona vía REST API — no requiere Designer abierto
+
+| Skill | Cuándo usarlo |
+|---|---|
+| `asset-audit` | Auditar assets sin alt text o con nombres no SEO-friendly |
+| `accessibility-audit` | Auditoría WCAG 2.1 de páginas (botones, forms, links, headings, foco) — excluye alt text |
+| `bulk-cms-update` | Crear o actualizar múltiples ítems de CMS con validación y preview diff |
+| `cms-best-practices` | Guía experta de arquitectura CMS: colecciones, relaciones, estructura |
+| `cms-collection-setup` | Crear una nueva colección CMS con campos y relaciones |
+| `custom-code-management` | **Inyectar SEO head code** (canonical, hreflang, FAQ schema JSON-LD) como scripts de página. Máx 10,000 chars. No usar `<script>` tags — Webflow los añade. |
+| `flowkit-naming` | Aplicar el sistema de naming FlowKit (fbl-/uui-) al crear o auditar clases |
+| `link-checker` | Encontrar y corregir links rotos o inseguros (HTTP) en todo el sitio |
+| `safe-publish` | Publicar el sitio con preview de cambios y confirmación explícita. El usuario DEBE escribir "publish" — "yes" no activa el publish. |
+| `site-activity` | Logs de actividad del sitio (solo planes Enterprise) |
+| `site-audit` | Auditoría completa: páginas, colecciones, health score, insights |
+
+### Orden recomendado para este challenge
+
+1. **Conectar Designer** → usar `designer-tools` para construir el canvas de ambas páginas
+2. **Sin Designer** → usar `custom-code-management` para inyectar el SEO head code (canonical, hreflang, FAQ schema)
+3. **Al terminar** → usar `safe-publish` para publicar con confirmación
 
 ## Cuándo usar /clear
 - Al cambiar de una página a la otra
