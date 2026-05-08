@@ -171,36 +171,26 @@ The demo is built in a real Webflow project using Clara's production CSS classes
 
 ```
 ClaraSEOChallenge/
-├── README.md                     ← this file
-├── CLAUDE.md                     ← Webflow MCP agent configuration
-├── ROADMAP.md                    ← execution checklist and status
-├── .mcp.json                     ← Webflow MCP server config (Claude Code)
-├── .claude/
-│   └── settings.json             ← agent permissions and plugins
-├── context/
-│   ├── style-guide.md            ← Clara's color tokens, typography, Webflow classes
-│   └── framework-principles.md   ← Webflow site conventions (real production)
+├── README.md
 ├── part-a/
-│   └── audit.md                  ← full SEO audit with methodology note
+│   └── audit.md
 ├── part-b/
-│   └── keyword-strategy.md       ← keyword strategy and content architecture
+│   └── keyword-strategy.md
 ├── part-c/
-│   ├── geo-ai-search.md          ← GEO baseline and AI search proposal
-│   └── llms.txt                  ← multilingual LLM retrieval source file
+│   ├── geo-ai-search.md
+│   └── llms.txt
 └── part-d/
-    ├── before/                   ← real site structure captured via Webflow MCP
-    ├── after/                    ← improved versions with all four changes implemented
+    ├── before/
+    ├── after/
+    │   ├── README.md
     │   ├── corporate-card.html
     │   └── small-business.html
-    └── notes.md                  ← change log, rationale, and validation metrics
+    └── notes.md
 ```
 
 ---
 
-## To Resume This Work
-
-See `CLAUDE.md` for the Webflow MCP setup and agent configuration.  
-See `ROADMAP.md` for the full status checklist.
+## Current Status
 
 **Current status (May 2026):** Parts A-D are complete. Review should start on `/empresas` and then move to `/corporate-card` (the homepage is not used as the evaluation entry point for this challenge). Navbar and Footer were extracted as reusable Webflow components, and copy/metadata updates were applied to both pages.
 
