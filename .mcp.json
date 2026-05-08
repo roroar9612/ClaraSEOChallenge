@@ -1,15 +1,15 @@
 {
   "mcpServers": {
-    "webflow": {
-      "command": "/home/victus/.nvm/versions/node/v22.22.2/bin/npx",
-      "args": ["mcp-remote", "https://mcp.webflow.com/sse"],
-      "env": {
-        "PATH": "/home/victus/.nvm/versions/node/v22.22.2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-      }
-    },
     "git": {
       "command": "mcp-server-git",
       "args": []
+    },
+    "webflow": {
+      "type": "url",
+      "url": "https://mcp.webflow.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${WEBFLOW_API_TOKEN}"
+      }
     }
   }
 }

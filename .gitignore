@@ -7,3 +7,17 @@ part-d/before/www.clara.com/xa5e8du3i6ydNjhmZmE5MDBiZDQ4NmU3ZDlmMzE4M2Rh/
 
 # Node
 node_modules/
+
+# Local tooling / machine-specific files
+.cursor/settings.json
+opencode.json
+
+# Local working artifacts (do not publish)
+downloads/
+reports/
+scripts/
+
+# Secrets and env files
+.env
+.env.*
+*.local
