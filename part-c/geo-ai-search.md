@@ -6,7 +6,7 @@
 
 ## Framing
 
-GEO (Generative Engine Optimization) is not a separate discipline from SEO — it is SEO's next layer. The same content that ranks well in Google tends to surface in AI-generated answers: structured, specific, attributable, and written around real questions. The difference is that traditional SEO optimizes for a ranked list of links, while GEO optimizes for inclusion in a synthesized answer. The implication for Clara is significant: a prospective buyer who asks ChatGPT or Perplexity "cuál es la mejor tarjeta empresarial para startups en México" may never visit a search results page at all. They receive an answer directly, and that answer either includes Clara or it does not.
+GEO (Generative Engine Optimization) is not a separate discipline from SEO — it is SEO's next layer. The same content that ranks well in Google tends to surface in AI-generated answers: structured, specific, attributable, and written around real questions. The difference is that traditional SEO optimizes for a ranked list of links, while GEO optimizes for inclusion in a synthesized answer. The implication for Clara is significant: a prospective buyer who asks ChatGPT or Perplexity, "cuál es la mejor tarjeta empresarial para startups en México," may never visit a search results page at all. They receive an answer directly, and that answer either includes Clara or it does not.
 
 ---
 
@@ -14,9 +14,9 @@ GEO (Generative Engine Optimization) is not a separate discipline from SEO — i
 
 ### Where Clara already appears — and where accuracy breaks down
 
-Clara already appears as the top recommendation in ChatGPT for "mejores tarjetas empresariales para startups en México." That is a meaningful signal: the model has indexed enough authoritative content to associate Clara with this category and market. The challenge is not visibility alone — it is accuracy.
+Clara already appears as the top recommendation in ChatGPT for "mejores tarjetas empresariales para startups en México." That is a meaningful signal: the model has indexed enough authoritative content to associate Clara with this category and market. The challenge is not visibility alone — it is also accuracy.
 
-The same ChatGPT response attributes "Tarjetas Visa físicas y virtuales" to Clara. Clara operates exclusively on the Mastercard World Elite network. This is not a minor error. A prospect who reads that answer and then visits the site — or asks a sales rep about Visa acceptance — encounters an immediate credibility gap. The error originates from low-authority or outdated third-party sources that the model weighted above Clara's own structured content. The production `llms.txt` (included in this directory as a reference artifact) explicitly states "Mastercard World Elite" in the Corporate Card entry, which is the correct signal — but that file alone is not sufficient if competing sources repeat the error without correction.
+The same ChatGPT response attributes "Tarjetas Visa físicas y virtuales" to Clara. Clara operates exclusively on the Mastercard World Elite network. This is not a minor error. A prospect who reads that answer and then visits the site — or asks a sales rep about Visa acceptance — encounters an immediate credibility gap. The error likely originates from low-authority or outdated third-party sources that the model weighted above Clara's own structured content. The production `llms.txt` (included in this directory as a reference artifact) explicitly states "Mastercard World Elite" in the Corporate Card entry, which is the correct signal — but that file alone is not sufficient if competing sources repeat the error without correction.
 
 This is the core GEO diagnostic finding: **Clara is present, but not yet authoritative enough to override inaccurate third-party content in model outputs.**
 

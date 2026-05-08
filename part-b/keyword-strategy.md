@@ -49,9 +49,9 @@ Optimization: Add a narrative section between the hero and the CTA that visualiz
 
 **`/es-mx/products/corporate-card` (and equivalent in CO and BR)**
 
-This is the highest-intent product page and the one most likely to rank for transactional queries. It currently shares components with three other card pages (Black, White, Virtual) and the small-business solution page, diluting its semantic focus.
+This is the highest-intent product page and the one most likely to rank for transactional queries. It currently shares components with three other card pages (Black, White, and Virtual) and the small-business solution page, diluting its semantic focus.
 
-Optimization: Consolidate the individual card pages (`/cards/black-card`, `/cards/white-card`, `/cards/virtual-card`) into this page as anchored sections with 301 redirects from the individual URLs. This concentrates link equity into one URL and eliminates the thin content problem. The page should be restructured around the H1 "Tarjeta empresarial para equipos que escalan con control", with H2s that cover card types, use cases, and differentiators against traditional bank cards. The FAQ section should be expanded with high-intent questions: "¿Puedo dar tarjeta corporativa a mis empleados sin aval?", "¿Cómo controlo los límites de gasto por empleado?", "¿Qué diferencia a Clara de una tarjeta de banco tradicional?".
+Optimization: Consolidate the individual card pages (`/es-mx/cards/black-card`, `/es-mx/cards/white-card`, `/es-mx/cards/virtual-card`) into this page as anchored sections with 301 redirects from the individual URLs. This concentrates link equity into one URL and eliminates the thin-content problem. The page should be restructured around the H1 "Tarjeta empresarial para equipos que escalan con control", with H2s that cover card types, use cases, and differentiators against traditional bank cards. The FAQ section should be expanded with high-intent questions: "¿Puedo dar tarjeta corporativa a mis empleados sin aval?", "¿Cómo controlo los límites de gasto por empleado?", and "¿Qué diferencia a Clara de una tarjeta de banco tradicional?".
 
 **`/es-mx/solutions/small-business` (and equivalents; demo slug later renamed to `/empresas`)**
 
@@ -61,7 +61,7 @@ Optimization: Rewrite around a specific user profile. For small-business: a fina
 
 **`/pt-br/` homepage and product pages**
 
-Brasil already uses the correct vocabulary ("cartão corporativo") but has the same absence of mid-funnel narrative. The optimization logic is identical to MX and CO — add the spend lifecycle narrative, restructure the product page around consolidated card content, and build solution pages with real user profiles.
+Brazil already uses the correct vocabulary ("cartão corporativo") but has the same absence of mid-funnel narrative. The optimization logic is identical to MX and CO — add the spend lifecycle narrative, restructure the product page around consolidated card content, and build solution pages with real user profiles.
 
 ---
 

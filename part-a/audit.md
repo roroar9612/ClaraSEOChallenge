@@ -1,7 +1,7 @@
 # Part A — SEO Audit: clara.com
 
 **Scope:** Technical SEO issues, on-page review of the homepage, and content opportunities for MX and BR.  
-**Tools used:** SEMrush (traffic data, organic overview), Browser DevTools (manual verification of `lang`, `hreflang`, page source), Stackoptic (structured technical audit), Google Trends (12-month export by country), Sitemap analysis.  
+**Tools used:** SEMrush (traffic data, organic overview), Browser DevTools (manual verification of `lang`, `hreflang`, and page source), Stackoptic (structured technical audit), Google Trends (12-month export by country), and sitemap analysis.  
 **Date:** April 2026
 
 ---
@@ -132,7 +132,7 @@ High-intent terms currently unaddressed: "tarjeta empresarial sin aval", "tarjet
 
 ### Opportunity 2 — Mid-funnel content around expense management processes
 
-A prospective buyer who has the problem Clara solves but does not yet know Clara does not search "Clara tarjeta empresarial". They search: "cómo reembolsar gastos a empleados en México", "proceso de reembolso de viáticos empresas", "cómo controlar gastos de equipo en campo". None of these queries is answered by any page on the site today.
+A prospective buyer who has the problem Clara solves but does not yet know Clara exists will not search for "Clara tarjeta empresarial." They search for process-level queries instead: "cómo reembolsar gastos a empleados en México", "proceso de reembolso de viáticos empresas", and "cómo controlar gastos de equipo en campo". None of these queries is answered by any page on the site today.
 
 The product release blog contains precise descriptions of exactly the features that answer these questions — but written as internal product announcements, not as responses to user searches. The opportunity is to build a mid-funnel content layer between the blog and the product pages, written around specific operational problems using the vocabulary of search.
 
