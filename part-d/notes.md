@@ -1,253 +1,96 @@
-# Part D — SEO Quick Win: Corporate Card + SMEs (Clara)
+# Part D — Webflow Quick Win (SEO)
 
-## Scope Decision
+## Scope and Assumption
 
-The challenge asked for `/empresas`. That URL does not exist on the real site. The decision was to work the actual architectural problem between two pages that exist and should be in conversation:
+The prompt references `/empresas`. In production, the equivalent route is `/es-mx/solutions/small-business`.
 
-- `/es-mx/products/corporate-card` → answers "what is the product?"
-- `/es-mx/solutions/small-business` → answers "is this for a company like mine?"
+To keep the intervention grounded in real pages and measurable behavior, the implementation focused on:
 
-Neither page linked to the other. The `before/` documents that state. The `after/` implements the complete journey.
+- `/es-mx/products/corporate-card` (product intent)
+- `/es-mx/solutions/small-business` (fit-by-company-size intent)
 
-> **Note on `before/` capture method:** The `before/` HTML files are snapshots of the live `www.clara.com` pages taken in April 2026 via the Webflow MCP (Designer). An early commit message references `wget` — that was a placeholder from the initial setup commit and does not reflect the actual method used. The Webflow MCP approach preserved live DOM structure, inline scripts, and Webflow-specific class names, making the `before/after` diff a true apples-to-apples comparison.
-
----
-
-## Latest Webflow Sync (May 8, 2026)
-
-The documentation set in this repository now tracks the latest Designer state used in the challenge iteration:
-
-- Page `69fc967c3d0867342deac6eb` uses slug `/empresas` (formerly `/small-business`).
-- `/empresas` is positioned as the entry page for company-level use cases and interlinks into `/corporate-card` for card-level depth.
-- Social proof on `/empresas` includes real-case editorial cards for SmartFit, 99 Minutos, MCM Telecom, Runa, Terranova, and Truora.
-- Work remains unpublished until explicit safe-publish confirmation.
+The `before/` and `after/` files in this folder document that change set.
 
 ---
 
-## Designer API Limitation Note (CMS / DynamoWrapper)
+## SEO Hypothesis
 
-During the latest `/empresas` "Casos de uso" implementation pass, a hard API limitation was confirmed:
+Bounce rate and weak ranking were not caused by a single headline or metadata issue. The root problem was architectural:
 
-- Webflow Designer API can create a `CMSCollection` wrapper (`DynamoWrapper`) via `element_builder`.
-- The same API does **not** allow inserting template children programmatically inside `DynamoItem` using common node types (`Link`, `DivBlock`, `BY_CUSTOM_TAG`, etc.).
-- Attempted inserts are rejected with: `"cannot be placed in a Collection List Wrapper."`
+1. Missing semantic and localization signals (`hreflang`, `canonical`, heading hierarchy, schema)
+2. Weak search-intent alignment in titles and hero messaging
+3. No narrative interlinking between product-level and solution-level pages
 
-### Practical outcome
-
-To keep momentum without blocking delivery, the section was implemented as static markup (WHTML) using real content from the "Casos de uso" collection:
-
-- 6 static tabs (`fbl-proof-tab`, `data-tab="0..5"`)
-- 6 static panels (`fbl-proof-panel`, `data-panel="0..5"`)
-- SmartFit active by default (`is-active` on tab/panel `0`)
-- Existing tabs JS remains valid and operational
-
-This workaround is intentional and documented for future sessions, until Webflow exposes programmatic template population for collection items.
+Hypothesis: a focused update across those three dimensions would improve search relevance, CTR, and post-landing navigation depth without requiring a full redesign.
 
 ---
 
-## Changes Implemented — corporate-card.html
+## Implemented Changes
 
-### 1. hreflang `es-MX` and canonical — relative URL fix
-**Before:** `href="corporate-card.html"`  
-**After:** `href="https://www.clara.com/es-mx/products/corporate-card"`  
-**Why:** Google cannot resolve relative URLs in hreflang attributes. This means the Mexican version of the page does not receive the correct localization signal, which affects ranking in searches from Mexico. The relative canonical has the same problem: without an absolute URL, Google cannot consolidate link equity signals toward the canonical URL.
+### A) `after/corporate-card.html`
 
-### 2. Title tag — primary keyword
-**Before:** `"Tarjeta Corporativa: Emisión Inmediata | Clara"`  
-**After:** `"Clara — Tarjeta corporativa y gestión de gastos para tu empresa en México"`  
-**Why:** Google Trends (last 12 months, Mexico) shows "tarjeta empresarial" consistently outperforming "tarjeta corporativa" in search volume. "Emisión Inmediata" is conversion copy, not a modifier with real search demand. The new title incorporates the geographic modifier "en México", which captures high-intent transactional searches. The previous pleonasm "Tarjeta Empresarial para Empresas" was corrected — "empresarial" already implies the business context.
+1. **Absolute `hreflang` + canonical**
+   - Fixed relative URLs to absolute URLs for `/es-mx/products/corporate-card`
+2. **Title and meta description rewrite**
+   - Shifted from generic/marketing phrasing to query-aligned, market-specific wording
+3. **Social metadata alignment**
+   - Updated `og:title` and `twitter:title` to match the final title strategy
+4. **H1 optimization**
+   - Hero H1 rewritten to keep primary keyword and improve role/team fit
+5. **Heading semantics**
+   - Second `<h1>` converted to `<h2>` to restore a clean hierarchy
+6. **FAQ structured data**
+   - Added `FAQPage` JSON-LD in `<head>` with pre-purchase intent questions
+7. **Differentiator section**
+   - Added copy block focused on “why Clara vs traditional bank flow”
+8. **Interlinking to solution page**
+   - Added contextual CTA from product page to small-business solution page
 
-### 3. Meta description — differentiator-oriented
-**Before:** Feature list (instant issuance, reconciliation, SAT)  
-**After:** Includes "sin aval", per-employee benefit, social proof ("30,000 empresas")  
-**Why:** The previous description did not differentiate Clara from a traditional bank. "Sin aval" is Clara's most powerful differentiator and no bank can offer that. Including it in the snippet increases CTR from users in active evaluation.
+### B) `after/small-business.html`
 
-### 4. og:title + twitter:title — consistency
-Updated to match the new `<title>`. Content shared on social must reflect the same positioning.
-
-### 5. H1 hero — keyword + team differentiator
-**Before:** `"Tarjeta de crédito empresarial para crecer con control"`  
-**After:** `"La tarjeta empresarial que escala con tu equipo"`  
-**Why:** Keeps the primary keyword "empresarial", removes the generic tagline "para crecer con control", and introduces "equipo" — a term that appears in transactional queries like "tarjeta empresarial para empleados".
-
-### 6. Second H1 → H2 — semantic correction
-**Before:** `<h1 class="fbl-heading-h1-17">Acelera tu crecimiento con Clara</h1>`  
-**After:** `<h2 class="fbl-heading-h1-17">Acelera tu crecimiento con Clara</h2>`  
-**Why:** A page should not have two H1 elements. The Webflow class `fbl-heading-h1-17` controls visual style, not semantics — the tag change is zero visual risk.
-
-### 7. FAQ schema — FAQPage JSON-LD
-**Before:** No structured data (Stackoptic score: 0/100)  
-**After:** 8-question `FAQPage` schema in `<head>`  
-**Questions chosen:** Credit requirements, card limits, multi-currency support, reimbursement process, per-employee controls, SAT integration, cancellation terms, onboarding time.  
-**Why these questions:** They map to the real pre-purchase questions a finance director would type into Google before signing up. FAQ rich results appear above standard organic results — the click doesn't require position 1.
-
-### 8. New H2 section — "Lo que tu banco no puede darte"
-**Why:** Addresses the implicit objection in every "tarjeta empresarial" search: "Why not just use my bank?" Naming the differentiators directly (no personal guarantee, instant issuance, per-employee controls) converts visitors who are in comparison mode — the exact profile of a user with a high bounce rate.
-
-### 9. Interlinking — narrative bridge to /small-business
-**Before:** No link to `/solutions/small-business`  
-**After:** Contextual link with anchor text: "¿Acabas de contratar tus primeros empleados? Esta página es para ti →"  
-**Why:** A user landing on the product page via organic search is in discovery mode. If they don't see themselves in the page's primary positioning ("established team"), they bounce. The internal link gives them a path forward instead of an exit.
+1. **Absolute `hreflang` + canonical**
+2. **Title update**
+   - Reframed to a clearer transactional query pattern for SMB audience
+3. **H1 rewrite**
+   - Shifted from brand-centric wording to problem-state wording
+4. **User profile clarity**
+   - Added profile-oriented framing to reduce “is this for me?” friction
+5. **Interlinking back to product page**
+   - Added reciprocal navigation path to `corporate-card`
 
 ---
 
-## Changes Implemented — small-business.html
+## Why This Qualifies as a Quick Win
 
-### 1. hreflang + canonical — absolute URLs
-Same fix as `corporate-card.html`. Relative URLs in both attributes.
-
-### 2. Title tag
-**Before:** `"Soluciones para Pequeñas Empresas | Clara"`  
-**After:** `"Tarjeta Empresarial para PyMEs en México | Clara"`  
-**Why:** The previous title describes a category, not a product. The new title targets the specific search query a small business owner would use.
-
-### 3. H1 — user pain, not product feature
-**Before:** `"Hecha para equipos que están creciendo"`  
-**After:** `"El control de gastos que tu PyME necesitaba desde el día uno"`  
-**Why:** "Hecha para equipos" is brand-centric. The new H1 is user-centric — it names the pain state (lack of expense control) and positions Clara as the solution that should have been there from the start.
-
-### 4. User profile section — "Hecha para equipos que están escalando"
-New section that explicitly describes the target user: a team of 5–50 people, first external hires, finance director who is also the CEO.  
-**Why:** The bounce rate on discovery pages is driven by users who can't quickly answer "is this for me?" Naming the profile explicitly reduces cognitive load and increases time on page.
-
-### 5. Interlinking back to /corporate-card
-**Anchor text:** `"¿Tu empresa ya tiene un equipo financiero? Conoce la tarjeta corporativa →"`  
-**Why:** Creates the bidirectional journey. A user who starts on `/small-business` and outgrows it needs a visible path to the next product tier.
+- No full template rebuild required
+- No backend or engineering dependency
+- High-impact SEO fundamentals addressed in one pass
+- Changes can be implemented via Webflow page settings + targeted content updates
 
 ---
 
-## Root Cause: Why the Bounce Rate Is an Architecture Problem
+## Validation Plan
 
-The challenge frames the problem as a content issue on a single page. The actual cause is structural:
-
-1. **No middle layer in the journey.** The site goes Homepage → Product page → Registration. There is no consideration-stage content that earns the conversion before asking for it.
-2. **The Matrioshka structure.** Each page looks complete from the outside. But opening one doesn't lead you to the next — there are no connecting threads between layers.
-3. **Users in discovery mode need orientation, not a CTA.** A first-time visitor searching "tarjeta empresarial" is not ready to register. They need to understand what makes Clara different from their bank, whether it's for their company size, and what happens after they sign up. None of that was available before the `after/` changes.
-
-Fixing the H1 without fixing the journey treats the symptom. The `after/` pages fix both.
-
----
-
-## Validation Metrics
-
-| Metric | Tool | Expected change | Timeframe |
+| Metric | Tool | Expected Direction | Observation Window |
 |---|---|---|---|
-| Organic impressions for "tarjeta empresarial" queries | Search Console | +20–40% | 4–8 weeks post-deploy |
-| CTR on `/products/corporate-card` in SERP | Search Console | +1.5–3pp (differentiators: "crédito a nombre de empresa", "tarjetas ilimitadas") | 2–4 weeks |
-| Bounce rate on `/products/corporate-card` | GA4 | −15–25% (interlinking + user profile section) | 2 weeks |
-| Pages per session (entry via corporate-card) | GA4 | 1.0 → 1.4+ (new internal link path) | 2 weeks |
-| FAQ rich result appearance | Google Search | Accordion in SERP | 1–3 weeks |
-| Ranking position for "tarjeta empresarial México" | Ahrefs / Search Console | Entry into top 10 | 6–12 weeks |
+| Organic impressions for “tarjeta empresarial” queries | Search Console | Up | 4–8 weeks |
+| CTR on corporate-card entry queries | Search Console | Up | 2–4 weeks |
+| Bounce rate on product entry page | GA4 | Down | 2–4 weeks |
+| Pages/session from organic product landings | GA4 | Up | 2–4 weeks |
+| FAQ rich result eligibility/appearance | Rich Results Test + Search Console | Up | 1–3 weeks |
 
 ---
 
-## What Was NOT Changed (and Why)
+## Constraints and What Was Intentionally Not Changed
 
-- **URL slugs** — changing `/products/corporate-card` to `/es-mx/tarjeta-empresarial` would require 301 redirects and risks losing existing link equity. High reward, high risk. Not a quick win.
-- **Page template structure** — all changes live in `<head>` metadata, semantic tag corrections, and content additions. No layout changes were made. This makes the changes implementable directly in Webflow Custom Code without touching the Webflow canvas structure.
-- **Visual design** — none. The `after/` pages are visually identical to `before/` from the user's perspective. All SEO improvements are invisible to the visitor.
-
----
-
-## How to Implement in Production
-
-All changes in `after/corporate-card.html` are implementable in Webflow without engineering involvement:
-
-1. **`<head>` changes** (title, meta, hreflang, canonical, FAQ schema JSON-LD) → Webflow Dashboard → Page Settings → Custom Code → `<head>` section
-2. **H2 semantic correction** → Webflow Designer → select the element → change tag from H1 to H2 in the element settings panel
-3. **New sections** ("Lo que tu banco no puede darte", interlinking block) → Webflow Designer → add section from component library or build with existing style tokens
-
-No code deployment required. No engineering ticket needed. A Webflow-trained content manager can implement and publish within 2 hours.
+- **Slug migration** (`/products/corporate-card` -> localized slug) was deferred due to redirect/link-equity risk for a quick-win scope.
+- **Visual redesign** was out of scope; this intervention prioritizes SEO performance signals over layout overhaul.
+- **Large CMS template refactors** were deferred to preserve delivery speed.
 
 ---
 
-## Webflow Demo — Iteration 3 Copy Pass (May 7, 2026)
+## Deliverable Mapping
 
-Copy, tone, and compliance changes applied directly to the Webflow demo via MCP Designer Tools.
-
-### Compliance
-
-- `small-business` meta description: removed `"Sin aval, sin historial previo."` — phrase violates product messaging guidelines. Replaced with `"Alta 100% digital."`.
-
-### Copy changes — Small Business
-
-| Element | Before | After | Why |
-|---|---|---|---|
-| Hero subtitle | "...sin trámites bancarios" | "Control de gastos empresarial para equipos de 5 a 100 personas. Alta 100% digital." | Phrase was duplicated 3× on same page; new copy anchors the target segment |
-| Feature "Tarjetas" body | "...Sin trámites bancarios." | "...Desde la plataforma, en minutos." | Eliminates repetition |
-| Feature "Alta digital" body | "Tu PyME califica desde el primer día... Sin trámites bancarios, sin visitas a sucursal." | "Carga tus documentos, verifica en minutos y empieza a operar el mismo día." | "Califica" ambiguous (sounds like credit scoring); "sin trámites" was duplicated |
-| Interlinking H2 | "¿Quieres entender primero cómo funciona la tarjeta?" | "¿Tu empresa ya superó los 100 colaboradores?" | Weak H2 with no targeting; new version speaks to the exact graduation moment |
-| Interlinking body | "...opciones para cada etapa de crecimiento." | "Cuando tu equipo crece y los controles básicos ya no alcanzan, la tarjeta corporativa Clara escala contigo." | Concrete trigger → clear CTA path |
-
-### Copy changes — Corporate Card
-
-| Element | Before | After | Why |
-|---|---|---|---|
-| Hero subtitle | "Crédito para tu empresa, controles para tu equipo." | "Crédito a nombre de tu empresa. Tarjetas ilimitadas con controles individuales por empleado." | Adds two concrete differentiators missing from the original |
-| Features H2 | "Todo lo que necesitas para gestionar gastos de equipo" | "Tarjeta empresarial con controles en tiempo real para cada empleado" | Primary keyword in H2; "tiempo real" adds search-relevant modifier |
-| Interlinking H2 | "¿Es Clara para una empresa como la tuya?" | "¿Acabas de contratar tus primeros empleados?" | Speaks to the specific user state that triggers the journey to `/small-business` |
-| CTA subtitle | "Tu empresa califica. Empieza en minutos." | "Alta 100% digital. Empieza hoy." | "Califica" ambiguous; new copy reinforces the process differentiator |
-| Differentiators body | Generic one-paragraph summary | "Con Clara emites tarjetas para todo tu equipo en minutos, defines límites por colaborador y concilias automáticamente con el SAT. El crédito va a nombre de la empresa — no del director general." | More specific; names 3 verified differentiators; removes bank comparison framing |
-
-### Typography migration
-
-All 43 styles with `font-family` were migrated from `Montserrat` (headings) and `Inter` (body/nav/footer) to `Arial, "Helvetica Neue", Helvetica, sans-serif`. No Google Fonts dependency remains on the demo site.
-
----
-
-## Webflow Demo — Iteration 5 Tab Switcher (May 8, 2026)
-
-Interaction and content redesign applied to the Small Business case studies section via MCP Designer Tools.
-
-### Problem with prior implementation
-
-The six case studies were rendered as stacked `fbl-empresas-case-card` article blocks, each containing 400–600 words of full narrative text. The section required significant vertical scrolling, had no scannability, and no visual hierarchy beyond a tag and heading. A user deciding "is Clara for me?" could not quickly read across companies.
-
-### What changed
-
-**Structure:** Replaced `fbl-empresas-proof-grid` (6 stacked articles) with `fbl-proof-tabs-wrap` — a tab switcher with 6 company pills and a 2-column panel per company.
-
-**Content distillation:** Each 500-word case reduced to:
-- Industry kicker (e.g. "Fitness · expansión nacional")
-- H3 case title (≤8 words)
-- Problem: 1 sentence, muted color
-- Solution: 2 sentences, full contrast
-- Metric chip with ↑ arrow (green accent)
-
-**Panel right column:**
-- Dark quote card (`#0d1731`) for companies with a direct named quote (SmartFit, 99 Minutos, Runa, Terranova, Truora)
-- Green insight card (`rgba(15,168,91,0.07)`) for MCM Telecom (no direct quote available in source material)
-
-**Motion:** Cross-fade opacity 0→1 + translateY 10px→0, 300ms ease, triggered on tab click. Pills: opacity 0.55 idle, 1.0 hover/active.
-
-**Section copy:**
-- H2: "Empresas como la tuya ya operan con Clara"
-- Lead: "Seis equipos mexicanos. Seis problemas distintos. Un patrón en común: banca lenta reemplazada por control en tiempo real."
-
-### CSS classes introduced
-
-| Class | Purpose |
-|---|---|
-| `fbl-proof-tabs-wrap` | Outer wrapper |
-| `fbl-proof-tabs-nav` | Pill navigation `<nav>` |
-| `fbl-proof-tab` | Company pill button (`.is-active` = dark fill) |
-| `fbl-proof-panels` | Panel container |
-| `fbl-proof-panel` | Individual panel (`.is-active` = visible + animation) |
-| `fbl-proof-industry` | Green uppercase kicker |
-| `fbl-proof-case-h3` | Panel heading |
-| `fbl-proof-problem` | Muted problem statement |
-| `fbl-proof-solution` | Full-contrast solution |
-| `fbl-proof-metric` | Green metric chip with ↑ prefix |
-| `fbl-proof-quote-wrap` | Dark quote card container |
-| `fbl-proof-quote-wrap--insight` | Green insight card variant |
-| `fbl-proof-quote` | Blockquote element |
-| `fbl-proof-cite` | Attribution figcaption |
-| `fbl-proof-insight-label` | "Resultado clave" label in insight card |
-| `fbl-proof-insight-text` | Insight body text |
-
-### JS implementation note
-
-Script registered as DOM embed element (`<script>` tag via `whtml_builder`) inserted before the Footer Clara component. Could not use `add_inline_site_script` — site had reached the 15-script limit. The embed targets `.fbl-proof-tab` and `.fbl-proof-panel` via `querySelectorAll`, toggles `is-active` class on click.
-
-### Status
-Applied in Designer. **Not yet published.** Run `/safe-publish` to push to `clara-seo-challenge.webflow.io`.
+- **Before/after artifacts:** `part-d/before/*` and `part-d/after/*`
+- **Hypothesis and rationale:** this document
+- **Validation metrics:** table above
