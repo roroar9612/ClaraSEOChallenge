@@ -35,7 +35,7 @@ A user searching "tarjeta corporativa empresas" lands on `/es-mx/products/corpor
 
 The bounce rate is not a copywriting problem. It's an architecture problem. Fixing the H1 without fixing the journey is polishing one doll without opening the next one.
 
-**That is why the `/empresas` page doesn't exist in production sitemap** — and why working on the two real pages that exist (`/es-mx/products/corporate-card` and `/es-mx/solutions/small-business`) is more honest and more useful than fabricating a URL.
+**That is why the `/empresas` page doesn't exist in the production sitemap** — and why working on the two real pages that exist (`/es-mx/products/corporate-card` and `/es-mx/solutions/small-business`) is more honest and more useful than fabricating a URL.
 
 ---
 
@@ -94,7 +94,7 @@ The structural fix is not ad-hoc: it's a `llms.txt` file in Spanish and Portugue
 
 ---
 
-## Part D: What Was Built and Why
+## Part D — What Was Built and Why
 
 ### Why two pages instead of one
 
@@ -114,7 +114,7 @@ The `before/` pages were not obtained with `wget` or a static site crawler. Clau
 The original `corporate-card` page had two `<h1>` elements — a technical SEO error that dilutes the primary keyword signal and confuses Google's heading interpretation. The second `<h1>` was corrected to `<h2>`. No visual change. Zero implementation risk.
 
 **2. FAQ schema markup**  
-Eight questions added as `FAQPage` JSON-LD in the `<head>` — covering the questions actual prospects ask before signing up: credit requirements, card limits, how reimbursements work, multi-currency support. This enables rich result accordions in SERP and gives AI search models structured, citable answers about Clara's product.
+Eight questions added as `FAQPage` JSON-LD in the `<head>` — covering the questions actual prospects ask before signing up: credit requirements, card limits, how reimbursements work, and multi-currency support. This enables rich-result accordions in SERP and gives AI search models structured, citable answers about Clara's product.
 
 **3. Meta title and description rewrite**
 
@@ -193,6 +193,6 @@ ClaraSEOChallenge/
 See `CLAUDE.md` for the Webflow MCP setup and agent configuration.  
 See `ROADMAP.md` for the full status checklist.
 
-**Current status (May 2026):** Parts A–D complete. Webflow demo published at `clara-seo-challenge.webflow.io` with both pages live. Navbar and Footer extracted as reusable Webflow components. Iteration 3 completed: compliance fix (removed non-compliant messaging from meta description), 10-node copy/tone pass across both pages, and full font migration to `Arial, "Helvetica Neue", Helvetica, sans-serif`. See `ROADMAP.md` for iteration 4 checklist.
+**Current status (May 2026):** Parts A-D are complete. Webflow demo published at `clara-seo-challenge.webflow.io` with both pages live. Navbar and Footer extracted as reusable Webflow components. Iteration 3 completed: compliance fix (removed non-compliant messaging from meta description), 10-node copy/tone pass across both pages, and full font migration to `Arial, "Helvetica Neue", Helvetica, sans-serif`. See `ROADMAP.md` for iteration 4 checklist.
 
 **Latest sync (May 8, 2026):** The Webflow page previously labeled "Small Business" now uses slug `/empresas` (page ID `69fc967c3d0867342deac6eb`). Documentation and navigation references were updated accordingly.
