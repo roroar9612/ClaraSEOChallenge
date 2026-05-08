@@ -13,6 +13,9 @@
 - `part-c/` — GEO / AI search plan (testing approach, improvements, executive reporting model)
 - `part-d/` — Webflow quick win with before/after artifacts, SEO hypothesis, and validation metrics
 
+Baseline context:
+- `part-a/context/initial-audit-baseline-es.pdf` — initial Spanish-language audit prepared before the formal challenge submission; used as a foundation and later expanded in Parts A-D.
+
 ---
 
 ## Challenge Requirements — Compliance Checklist

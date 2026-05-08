@@ -6,6 +6,12 @@
 
 ---
 
+## Context Note
+
+This audit was developed on top of an earlier preparation report in Spanish: `part-a/context/initial-audit-baseline-es.pdf`. That baseline was used to frame initial hypotheses and was then refined and expanded for this challenge submission.
+
+---
+
 ## Assumption Log
 
 **Assumption 1 — `/empresas` is a challenge label, not the production URL.** In production, the equivalent route is `/es-mx/solutions/small-business`. In the challenge demo, that page was later renamed to `/empresas`. Part D works on the two real page types behind the challenge prompt: `/es-mx/products/corporate-card` and `/es-mx/solutions/small-business`.
