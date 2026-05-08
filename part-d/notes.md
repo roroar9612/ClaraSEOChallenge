@@ -31,20 +31,65 @@ Hypothesis: a focused update across those three dimensions would improve search 
 
 1. **Absolute `hreflang` + canonical**
    - Fixed relative URLs to absolute URLs for `/es-mx/products/corporate-card`
+   ```html
+   <link rel="alternate" hrefLang="es-MX" href="https://www.clara.com/es-mx/products/corporate-card"/>
+   <link href="https://www.clara.com/es-mx/products/corporate-card" rel="canonical"/>
+   ```
 2. **Title and meta description rewrite**
    - Shifted from generic/marketing phrasing to query-aligned, market-specific wording
+   ```html
+   <title>Clara — Tarjeta corporativa y gestión de gastos para tu empresa en México</title>
+   <meta content="Tarjeta empresarial para equipos en México. Crédito ilimitado, controles por empleado y conciliación automática con SAT e integración ERP. Más de 30,000 empresas confían en Clara." name="description"/>
+   ```
 3. **Social metadata alignment**
    - Updated `og:title` and `twitter:title` to match the final title strategy
+   ```html
+   <meta content="Clara — Tarjeta corporativa y gestión de gastos para tu empresa en México" property="og:title"/>
+   <meta content="Clara — Tarjeta corporativa y gestión de gastos para tu empresa en México" property="twitter:title"/>
+   ```
 4. **H1 optimization**
    - Hero H1 rewritten to keep primary keyword and improve role/team fit
+   ```html
+   <h1 class="fbl-hero-19-title"><strong>La tarjeta empresarial que escala con tu equipo</strong></h1>
+   ```
 5. **Heading semantics**
    - Second `<h1>` converted to `<h2>` to restore a clean hierarchy
+   ```html
+   <h2 class="fbl-heading-h1-17">Acelera tu crecimiento con Clara</h2>
+   ```
 6. **FAQ structured data**
    - Added `FAQPage` JSON-LD in `<head>` with pre-purchase intent questions
+   ```html
+   <script type="application/ld+json">
+   {
+     "@context": "https://schema.org",
+     "@type": "FAQPage",
+     "mainEntity": [
+       {
+         "@type": "Question",
+         "name": "¿Cuánto tiempo tarda el proceso de alta en Clara?",
+         "acceptedAnswer": {
+           "@type": "Answer",
+           "text": "El proceso de alta es 100% digital..."
+         }
+       }
+     ]
+   }
+   </script>
+   ```
 7. **Differentiator section**
    - Added copy block focused on “why Clara vs traditional bank flow”
+   ```html
+   <div class="fbl-section-banco-vs-clara">
+     <h2 class="fbl-heading-h3-6">Lo que tu banco no puede darte</h2>
+     <p class="fbl-lead-text-26">A diferencia de una tarjeta bancaria tradicional, puedes emitir tarjetas ilimitadas para tu equipo en minutos...</p>
+   </div>
+   ```
 8. **Interlinking to solution page**
-   - Added contextual CTA from product page to small-business solution page
+   - Added direct internal path from this page to the small-business solution URL
+   ```html
+   <a href="https://www.clara.com/es-mx/solutions/small-business" class="uui-navbar02_dropdown-link-2 w-inline-block">...</a>
+   ```
 
 ### B) `after/small-business.html`
 
