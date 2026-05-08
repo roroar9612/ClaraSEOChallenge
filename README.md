@@ -6,6 +6,15 @@
 
 ---
 
+## Submission Map
+
+- `part-a/` — Quick SEO audit of `clara.com` (technical issues, homepage review, content opportunities)
+- `part-b/` — Keyword strategy and content architecture (what to optimize, what to build, interlinking)
+- `part-c/` — GEO / AI search plan (testing approach, improvements, executive reporting model)
+- `part-d/` — Webflow quick win with before/after artifacts, SEO hypothesis, and validation metrics
+
+---
+
 ## Challenge Requirements — Compliance Checklist
 
 The challenge asked: *"Imagine the `/empresas` page on clara.com has a high bounce rate and isn't ranking well for 'tarjeta corporativa empresas'. Propose and execute one concrete improvement."*
