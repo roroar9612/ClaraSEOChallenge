@@ -136,6 +136,8 @@ Hypothesis: a focused update across those three dimensions would improve search 
 
 ## Deliverable Mapping
 
-- **Before/after artifacts:** `part-d/before/*` and `part-d/after/*`
+- **Before snapshots (archival):** `part-d/before/*`
+- **After reference (primary):** `https://clara-seo-challenge.webflow.io/corporate-card` and `https://clara-seo-challenge.webflow.io/empresas`
+- **After snapshots (secondary):** `part-d/after/*.html`
 - **Hypothesis and rationale:** this document
 - **Validation metrics:** table above
