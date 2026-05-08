@@ -169,24 +169,13 @@ The demo is built in a real Webflow project using Clara's production CSS classes
 
 ## Repository Structure
 
-```
-ClaraSEOChallenge/
-├── README.md
-├── part-a/
-│   └── audit.md
-├── part-b/
-│   └── keyword-strategy.md
-├── part-c/
-│   ├── geo-ai-search.md
-│   └── llms.txt
-└── part-d/
-    ├── before/
-    ├── after/
-    │   ├── README.md
-    │   ├── corporate-card.html
-    │   └── small-business.html
-    └── notes.md
-```
+This repository is intentionally organized around the challenge sections only:
+
+- `README.md` — approach, assumptions, and review entrypoints
+- `part-a/` — quick SEO audit deliverable
+- `part-b/` — keyword strategy and content architecture deliverable
+- `part-c/` — GEO / AI search deliverable
+- `part-d/` — Webflow quick win deliverable (before/after artifacts + notes)
 
 ---
 
