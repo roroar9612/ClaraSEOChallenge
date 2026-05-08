@@ -160,3 +160,62 @@ Copy, tone, and compliance changes applied directly to the Webflow demo via MCP 
 ### Typography migration
 
 All 43 styles with `font-family` were migrated from `Montserrat` (headings) and `Inter` (body/nav/footer) to `Arial, "Helvetica Neue", Helvetica, sans-serif`. No Google Fonts dependency remains on the demo site.
+
+---
+
+## Webflow Demo — Iteration 5 Tab Switcher (May 8, 2026)
+
+Interaction and content redesign applied to the Small Business case studies section via MCP Designer Tools.
+
+### Problem with prior implementation
+
+The six case studies were rendered as stacked `fbl-empresas-case-card` article blocks, each containing 400–600 words of full narrative text. The section required significant vertical scrolling, had no scannability, and no visual hierarchy beyond a tag and heading. A user deciding "is Clara for me?" could not quickly read across companies.
+
+### What changed
+
+**Structure:** Replaced `fbl-empresas-proof-grid` (6 stacked articles) with `fbl-proof-tabs-wrap` — a tab switcher with 6 company pills and a 2-column panel per company.
+
+**Content distillation:** Each 500-word case reduced to:
+- Industry kicker (e.g. "Fitness · expansión nacional")
+- H3 case title (≤8 words)
+- Problem: 1 sentence, muted color
+- Solution: 2 sentences, full contrast
+- Metric chip with ↑ arrow (green accent)
+
+**Panel right column:**
+- Dark quote card (`#0d1731`) for companies with a direct named quote (SmartFit, 99 Minutos, Runa, Terranova, Truora)
+- Green insight card (`rgba(15,168,91,0.07)`) for MCM Telecom (no direct quote available in source material)
+
+**Motion:** Cross-fade opacity 0→1 + translateY 10px→0, 300ms ease, triggered on tab click. Pills: opacity 0.55 idle, 1.0 hover/active.
+
+**Section copy:**
+- H2: "Empresas como la tuya ya operan con Clara"
+- Lead: "Seis equipos mexicanos. Seis problemas distintos. Un patrón en común: banca lenta reemplazada por control en tiempo real."
+
+### CSS classes introduced
+
+| Class | Purpose |
+|---|---|
+| `fbl-proof-tabs-wrap` | Outer wrapper |
+| `fbl-proof-tabs-nav` | Pill navigation `<nav>` |
+| `fbl-proof-tab` | Company pill button (`.is-active` = dark fill) |
+| `fbl-proof-panels` | Panel container |
+| `fbl-proof-panel` | Individual panel (`.is-active` = visible + animation) |
+| `fbl-proof-industry` | Green uppercase kicker |
+| `fbl-proof-case-h3` | Panel heading |
+| `fbl-proof-problem` | Muted problem statement |
+| `fbl-proof-solution` | Full-contrast solution |
+| `fbl-proof-metric` | Green metric chip with ↑ prefix |
+| `fbl-proof-quote-wrap` | Dark quote card container |
+| `fbl-proof-quote-wrap--insight` | Green insight card variant |
+| `fbl-proof-quote` | Blockquote element |
+| `fbl-proof-cite` | Attribution figcaption |
+| `fbl-proof-insight-label` | "Resultado clave" label in insight card |
+| `fbl-proof-insight-text` | Insight body text |
+
+### JS implementation note
+
+Script registered as DOM embed element (`<script>` tag via `whtml_builder`) inserted before the Footer Clara component. Could not use `add_inline_site_script` — site had reached the 15-script limit. The embed targets `.fbl-proof-tab` and `.fbl-proof-panel` via `querySelectorAll`, toggles `is-active` class on click.
+
+### Status
+Applied in Designer. **Not yet published.** Run `/safe-publish` to push to `clara-seo-challenge.webflow.io`.

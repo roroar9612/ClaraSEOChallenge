@@ -2,7 +2,7 @@
 
 ---
 
-## Current Status (May 7, 2026)
+## Current Status (May 8, 2026)
 
 | Part | Document | Status |
 |---|---|---|
@@ -11,21 +11,28 @@
 | C | `part-c/geo-ai-search.md` | ✅ Complete |
 | D | `part-d/before/` + `part-d/after/` + `part-d/notes.md` | ✅ Complete |
 | — | `README.md` | ✅ Complete |
-| — | Webflow demo | ✅ Published at `clara-seo-challenge.webflow.io` |
+| — | Webflow demo | ✅ Live at `clara-seo-challenge.webflow.io` (unpublished changes pending) |
 
 ---
 
-## Webflow Demo — Published State
+## Webflow Demo — Real Current State
 
-**Site URL:** `clara-seo-challenge.webflow.io`  
+> ⚠️ **Fuente de verdad: el Designer de Webflow, no estos archivos.**
+> Los .md reflejan el estado conocido al momento del último sync. Siempre hacer `get_all_elements` al inicio de sesión para verificar estado real.
+
+**Site URL:** `clara-seo-challenge.webflow.io`
 **Site ID:** `69f57ff4021a4f2250a9fbd4`
 
 ### Pages
 
-| Page | Slug | Webflow Page ID |
-|---|---|---|
-| Corporate Card | `/corporate-card` | `69f592e365ffb17eb53e7488` |
-| Small Business | `/small-business` | `69fc967c3d0867342deac6eb` |
+| Page | Slug | Webflow Page ID | Last Updated |
+|---|---|---|---|
+| Corporate Card | `/corporate-card` | `69f592e365ffb17eb53e7488` | 2026-05-08T01:58 UTC |
+| Small Business | `/small-business` | `69fc967c3d0867342deac6eb` | 2026-05-08T02:50+ UTC |
+| Como Funciona | `/como-funciona` | `69fd2816de8f795304411f79` | 2026-05-08T00:04 UTC |
+
+**Last published:** 2026-05-08T02:02 UTC
+**Unpublished changes:** Small Business (tab switcher testimonials + iteration 3 copy)
 
 ### Reusable Components
 
@@ -33,98 +40,146 @@
 |---|---|
 | Navbar Clara | `1458fdd9-2ea2-f3f7-2342-cd55a0df2fc4` |
 | Footer Clara | `594c8515-0263-6f17-987b-6375305f4759` |
-
-### Sections built (corporate-card)
-
-1. ✅ Hero — H1, CTA "Regístrate gratis", lead copy
-2. ✅ Logos strip — 11 enterprise clients (Telefónica, Schneider, MAPFRE, Krispy Kreme, MINISO, SmartFit, GNC, Rappi, Pan American, Viva, OCESA)
-3. ✅ Features grid — 4 features (Control por empleado, Conciliación SAT, Crédito a nombre de empresa, Integraciones ERP)
-4. ✅ "Lo que tu banco no puede darte" — differentiators section
-5. ✅ FAQ accordion — 8 questions
-6. ✅ Interlinking CTA → `/small-business`
-7. ✅ CTA final (registro form placeholder)
-8. ✅ Navbar Clara component
-9. ✅ Footer Clara component (with logos, awards, app store badges via CSS background-image)
-
-### Sections built (small-business)
-
-1. ✅ Hero — H1, CTA, lead copy (no compliance issues)
-2. ✅ Logos strip — same 11 enterprise clients
-3. ✅ Perfil de usuario — "Hecha para equipos que están escalando"
-4. ✅ Features PyME — adapted for SME context
-5. ✅ Interlinking CTA → `/corporate-card`
-6. ✅ CTA final
-7. ✅ Navbar Clara component
-8. ✅ Footer Clara component
-
-### Custom Code injected (Page Settings > Head)
-
-Both pages have canonical, hreflang, and meta description via Webflow Page Settings.  
-Corporate-card also has `FAQPage` JSON-LD schema injected via custom script.
+| Logos Strip Clara | `049962a7-2787-8d6e-e9ce-adf1c6f85c28` |
+| Interlink CTA Clara | `6c61e216-0c09-92b4-9e15-9eb852931b76` |
+| CTA Section Clara | `984f67a6-1aa0-a134-ecc1-1449fbd20b3e` |
 
 ---
 
-## Iteration 3 — Completed (May 7, 2026)
+### Sections — `/corporate-card`
 
-- ✅ **Compliance fix** — removed `"Sin aval, sin historial previo."` from small-business meta description. Replaced with `"Alta 100% digital."`
-- ✅ **Copy/tone pass** — 10 text nodes updated across both pages (see `part-d/notes.md` for full change log)
-- ✅ **Font migration** — 43 styles migrated from `Montserrat`/`Inter` → `Arial, "Helvetica Neue", Helvetica, sans-serif`. No Google Fonts dependency.
+1. ✅ **Hero** — H1 "La tarjeta empresarial que escala con tu equipo", lead "Crédito a nombre de tu empresa. Tarjetas ilimitadas con controles individuales por empleado.", CTA "Regístrate gratis" + "Ver cómo funciona", social proof inline ("2K tarjetas creadas / 1M+ transacciones por minuto"), hero image vía CSS background
+2. ✅ **KPIs** — H2 "Controles de tarjeta para que Finanzas se concentre donde más importa", stats: +180M pesos ahorrados, +30% deducciones fiscales, +156h ahorradas/año
+3. ✅ **Logos strip** — "30,000 empresas confían en Clara" (componente `049962a7`)
+4. ✅ **Features** — H2 "Para equipos financieros que ponen el foco donde más importa", 5 features: Reembolsos centralizados, Aprobaciones personalizadas, Control de tarjetas, Deducción fiscal automática, Integración con ERP + mockup finops
+5. ✅ **"Lo que tu banco no puede darte"** — diferenciadores con imagen dark cards
+6. ✅ **FAQ accordion** — 6 preguntas con H2 "¿Tienes preguntas?"
+7. ✅ **Interlinking** — "¿Tu PyME está creciendo y necesita más control?" → `/es-mx/solutions/small-business`
+8. ✅ **CTA final** — formulario con Nombre, Email empresarial, Empresa, Número de empleados
+9. ✅ Navbar Clara + Footer Clara (componentes)
 
-## Iteration 4 — Pending
+### Sections — `/small-business`
 
-### High priority
-
-- [ ] **Hero image** — corporate-card hero background image not wired. Asset uploaded to project CDN (`69fcec93c6b5fa35b5651982`). Apply via CSS `background-image` on hero section div.
-- [ ] **og:image** — add Open Graph image for both pages via Page Settings (Webflow: SEO tab → OG image).
-- [ ] **hreflang as HTML** — currently injected via JS. Move to Page Settings > Custom Code > Head as static `<link rel="alternate" hreflang="es-MX" ...>`.
-
-### Medium priority
-
-- [ ] **Navbar dropdowns** — real Clara navbar has dropdowns for Productos, Soluciones, Recursos. Current version has placeholder links only.
-- [ ] **Registro form** — CTA final has a form placeholder. Wire up a real form (Webflow native form or HubSpot embed).
-- [ ] **Responsive review** — check navbar and footer at tablet and mobile breakpoints in Webflow Designer.
-
-> ⚠️ **Bloqueado (May 7, 2026)** — Todas las tareas de esta iteración (High + Medium priority) requieren el Webflow Designer MCP Bridge App. La extensión en `webflow-ext.com` estaba caída durante la sesión. Cuando vuelva disponible: abrir Designer → Bridge App → conectar a `localhost:1338` → ejecutar backlog.
-
-### Low priority
-
-- [ ] **parts B and C** — confirm `part-b/keyword-strategy.md` and `part-c/geo-ai-search.md` are in repo with correct content.
-- [ ] **Safe publish** — run `/safe-publish` after any Designer session to push changes to `clara-seo-challenge.webflow.io`.
+1. ✅ **Hero** — H1 "Control financiero para empresas que están creciendo", lead copy, CTA "Regístrate gratis" + "Ver tarjetas Clara", mockup panel de gasto (Gasto mensual $1,546,736 + chips: Tarjetas por equipo, Límites por colaborador, Pagos y gastos visibles)
+2. ✅ **Logos strip** — componente `049962a7`
+3. ✅ **Casos de uso (tab switcher)** — H2 "Empresas como la tuya ya operan con Clara", lead "Seis equipos mexicanos. Seis problemas distintos. Un patrón en común: banca lenta reemplazada por control en tiempo real.", 6 pills de empresa → panel 2 columnas (historia destilada + quote card oscura o insight card verde). Empresas: SmartFit, 99 Minutos, Runa, MCM Telecom, Terranova, Truora. Cross-fade 300ms + slide 10px.
+4. ✅ **Perfiles** — "Para empresas que necesitan ordenar su operación financiera", 3 perfiles: Fundadores con operación activa, Equipos financieros pequeños, Empresas en crecimiento
+5. ✅ **Features** — "Capacidades para controlar gastos sin frenar a tu equipo", 4 features: Tarjetas para todo el equipo, Reembolsos centralizados, Visibilidad en tiempo real, Alta 100% digital
+6. ✅ **CTA final** — "Empieza a centralizar la operación financiera de tu empresa" (componente `CTA Section Clara`)
+7. ✅ **Interlinking** — "Profundiza en las tarjetas Clara para tu equipo" → `/es-mx/products/corporate-card` (componente `Interlink CTA Clara`)
+8. ✅ Navbar Clara + Footer Clara (componentes)
 
 ---
 
-## Critical Context for Next Session
+### Scripts registrados en el sitio (15/15 — LÍMITE ALCANZADO)
 
-### Ghost element pattern
-`remove_element` in Webflow MCP sometimes reports success but elements persist across sessions. At session start, always query the page's body direct children to distinguish true standalone elements from component-internal elements before attempting any delete.
+> ⚠️ El límite de scripts registrados por la API es 15. Está al tope.
+> Nuevos scripts JS deben inyectarse como elemento DOM `<script>` vía `whtml_builder`, no como scripts registrados.
+
+| Script ID | Versión | Ubicación | Página |
+|---|---|---|---|
+| `claracorpseocore` | 1.0.0 | header | corporate-card |
+| `claraccfaqschema` | 1.0.1 | header | corporate-card |
+| `claraccseolinks` | 1.0.0 | footer | corporate-card |
+| `clarafaqclean` | 1.0.0 | — | registrado, sin asignar |
+| `clarasmallseocore` | 1.0.0 | header | small-business |
+| `claracontentpolish` | 1.0.0 | header | small-business |
+| `clarasobermotion` | 1.0.0 | header | small-business |
+| `claralogostripmotion` | 1.0.0/1.1.0 | footer | small-business |
+| `clarasbseolinks` | 1.0.0 | — | registrado, sin asignar confirmado |
+| `clarascrollorchestrator` | 1.0.0 | — | registrado |
+| `claraheropremiummotion` | 1.0.0 | — | registrado |
+| `clarapremiumvisuals` | 1.0.0 | — | registrado |
+| `claramotionquality` | 1.0.0 | — | registrado |
+| `claraherocardmotion` | 1.0.0/1.1.0 | — | registrado |
+
+**Tab switcher JS** (`ClaraProofTabs`) — inyectado como DOM embed en Small Business (no como script registrado, por límite).
+
+---
+
+## Iteraciones completadas
+
+### Iteración 1 — Estructura base (mayo 2–5, 2026)
+- Ambas páginas construidas en Webflow
+- Navbar + Footer como componentes
+- SEO head code (canonical, hreflang, meta description) vía Page Settings
+
+### Iteración 2 — Componentes y assets (mayo 5–6, 2026)
+- Logos strip convertido a componente
+- FAQ schema JSON-LD inyectado en corporate-card
+- Hero image de corporate-card subida al CDN (`69fcec93c6b5fa35b5651982`)
+
+### Iteración 3 — Copy, compliance y tipografía (mayo 7, 2026)
+- Compliance fix: removido "Sin aval, sin historial previo." de meta small-business
+- 10 nodos de texto actualizados en ambas páginas (ver `part-d/notes.md`)
+- 43 estilos migrados de Montserrat/Inter → Arial system font
+- **Estado: aplicado en Designer, pendiente de publicar**
+
+### Iteración 4 — Motion y scripts (mayo 8, 2026)
+- Scripts de motion aplicados a small-business: ClaraSoberMotion, ClaraContentPolish, ClaraLogoStripMotion
+- Scripts adicionales registrados (ClaraScrollOrchestrator, ClaraHeroPremiumMotion, ClaraPremiumVisuals, ClaraMotionQuality, ClaraHeroCardMotion) — detalles de aplicación a verificar en Designer
+- Sección "Como Funciona" creada como tercera página del sitio
+
+### Iteración 5 — Tab switcher testimonios (mayo 8, 2026)
+- Sección de casos de uso en Small Business rediseñada: de 6 bloques apilados con texto largo → tab switcher interactivo
+- 6 casos destilados a: kicker de industria + H3 + problema (1 línea) + solución (2 líneas) + métrica chip
+- Panel derecho: quote card oscura (`#0d1731`) para casos con cita directa, insight card verde para MCM Telecom (sin cita)
+- Cross-fade opacity 0→1 + slide 10px, 300ms
+- H2 actualizado: "Empresas como la tuya ya operan con Clara"
+- Lead actualizado: "Seis equipos mexicanos. Seis problemas distintos. Un patrón en común: banca lenta reemplazada por control en tiempo real."
+- JS inyectado como DOM embed (límite de scripts registrados alcanzado)
+- **Estado: aplicado en Designer, pendiente de publicar**
+
+---
+
+## Pendiente — Iteración 6
+
+- [ ] **Publicar** — correr `/safe-publish` para subir iteraciones 3+4+5 a `clara-seo-challenge.webflow.io`
+- [ ] **og:image** — Open Graph image en ambas páginas vía Page Settings
+- [ ] **hreflang estático** — mover de JS a `<link>` HTML en Page Settings > Custom Code > Head
+- [ ] **Responsive review** — navbar y footer a tablet/mobile
+- [ ] **Registro form** — conectar formulario de CTA final (Webflow native form)
+
+---
+
+## Critical Context para próxima sesión
+
+### Fuente de verdad
+Los .md están siempre desfasados respecto al Designer. Al iniciar sesión:
+1. Conectar Designer MCP: `https://clara-seo-challenge.design.webflow.com?app=dc8209c65e3ec02254d15275ca056539c89f6d15741893a0adf29ad6f381eb99`
+2. Hacer `get_all_elements` en la página activa para ver el estado real
+3. Hacer `get_page_script` para ver qué scripts están aplicados
+
+### Límite de scripts (CRÍTICO)
+**15/15 registrados.** Para agregar JS nuevo: inyectar como DOM embed vía `whtml_builder` con `<script>` tag, antes del footer. No intentar `add_inline_site_script` — fallará con `max_scripts_per_block`.
 
 ### imgraw limitation
-`whtml_builder` converts `<img>` tags to `imgraw` DOM elements. The `src` attribute is **not stored** in Webflow's data model — images will be blank in the Designer and in published output. Fix: use CSS `background-image` on div containers. All current images on both pages use this pattern.
-
-### CSS background-image pattern (project CDN)
+`whtml_builder` convierte `<img>` a `imgraw` — el `src` no se persiste. Siempre usar CSS `background-image` en divs. CDN pattern:
 ```
-https://cdn.prod.website-files.com/69f57ff4021a4f2250a9fbd4/{asset_id}_{original_filename}
+https://cdn.prod.website-files.com/69f57ff4021a4f2250a9fbd4/{asset_id}_{filename}
 ```
-Asset IDs for key images can be found in the `asset_tool` or from uploaded asset metadata.
 
-### Compliance rule (HARD)
-Never use "sin aval", "sin historial crediticio", "sin garantías patrimoniales" or any variant. This is a compliance risk, not a style preference. Use verified differentiators: control de gastos por empleado, conciliación automática SAT, tarjetas ilimitadas, integración ERP, proceso 100% digital.
+### Ghost element pattern
+`remove_element` a veces reporta éxito pero el elemento persiste entre sesiones. Verificar con `query_elements` después de cualquier eliminación.
+
+### Compliance (HARD)
+Nunca usar "sin aval", "sin historial crediticio", "sin garantías patrimoniales". Usar solo: control de gastos por empleado, conciliación automática SAT, tarjetas ilimitadas, integración ERP, proceso 100% digital.
 
 ---
 
-## For the Live Session
+## Para la presentación en vivo
 
-**"Why did you work on two pages instead of one?"**  
-→ Because the real problem is not the content of a single page — it's that the pages aren't in conversation. The challenge mentions `/empresas` but that URL doesn't exist on the site. I chose to work the real architectural problem instead of simulating a hypothetical URL.
+**"¿Por qué trabajaste dos páginas en vez de una?"**
+→ El problema real no es el contenido de una página — es que las páginas no están en conversación. El challenge menciona `/empresas` pero esa URL no existe en el sitio real. Elegí trabajar el problema arquitectónico real: ninguna de las dos páginas enlazaba a la otra.
 
-**"How would you validate that these changes worked?"**  
-→ Search Console for impressions and CTR on queries containing "tarjeta empresarial". Google Analytics for bounce rate and pages per session for users who entered via `/products/corporate-card`. Compare 30 days before vs 30 days after.
+**"¿Cómo validarías que los cambios funcionaron?"**
+→ Search Console para impresiones y CTR en queries "tarjeta empresarial". GA4 para bounce rate y páginas/sesión en usuarios que entran por `/products/corporate-card`. Comparar 30 días antes vs 30 días después del deploy.
 
-**"Why did you replace 'corporativa' with 'empresarial'?"**  
-→ Google Trends 12-month CSV exports show "tarjeta empresarial" consistently outperforming "tarjeta corporativa" in Mexico and Colombia. The strategy is not to remove "corporativa" — it's coexistence: "empresarial" anchors the highest-weight SEO elements (title, H1, meta description), "corporativa" stays in body copy as a secondary semantic signal and brand name.
+**"¿Por qué reemplazaste 'corporativa' por 'empresarial'?"**
+→ Google Trends (12 meses, México) muestra "tarjeta empresarial" consistentemente por encima de "tarjeta corporativa". La estrategia es coexistencia: "empresarial" ancla los elementos de mayor peso SEO (title, H1, meta), "corporativa" permanece en body copy como señal semántica secundaria.
 
-**"Show me the FAQ schema you implemented."**  
-→ Open `after/corporate-card.html`, find `application/ld+json`, explain each question and why those were chosen. Or open the Webflow demo and view source.
+**"Muéstrame el FAQ schema que implementaste."**
+→ Abrir `after/corporate-card.html`, buscar `application/ld+json`. O abrir el demo y ver source. 6 preguntas elegidas por ser las que un director de finanzas buscaría antes de firmar.
 
-**"What would you do differently with more time?"**  
-→ Build the platform / "how it works" page that describes the complete expense lifecycle. That's the piece the site is most missing and the one with the highest GEO impact. I'd also write a `llms.txt` in Spanish and Portuguese with the accuracy corrections identified in the GEO baseline (Mastercard vs Visa in Perplexity's response about Clara).
+**"¿Qué harías diferente con más tiempo?"**
+→ Construir la página "cómo funciona" que describe el ciclo completo de gasto. Es la pieza que más falta en el sitio y la de mayor impacto GEO. También escribiría `llms.txt` en español y portugués con las correcciones de precisión identificadas en el baseline (Mastercard vs Visa en la respuesta de Perplexity sobre Clara).
