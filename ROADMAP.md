@@ -28,11 +28,11 @@
 | Page | Slug | Webflow Page ID | Last Updated |
 |---|---|---|---|
 | Corporate Card | `/corporate-card` | `69f592e365ffb17eb53e7488` | 2026-05-08T01:58 UTC |
-| Small Business | `/small-business` | `69fc967c3d0867342deac6eb` | 2026-05-08T02:50+ UTC |
+| Empresas (formerly Small Business) | `/empresas` | `69fc967c3d0867342deac6eb` | 2026-05-08T04:49 UTC |
 | Como Funciona | `/como-funciona` | `69fd2816de8f795304411f79` | 2026-05-08T00:04 UTC |
 
 **Last published:** 2026-05-08T02:02 UTC
-**Unpublished changes:** Small Business (tab switcher testimonials + iteration 3 copy)
+**Unpublished changes:** Corporate Card + Empresas (visual rescue, copy updates, social-proof expansion, script/motion adjustments)
 
 ### Reusable Components
 
@@ -54,19 +54,19 @@
 4. ✅ **Features** — H2 "Para equipos financieros que ponen el foco donde más importa", 5 features: Reembolsos centralizados, Aprobaciones personalizadas, Control de tarjetas, Deducción fiscal automática, Integración con ERP + mockup finops
 5. ✅ **"Lo que tu banco no puede darte"** — diferenciadores con imagen dark cards
 6. ✅ **FAQ accordion** — 6 preguntas con H2 "¿Tienes preguntas?"
-7. ✅ **Interlinking** — "¿Tu PyME está creciendo y necesita más control?" → `/es-mx/solutions/small-business`
+7. ✅ **Interlinking** — "¿Tu empresa está creciendo y necesita más control?" → `/empresas`
 8. ✅ **CTA final** — formulario con Nombre, Email empresarial, Empresa, Número de empleados
 9. ✅ Navbar Clara + Footer Clara (componentes)
 
-### Sections — `/small-business`
+### Sections — `/empresas`
 
 1. ✅ **Hero** — H1 "Control financiero para empresas que están creciendo", lead copy, CTA "Regístrate gratis" + "Ver tarjetas Clara", mockup panel de gasto (Gasto mensual $1,546,736 + chips: Tarjetas por equipo, Límites por colaborador, Pagos y gastos visibles)
 2. ✅ **Logos strip** — componente `049962a7`
-3. ✅ **Casos de uso (tab switcher)** — H2 "Empresas como la tuya ya operan con Clara", lead "Seis equipos mexicanos. Seis problemas distintos. Un patrón en común: banca lenta reemplazada por control en tiempo real.", 6 pills de empresa → panel 2 columnas (historia destilada + quote card oscura o insight card verde). Empresas: SmartFit, 99 Minutos, Runa, MCM Telecom, Terranova, Truora. Cross-fade 300ms + slide 10px.
+3. ✅ **Casos de uso (editorial cards)** — H2 "Historias reales para mostrar dónde Clara genera valor", grid de tarjetas con caso destacado + casos de apoyo. Empresas integradas: SmartFit, 99 Minutos, MCM Telecom, Runa, Terranova y Truora.
 4. ✅ **Perfiles** — "Para empresas que necesitan ordenar su operación financiera", 3 perfiles: Fundadores con operación activa, Equipos financieros pequeños, Empresas en crecimiento
 5. ✅ **Features** — "Capacidades para controlar gastos sin frenar a tu equipo", 4 features: Tarjetas para todo el equipo, Reembolsos centralizados, Visibilidad en tiempo real, Alta 100% digital
 6. ✅ **CTA final** — "Empieza a centralizar la operación financiera de tu empresa" (componente `CTA Section Clara`)
-7. ✅ **Interlinking** — "Profundiza en las tarjetas Clara para tu equipo" → `/es-mx/products/corporate-card` (componente `Interlink CTA Clara`)
+7. ✅ **Interlinking** — "Profundiza en las tarjetas Clara para tu equipo" → `/corporate-card` (componente `Interlink CTA Clara`)
 8. ✅ Navbar Clara + Footer Clara (componentes)
 
 ---
@@ -120,25 +120,24 @@
 - Scripts adicionales registrados (ClaraScrollOrchestrator, ClaraHeroPremiumMotion, ClaraPremiumVisuals, ClaraMotionQuality, ClaraHeroCardMotion) — detalles de aplicación a verificar en Designer
 - Sección "Como Funciona" creada como tercera página del sitio
 
-### Iteración 5 — Tab switcher testimonios (mayo 8, 2026)
-- Sección de casos de uso en Small Business rediseñada: de 6 bloques apilados con texto largo → tab switcher interactivo
-- 6 casos destilados a: kicker de industria + H3 + problema (1 línea) + solución (2 líneas) + métrica chip
-- Panel derecho: quote card oscura (`#0d1731`) para casos con cita directa, insight card verde para MCM Telecom (sin cita)
-- Cross-fade opacity 0→1 + slide 10px, 300ms
-- H2 actualizado: "Empresas como la tuya ya operan con Clara"
-- Lead actualizado: "Seis equipos mexicanos. Seis problemas distintos. Un patrón en común: banca lenta reemplazada por control en tiempo real."
-- JS inyectado como DOM embed (límite de scripts registrados alcanzado)
+### Iteración 5 — Replanteamiento visual de `/empresas` (mayo 8, 2026)
+- La página "Small Business" se consolidó como **`/empresas`** (mismo page ID, nuevo slug)
+- Hero de `/empresas` rediseñado con visual de sistema (no duplicar patrón del hero de corporate-card)
+- Interlinking consolidado hacia `/corporate-card` para profundidad de producto (Black/White/virtual/wallet)
+- Sección de social proof migrada a tarjetas editoriales con contenido real y tono de customer story
+- Casos integrados: SmartFit, 99 Minutos, MCM Telecom, Runa, Terranova y Truora
 - **Estado: aplicado en Designer, pendiente de publicar**
 
 ---
 
 ## Pendiente — Iteración 6
 
-- [ ] **Publicar** — correr `/safe-publish` para subir iteraciones 3+4+5 a `clara-seo-challenge.webflow.io`
+- [ ] **Publicar** — correr `/safe-publish` para subir iteraciones 3+4+5+6 a `clara-seo-challenge.webflow.io`
 - [ ] **og:image** — Open Graph image en ambas páginas vía Page Settings
 - [ ] **hreflang estático** — mover de JS a `<link>` HTML en Page Settings > Custom Code > Head
 - [ ] **Responsive review** — navbar y footer a tablet/mobile
 - [ ] **Registro form** — conectar formulario de CTA final (Webflow native form)
+- [ ] **FAQ costos corporate-card** — agregar Q/A: "¿Cuáles son los costos y comisiones de Clara?" con valores aprobados (Apertura $0, administración $0, White/Virtual $0, Black $5,000 MXN/año, sin costos ocultos)
 
 ---
 

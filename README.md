@@ -98,7 +98,7 @@ The structural fix is not ad-hoc: it's a `llms.txt` file in Spanish and Portugue
 
 ### Why two pages instead of one
 
-`/products/corporate-card` answers "what is the product." `/solutions/small-business` answers "is this for a company like mine." Neither page links to the other. A user in the consideration stage needs both — and the absence of a path between them is the architectural cause of the bounce.
+`/products/corporate-card` answers "what is the product." `/empresas` (formerly `/solutions/small-business`) answers "is this for a company like mine." Neither page linked to the other originally. A user in the consideration stage needs both — and the absence of a path between them is the architectural cause of the bounce.
 
 The `before/` and `after/` demonstrate two things simultaneously:
 1. **Technical fixes** — hreflang with absolute URLs, duplicate H1 corrected, FAQ schema added
@@ -138,7 +138,7 @@ The copy follows Clara's documented tone of voice principles: tuteo, concrete be
 | Page | URL |
 |---|---|
 | Corporate Card (after) | `clara-seo-challenge.webflow.io/corporate-card` |
-| Small Business (after) | `clara-seo-challenge.webflow.io/small-business` |
+| Empresas (after, formerly Small Business) | `clara-seo-challenge.webflow.io/empresas` |
 
 The demo is built in a real Webflow project using Clara's production CSS classes (`fbl-`/`uui-` naming system). Both pages include the four mandatory improvements plus full narrative interlinking, a logos strip (11 enterprise clients), and reusable Navbar/Footer components.
 
@@ -193,3 +193,5 @@ See `CLAUDE.md` for the Webflow MCP setup and agent configuration.
 See `ROADMAP.md` for the full status checklist.
 
 **Current status (May 2026):** Parts A–D complete. Webflow demo published at `clara-seo-challenge.webflow.io` with both pages live. Navbar and Footer extracted as reusable Webflow components. Iteration 3 completed: compliance fix (removed non-compliant messaging from meta description), 10-node copy/tone pass across both pages, and full font migration to `Arial, "Helvetica Neue", Helvetica, sans-serif`. See `ROADMAP.md` for iteration 4 checklist.
+
+**Latest sync (May 8, 2026):** The Webflow page previously labeled "Small Business" now uses slug `/empresas` (page ID `69fc967c3d0867342deac6eb`). Documentation and navigation references were updated accordingly.

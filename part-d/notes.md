@@ -13,6 +13,17 @@ Neither page linked to the other. The `before/` documents that state. The `after
 
 ---
 
+## Latest Webflow Sync (May 8, 2026)
+
+The documentation set in this repository now tracks the latest Designer state used in the challenge iteration:
+
+- Page `69fc967c3d0867342deac6eb` uses slug `/empresas` (formerly `/small-business`).
+- `/empresas` is positioned as the entry page for company-level use cases and interlinks into `/corporate-card` for card-level depth.
+- Social proof on `/empresas` includes real-case editorial cards for SmartFit, 99 Minutos, MCM Telecom, Runa, Terranova, and Truora.
+- Work remains unpublished until explicit safe-publish confirmation.
+
+---
+
 ## Changes Implemented — corporate-card.html
 
 ### 1. hreflang `es-MX` and canonical — relative URL fix
