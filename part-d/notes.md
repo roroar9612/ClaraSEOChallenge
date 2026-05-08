@@ -4,12 +4,17 @@
 
 The prompt references `/empresas`. In production, the equivalent route is `/es-mx/solutions/small-business`.
 
-To keep the intervention grounded in real pages and measurable behavior, the implementation focused on:
+Because the challenge prioritizes `/empresas`, the implementation and review order used in this submission is:
+
+1. `/empresas` (demo page for the SMB/fit stage)
+2. `/corporate-card` (product-detail stage)
+
+To keep the intervention grounded in real pages and measurable behavior, the technical work focused on:
 
 - `/es-mx/products/corporate-card` (product intent)
 - `/es-mx/solutions/small-business` (fit-by-company-size intent)
 
-The `before/` and `after/` files in this folder document that change set.
+The `before/` and `after/` files document that change set. Interlinking between both pages is deliberate and designed to support the user journey from fit assessment to product depth (and back).
 
 ---
 
@@ -137,7 +142,7 @@ Hypothesis: a focused update across those three dimensions would improve search 
 ## Deliverable Mapping
 
 - **Before snapshots (archival):** `part-d/before/*`
-- **After reference (primary):** `https://clara-seo-challenge.webflow.io/corporate-card` and `https://clara-seo-challenge.webflow.io/empresas`
-- **After snapshots (secondary):** `part-d/after/*.html`
+- **After reference (primary):** `https://clara-seo-challenge.webflow.io/empresas` and `https://clara-seo-challenge.webflow.io/corporate-card`
+- **Local HTML artifacts (secondary):** `part-d/after/*.html` (archival snapshots from early capture/diff workflow; not the primary review source)
 - **Hypothesis and rationale:** this document
 - **Validation metrics:** table above
