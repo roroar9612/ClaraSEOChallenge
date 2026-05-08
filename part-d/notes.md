@@ -101,7 +101,7 @@ Fixing the H1 without fixing the journey treats the symptom. The `after/` pages 
 | Metric | Tool | Expected change | Timeframe |
 |---|---|---|---|
 | Organic impressions for "tarjeta empresarial" queries | Search Console | +20–40% | 4–8 weeks post-deploy |
-| CTR on `/products/corporate-card` in SERP | Search Console | +1.5–3pp ("sin aval" in description) | 2–4 weeks |
+| CTR on `/products/corporate-card` in SERP | Search Console | +1.5–3pp (differentiators: "crédito a nombre de empresa", "tarjetas ilimitadas") | 2–4 weeks |
 | Bounce rate on `/products/corporate-card` | GA4 | −15–25% (interlinking + user profile section) | 2 weeks |
 | Pages per session (entry via corporate-card) | GA4 | 1.0 → 1.4+ (new internal link path) | 2 weeks |
 | FAQ rich result appearance | Google Search | Accordion in SERP | 1–3 weeks |
@@ -126,3 +126,37 @@ All changes in `after/corporate-card.html` are implementable in Webflow without 
 3. **New sections** ("Lo que tu banco no puede darte", interlinking block) → Webflow Designer → add section from component library or build with existing style tokens
 
 No code deployment required. No engineering ticket needed. A Webflow-trained content manager can implement and publish within 2 hours.
+
+---
+
+## Webflow Demo — Iteration 3 Copy Pass (May 7, 2026)
+
+Copy, tone, and compliance changes applied directly to the Webflow demo via MCP Designer Tools.
+
+### Compliance
+
+- `small-business` meta description: removed `"Sin aval, sin historial previo."` — phrase violates product messaging guidelines. Replaced with `"Alta 100% digital."`.
+
+### Copy changes — Small Business
+
+| Element | Before | After | Why |
+|---|---|---|---|
+| Hero subtitle | "...sin trámites bancarios" | "Control de gastos empresarial para equipos de 5 a 100 personas. Alta 100% digital." | Phrase was duplicated 3× on same page; new copy anchors the target segment |
+| Feature "Tarjetas" body | "...Sin trámites bancarios." | "...Desde la plataforma, en minutos." | Eliminates repetition |
+| Feature "Alta digital" body | "Tu PyME califica desde el primer día... Sin trámites bancarios, sin visitas a sucursal." | "Carga tus documentos, verifica en minutos y empieza a operar el mismo día." | "Califica" ambiguous (sounds like credit scoring); "sin trámites" was duplicated |
+| Interlinking H2 | "¿Quieres entender primero cómo funciona la tarjeta?" | "¿Tu empresa ya superó los 100 colaboradores?" | Weak H2 with no targeting; new version speaks to the exact graduation moment |
+| Interlinking body | "...opciones para cada etapa de crecimiento." | "Cuando tu equipo crece y los controles básicos ya no alcanzan, la tarjeta corporativa Clara escala contigo." | Concrete trigger → clear CTA path |
+
+### Copy changes — Corporate Card
+
+| Element | Before | After | Why |
+|---|---|---|---|
+| Hero subtitle | "Crédito para tu empresa, controles para tu equipo." | "Crédito a nombre de tu empresa. Tarjetas ilimitadas con controles individuales por empleado." | Adds two concrete differentiators missing from the original |
+| Features H2 | "Todo lo que necesitas para gestionar gastos de equipo" | "Tarjeta empresarial con controles en tiempo real para cada empleado" | Primary keyword in H2; "tiempo real" adds search-relevant modifier |
+| Interlinking H2 | "¿Es Clara para una empresa como la tuya?" | "¿Acabas de contratar tus primeros empleados?" | Speaks to the specific user state that triggers the journey to `/small-business` |
+| CTA subtitle | "Tu empresa califica. Empieza en minutos." | "Alta 100% digital. Empieza hoy." | "Califica" ambiguous; new copy reinforces the process differentiator |
+| Differentiators body | Generic one-paragraph summary | "Con Clara emites tarjetas para todo tu equipo en minutos, defines límites por colaborador y concilias automáticamente con el SAT. El crédito va a nombre de la empresa — no del director general." | More specific; names 3 verified differentiators; removes bank comparison framing |
+
+### Typography migration
+
+All 43 styles with `font-family` were migrated from `Montserrat` (headings) and `Inter` (body/nav/footer) to `Arial, "Helvetica Neue", Helvetica, sans-serif`. No Google Fonts dependency remains on the demo site.

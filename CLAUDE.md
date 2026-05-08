@@ -33,6 +33,61 @@ Secciones en orden:
 4. **Interlinking** — CTA de regreso hacia `/corporate-card`
 5. **Registro final**
 
+## Estrategia de componentes — regla de oro de esta sesión
+
+**Principio:** si un patrón visual aparece más de una vez en el sitio (misma estructura,
+contenido diferente), construirlo como componente Webflow desde la primera instancia.
+No convertir después — pensar en componente desde el diseño.
+
+El sitio real de Clara está construido así: las tarjetas Clara Black / White / Virtual / Travel
+son instancias del mismo componente con propiedades distintas. Ese es el estándar a replicar.
+
+### Qué se convierte en componente (y cuándo)
+
+| Patrón | Acción | Propiedades variables |
+|---|---|---|
+| **Logos strip** | Convertir el existente (corporate-card) en componente, insertar instancia en small-business | Label del encabezado si cambia |
+| **Profile card** (sección "¿Esta tarjeta es para ti?") | Construir la card como componente antes de multiplicarla × 3 | Título de perfil, texto de dolor, texto de solución |
+| **Step card** (sección "Cómo funciona") | Construir el step como componente antes de multiplicarlo × 3 | Número, título, descripción |
+| **Differentiator card** ("Lo que tu banco no puede darte") | Construir como componente | Ícono/emoji, título, descripción |
+| **Interlinking CTA block** | Construir como componente, insertar instancia diferente en cada página | Texto calificador, label del CTA, href |
+| **CTA final section** | Construir como componente, insertar instancias en ambas páginas | Heading, label del botón |
+| **Chatbot entry point** | Construir como componente (puede aparecer en más páginas futuras) | Heading, copy, label del botón, href |
+| **Navbar Clara** | Ya es componente ✅ | — |
+| **Footer Clara** | Ya es componente ✅ | — |
+
+### Flujo de trabajo para cada sección nueva
+
+1. Construir **una sola instancia** de la sección en corporate-card (la página más compleja)
+2. Cuando esté correcta: `de_component_tool` → `transform_element_to_component` con `replace: true`
+3. Definir **component properties** (texto variable) con `data_components_tool` → `update_component_properties`
+4. En small-business: insertar con `de_component_tool` → `insert_component_instance` y sobreescribir solo las propiedades que cambian
+5. Nunca duplicar HTML — si hay algo que parece copy-paste, es un componente que falta
+
+### Por qué importa demostrarlo
+
+El evaluador ve el canvas de Webflow. Un proyecto con secciones construidas como bloques
+únicos por página y otro con componentes reutilizables comunican niveles de conocimiento
+distintos. El segundo demuestra que se sabe mantener un proyecto escalable: cambiar el
+footer en un lugar lo actualiza en todas las páginas. Eso es lo que se quiere transmitir.
+
+### Nomenclatura de componentes (seguir el patrón del sitio real)
+
+| Componente | Estado |
+|---|---|
+| Navbar Clara | ya creado |
+| Footer Clara | ya creado |
+| Logos Strip Clara | nuevo |
+| Profile Card Clara | nuevo |
+| Step Card Clara | nuevo |
+| Differentiator Card | nuevo |
+| Interlink CTA Clara | nuevo |
+| CTA Section Clara | nuevo |
+| Chatbot Entry Clara | nuevo |
+
+Al crear cada componente: nombrar exactamente así en el panel de componentes de Webflow.
+El nombre es lo primero que ve el colaborador que abre el proyecto.
+
 ## Reglas duras
 - NUNCA inventar clases que no existan en `context/style-guide.md`
 - NUNCA usar inline styles

@@ -64,12 +64,17 @@ Corporate-card also has `FAQPage` JSON-LD schema injected via custom script.
 
 ---
 
-## Iteration 3 — Pending
+## Iteration 3 — Completed (May 7, 2026)
 
-### High priority (before live session)
+- ✅ **Compliance fix** — removed `"Sin aval, sin historial previo."` from small-business meta description. Replaced with `"Alta 100% digital."`
+- ✅ **Copy/tone pass** — 10 text nodes updated across both pages (see `part-d/notes.md` for full change log)
+- ✅ **Font migration** — 43 styles migrated from `Montserrat`/`Inter` → `Arial, "Helvetica Neue", Helvetica, sans-serif`. No Google Fonts dependency.
+
+## Iteration 4 — Pending
+
+### High priority
 
 - [ ] **Hero image** — corporate-card hero background image not wired. Asset uploaded to project CDN (`69fcec93c6b5fa35b5651982`). Apply via CSS `background-image` on hero section div.
-- [ ] **Compliance pass** — verify no "sin aval" or "sin historial crediticio" remaining in FAQ accordion text or differentiadores section on corporate-card.
 - [ ] **og:image** — add Open Graph image for both pages via Page Settings (Webflow: SEO tab → OG image).
 - [ ] **hreflang as HTML** — currently injected via JS. Move to Page Settings > Custom Code > Head as static `<link rel="alternate" hreflang="es-MX" ...>`.
 
@@ -79,9 +84,12 @@ Corporate-card also has `FAQPage` JSON-LD schema injected via custom script.
 - [ ] **Registro form** — CTA final has a form placeholder. Wire up a real form (Webflow native form or HubSpot embed).
 - [ ] **Responsive review** — check navbar and footer at tablet and mobile breakpoints in Webflow Designer.
 
+> ⚠️ **Bloqueado (May 7, 2026)** — Todas las tareas de esta iteración (High + Medium priority) requieren el Webflow Designer MCP Bridge App. La extensión en `webflow-ext.com` estaba caída durante la sesión. Cuando vuelva disponible: abrir Designer → Bridge App → conectar a `localhost:1338` → ejecutar backlog.
+
 ### Low priority
 
 - [ ] **parts B and C** — confirm `part-b/keyword-strategy.md` and `part-c/geo-ai-search.md` are in repo with correct content.
+- [ ] **Safe publish** — run `/safe-publish` after any Designer session to push changes to `clara-seo-challenge.webflow.io`.
 
 ---
 

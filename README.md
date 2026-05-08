@@ -192,4 +192,4 @@ ClaraSEOChallenge/
 See `CLAUDE.md` for the Webflow MCP setup and agent configuration.  
 See `ROADMAP.md` for the full status checklist.
 
-**Current status (May 2026):** Parts A–D complete. Webflow demo published at `clara-seo-challenge.webflow.io` with both pages live. Navbar and Footer extracted as reusable Webflow components. See `ROADMAP.md` for iteration 3 checklist.
+**Current status (May 2026):** Parts A–D complete. Webflow demo published at `clara-seo-challenge.webflow.io` with both pages live. Navbar and Footer extracted as reusable Webflow components. Iteration 3 completed: compliance fix (removed non-compliant messaging from meta description), 10-node copy/tone pass across both pages, and full font migration to `Arial, "Helvetica Neue", Helvetica, sans-serif`. See `ROADMAP.md` for iteration 4 checklist.
