@@ -15,7 +15,7 @@ Before mapping keywords or pages, a framing decision that shapes everything that
 
 SEO is not the strategy — it is the result of a content strategy well executed. If the site's narrative reflects how a real user discovers, evaluates, and decides to use Clara, then pages naturally answer the right questions, use the right vocabulary, and interlink in ways that make sense for both the user and the crawler. Keyword targeting is not something applied on top of content — it emerges from understanding what question a user is asking at each moment of their journey.
 
-Clara's core narrative is underutilized. The product is genuinely differentiated: it covers the complete lifecycle of corporate spend, from the moment an employee makes a purchase to the moment a CFO sees it reconciled, categorized, and tax-deductible — all within one platform. That narrative does not appear anywhere in the current landing pages. It lives in product release posts written for existing users, disconnected from the discovery journey of a prospective buyer.
+Clara's core narrative is underutilized. The product is genuinely differentiated: it covers the complete lifecycle of corporate spend, from the moment an employee makes a purchase to the moment a CFO sees it reconciled, categorized, and tax-deductible — all within one platform. That narrative does not appear anywhere in the current landing pages. It lives in product release posts written for existing users, disconnected from the discovery journey of a prospective decision-maker.
 
 The architecture proposed here is built around that narrative, structured by user journey stage.
 
@@ -23,7 +23,7 @@ The architecture proposed here is built around that narrative, structured by use
 
 ## The User Journey: Four Moments of Search
 
-A prospective buyer searching for a solution like Clara moves through four distinct moments, each with a different question and a different search behavior.
+A prospective decision-maker searching for a solution like Clara moves through four distinct moments, each with a different question and a different search behavior.
 
 **Moment 1 — Problem awareness.** The user has an operational problem but does not know Clara exists. They search for process-level answers: "cómo controlar gastos de empleados en campo", "como reembolsar despesas de funcionários Brasil", "proceso de reembolso de viáticos empresas Colombia". These are informational queries with low competition and high strategic value because they capture the user before any competitor does.
 

@@ -72,30 +72,33 @@ This connection between the `llms.txt` extension above and the FAQ schema is del
 
 ---
 
-## 3. How to Report GEO Impact to a Non-Technical Executive
+## 3. GEO Reporting Model for Non-Technical Stakeholders
 
-### The framing problem
+### Reporting challenge
 
-GEO does not have a universal metric equivalent to organic sessions or keyword rankings. Saying "Clara appeared in 7 out of 10 AI queries this week" means nothing to a CFO or CMO who does not know what the baseline was, whether 7 is good or bad, or whether it translates to business outcomes. The reporting framework has to solve for that context problem.
+GEO does not yet have a single standard metric equivalent to organic sessions or keyword rankings. A statement like "Clara appeared in 7 out of 10 AI queries this week" lacks context unless the audience can see the baseline, trend direction, and business implication.
 
-### What to measure
+### Recommended metrics
 
-Three metrics, in order of importance:
+Three metrics should be tracked in this order:
 
-**Presence rate:** Of the 15 queries tracked weekly (5 per market), in how many does Clara appear as a named recommendation? Expressed as a percentage and tracked over time. The current baseline — Clara appears in ChatGPT for the primary MX startup query — becomes week-zero. The goal is to extend that presence to CO and BR queries and to Perplexity and Gemini alongside ChatGPT.
+**Presence rate:** Of the 15 benchmark queries tracked weekly (5 per market), in how many does Clara appear as a named recommendation? Track as a percentage over time. Current baseline: Clara appears in ChatGPT for the primary MX startup query. Target: expand coverage across CO and BR queries and across Perplexity and Gemini in addition to ChatGPT.
 
-**Accuracy rate:** Of the responses where Clara appears, what percentage contain accurate information? The Visa/Mastercard error is the current accuracy failure. Each inaccuracy identified feeds into a correction backlog: update the `llms.txt` entry, publish a corrective FAQ page, amplify the press release that carries the correct claim. Accuracy rate should trend toward 100% as structured content accumulates.
+**Accuracy rate:** Of the responses where Clara appears, what percentage contain accurate factual information? The Visa/Mastercard mismatch is the current reference error. Every inaccuracy feeds a correction backlog (`llms.txt` updates, FAQ/schema updates, and supporting high-authority citations). Target trend: move accuracy toward 100%.
 
-**Downstream signal:** AI-generated recommendations tend to surface as direct traffic or branded search in Google Analytics — users who received a recommendation from an AI model and then searched for Clara directly to verify. A sustained increase in branded search volume, tracked against the timeline of GEO improvements, is the closest available proxy for GEO-driven business impact.
+**Downstream signal:** AI-assisted recommendations usually appear in analytics as direct traffic uplift and branded search growth. A sustained increase in branded search volume, aligned with GEO content releases, is the best available proxy for GEO business impact.
 
-### Cadence and framing
+### Executive cadence
 
-Monthly report to executives. Three sections: presence trend (chart showing presence rate over the past 8 weeks), accuracy issues found and corrected that month, and one concrete example — a screenshot of a ChatGPT or Perplexity response that includes Clara, with a note on what content or `llms.txt` change contributed to that appearance.
+Recommended format: monthly executive update with three sections:
 
-The framing for a non-technical executive: *"AI search engines are becoming a primary discovery channel for B2B buyers. This report tracks whether Clara appears — and appears correctly — when a prospective customer asks an AI assistant which corporate card to use. Our goal is to be the default recommendation for companies in Mexico, Colombia, and Brazil."*
+1. Presence trend (8-week chart)
+2. Accuracy issues identified and corrected
+3. One concrete model output example (ChatGPT/Perplexity/Gemini) plus the content change that likely influenced it
 
-That single sentence connects the metric to a business outcome the executive already understands: being recommended over competitors at the moment a buyer is deciding.
+Executive framing:
+*"AI search is becoming a primary discovery channel for B2B buyers. This report shows whether Clara is recommended — and recommended accurately — when decision-makers ask AI assistants which corporate card to use."*
 
-### Tooling at scale
+### Tooling path
 
-For a small team, a structured weekly log with 10–15 queries per market establishes trend direction without tooling investment. When volume or frequency demands automation, platforms like Profound, Otterly, or AthenaHQ track AI query responses at scale — logging date, model, query, Clara mention, position, accuracy issues, and cited sources automatically. The log structure is the same whether it is filled manually or by a tool; the tool just removes the weekly time cost.
+For a lean team, a structured weekly log (10-15 benchmark queries per market) is sufficient to establish trend direction. At larger scale, platforms like Profound, Otterly, or AthenaHQ can automate tracking (query, model, mention, position, accuracy issue, cited source), while preserving the same reporting structure.
