@@ -8,13 +8,13 @@
 
 ## Assumption Log
 
-**Assumption 1 — The `/empresas` page is hypothetical.** That URL does not exist in the sitemap. Part D works on two real pages that serve the same purpose: `/es-mx/products/corporate-card` and `/es-mx/solutions/small-business`. Both share nearly identical components and copy — which is itself a finding.
+**Assumption 1 — `/empresas` is a challenge label, not the production URL.** In production, the equivalent route is `/es-mx/solutions/small-business`. In the challenge demo, that page was later renamed to `/empresas`. Part D works on the two real page types behind the challenge prompt: `/es-mx/products/corporate-card` and `/es-mx/solutions/small-business`.
 
 **Assumption 2 — Vocabulary strategy requires coexistence, not substitution.** Clara uses "tarjeta corporativa" as the official product name. Google Trends shows that "tarjeta empresarial" consistently outperforms "tarjeta corporativa" in search volume in MX and CO — in Colombia, "corporativa" has close to zero search volume. The right approach is not to abandon "corporativa" but to work with both terms in distinct layers: "empresarial" as the anchor in the highest-weight SEO elements (title, H1, meta description), and "corporativa" as a secondary semantic signal in subheadings and body text. Brazil is the exception — "cartão corporativo" leads and the site already uses it correctly.
 
 This strategy resolves the tension between what the brand calls the product and what users actually search for, without creating brand inconsistency.
 
-**Assumption 3 — English URL slugs affect localization signals.** Pages like `/products/corporate-card` and `/cards/black-card` within Spanish-language URL paths generate an inconsistent localization signal. The slug impact alone is modest, but the inconsistency amplifies the hreflang and duplicate content issues that already exist. Any slug migration must include 301 redirects and pre/post validation in Google Search Console.
+**Assumption 3 — English URL slugs affect localization signals.** Pages like `/es-mx/products/corporate-card` and `/es-mx/cards/black-card` within Spanish-language paths generate an inconsistent localization signal. The slug impact alone is modest, but the inconsistency amplifies the hreflang and duplicate content issues that already exist. Any slug migration must include 301 redirects and pre/post validation in Google Search Console.
 
 ---
 
@@ -106,7 +106,7 @@ The H1 must reflect search intent without sounding generic. A direction that res
 
 The meta description must function as a conversion asset in the SERP: `Emite tarjetas para tu equipo, automatiza reembolsos y cierra el mes sin caos. Sin aval, sin historial crediticio. Más de 30,000 empresas ya lo hacen con Clara.`
 
-The **internal linking** on the Mexico homepage is oriented primarily toward registration. There are no prominent links to product pages (`/products/corporate-card`) or solution pages, which limits authority distribution and shortens the discovery journey for users who are not yet ready to sign up.
+The **internal linking** on the Mexico homepage is oriented primarily toward registration. There are no prominent links to product pages (`/es-mx/products/corporate-card`) or solution pages, which limits authority distribution and shortens the discovery journey for users who are not yet ready to sign up.
 
 ---
 

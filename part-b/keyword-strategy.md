@@ -53,7 +53,7 @@ This is the highest-intent product page and the one most likely to rank for tran
 
 Optimization: Consolidate the individual card pages (`/cards/black-card`, `/cards/white-card`, `/cards/virtual-card`) into this page as anchored sections with 301 redirects from the individual URLs. This concentrates link equity into one URL and eliminates the thin content problem. The page should be restructured around the H1 "Tarjeta empresarial para equipos que escalan con control", with H2s that cover card types, use cases, and differentiators against traditional bank cards. The FAQ section should be expanded with high-intent questions: "¿Puedo dar tarjeta corporativa a mis empleados sin aval?", "¿Cómo controlo los límites de gasto por empleado?", "¿Qué diferencia a Clara de una tarjeta de banco tradicional?".
 
-**`/es-mx/solutions/small-business` (and equivalents)**
+**`/es-mx/solutions/small-business` (and equivalents; demo slug later renamed to `/empresas`)**
 
 Currently a near-duplicate of the corporate card page with a different H1. The solution pages need a fundamentally different content type than the product pages — they should answer "is Clara right for my company?" not "what does Clara do?".
 
@@ -73,7 +73,7 @@ These pages target Moment 1 searches. They are written around specific operation
 
 Pages to create:
 
-- `/es-mx/recursos/como-reembolsar-gastos-a-empleados` — targets "cómo reembolsar gastos a empleados México". Covers the full reimbursement process, the problems with manual approaches (receipts, transfers, reconciliation), and how an automated platform changes the workflow. Links to `/products/corporate-card` and `/solutions/small-business`.
+- `/es-mx/recursos/como-reembolsar-gastos-a-empleados` — targets "cómo reembolsar gastos a empleados México". Covers the full reimbursement process, the problems with manual approaches (receipts, transfers, reconciliation), and how an automated platform changes the workflow. Links to `/es-mx/products/corporate-card` and `/es-mx/solutions/small-business`.
 
 - `/es-mx/recursos/control-de-gastos-corporativos` — targets "cómo controlar gastos de equipo en campo". Covers card controls, approval flows, and real-time visibility. Links to the consolidated corporate card page.
 
@@ -99,26 +99,26 @@ The interlinking should reflect the user journey sequence, not the site's intern
 
 ```
 Homepage (es-mx)
-├── → /products/corporate-card  [primary product, transactional]
-├── → /solutions/small-business  [fit assessment, by size]
-├── → /solutions/enterprise       [fit assessment, by size]
-└── → /como-funciona              [narrative/operating system page]
+├── → /es-mx/products/corporate-card        [primary product, transactional]
+├── → /es-mx/solutions/small-business       [fit assessment, by size]
+├── → /es-mx/solutions/enterprise           [fit assessment, by size]
+└── → /es-mx/como-funciona                  [narrative/operating system page]
 
-/products/corporate-card
-├── → /solutions/small-business  [if you're a growing team]
-├── → /solutions/enterprise       [if you're scaling fast]
-├── → /recursos/control-de-gastos-corporativos  [go deeper on a use case]
-└── → /pricing                    [decision moment]
+/es-mx/products/corporate-card
+├── → /es-mx/solutions/small-business       [if you're a growing team]
+├── → /es-mx/solutions/enterprise           [if you're scaling fast]
+├── → /es-mx/recursos/control-de-gastos-corporativos  [go deeper on a use case]
+└── → /es-mx/planes                         [decision moment]
 
-/recursos/como-reembolsar-gastos-a-empleados
-├── → /products/corporate-card    [the solution]
-├── → /solutions/small-business   [is this right for my company?]
-└── → /registration               [decision CTA, lower in the page]
+/es-mx/recursos/como-reembolsar-gastos-a-empleados
+├── → /es-mx/products/corporate-card        [the solution]
+├── → /es-mx/solutions/small-business       [is this right for my company?]
+└── → /es-mx/planes                         [decision CTA, lower in the page]
 
-/como-funciona
-├── → /products/corporate-card
-├── → /resources/[customer story]
-└── → /pricing
+/es-mx/como-funciona
+├── → /es-mx/products/corporate-card
+├── → /es-mx/customers/[customer-case]
+└── → /es-mx/planes
 ```
 
 The key principle: every informational page has a path to a transactional page. Every product page has a path to a solution page. Every solution page has a path to pricing and registration. No page is a dead end.

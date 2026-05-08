@@ -28,11 +28,11 @@ Two gaps remain that limit its GEO effectiveness:
 
 **It describes features but does not answer questions.** AI models surface content that responds to specific queries, not product catalogs. "Clara Intelligence analyzes spending data" is a feature label. What a model needs to answer "¿cómo detecta Clara gastos duplicados?" is a sentence structured as an answer: *"Clara Intelligence automatically identifies duplicate subscriptions and anomalous transactions in real time, alerting the finance team before the expense is reconciled."* The information is the same — the format determines whether a model can use it.
 
-**It is entirely in English.** AI models responding to Spanish and Portuguese queries weight sources in the query language. The `llms.txt` should include parallel descriptions in `es-mx`/`es-co` and `pt-br` for each product section. The press release URLs already link to Spanish and Portuguese content — the `llms.txt` itself needs the same treatment.
+**Language coverage was a gap in the initial baseline.** AI models responding to Spanish and Portuguese queries weight sources in the query language. The repository version of `part-c/llms.txt` now includes parallel sections in English, Spanish (`es-mx`/`es-co`), and Portuguese (`pt-br`) to address this.
 
-### Recommended `llms.txt` extension
+### `llms.txt` extension implemented in this repository
 
-The addition below does not replace the existing file — it extends it with a question-answer block and a multilingual description layer:
+The structure below is now reflected in `part-c/llms.txt`: a question-answer block and a multilingual description layer designed for direct retrieval by LLMs.
 
 ```
 ## What problems does Clara solve?

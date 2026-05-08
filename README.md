@@ -31,11 +31,11 @@ The instinctive answer is "bad copy" or "wrong keyword." Those are symptoms. The
 
 Clara's site is built like a [Matrioshka](https://en.wikipedia.org/wiki/Matryoshka_doll) — nested layers that each look complete from the outside, but when you open one, there's another inside with no connecting thread. The homepage links to product pages. Product pages list features. Features link to... registration. There is no middle layer: no "how does this work for a company like mine," no path from awareness to consideration, no content that earns the click before asking for commitment.
 
-A user searching "tarjeta corporativa empresas" lands on `/products/corporate-card`. The page is visually polished. But it doesn't answer the implicit question behind that search: *"Is this actually for my type of business? What happens after I sign up? Why not just use my bank?"* The page doesn't answer any of those questions — it asks for a registration. The user bounces.
+A user searching "tarjeta corporativa empresas" lands on `/es-mx/products/corporate-card`. The page is visually polished. But it doesn't answer the implicit question behind that search: *"Is this actually for my type of business? What happens after I sign up? Why not just use my bank?"* The page doesn't answer any of those questions — it asks for a registration. The user bounces.
 
 The bounce rate is not a copywriting problem. It's an architecture problem. Fixing the H1 without fixing the journey is polishing one doll without opening the next one.
 
-**That is why the `/empresas` page doesn't exist** — and why working on the two real pages that exist (`/products/corporate-card` and `/solutions/small-business`) is more honest and more useful than fabricating a URL.
+**That is why the `/empresas` page doesn't exist in production sitemap** — and why working on the two real pages that exist (`/es-mx/products/corporate-card` and `/es-mx/solutions/small-business`) is more honest and more useful than fabricating a URL.
 
 ---
 
@@ -98,7 +98,7 @@ The structural fix is not ad-hoc: it's a `llms.txt` file in Spanish and Portugue
 
 ### Why two pages instead of one
 
-`/products/corporate-card` answers "what is the product." `/empresas` (formerly `/solutions/small-business`) answers "is this for a company like mine." Neither page linked to the other originally. A user in the consideration stage needs both — and the absence of a path between them is the architectural cause of the bounce.
+`/es-mx/products/corporate-card` answers "what is the product." `/empresas` (demo slug for `/es-mx/solutions/small-business`) answers "is this for a company like mine." Neither page linked to the other originally. A user in the consideration stage needs both — and the absence of a path between them is the architectural cause of the bounce.
 
 The `before/` and `after/` demonstrate two things simultaneously:
 1. **Technical fixes** — hreflang with absolute URLs, duplicate H1 corrected, FAQ schema added
@@ -137,8 +137,8 @@ The copy follows Clara's documented tone of voice principles: tuteo, concrete be
 
 | Page | URL |
 |---|---|
-| Corporate Card (after) | `clara-seo-challenge.webflow.io/corporate-card` |
-| Empresas (after, formerly Small Business) | `clara-seo-challenge.webflow.io/empresas` |
+| Corporate Card (after) | `https://clara-seo-challenge.webflow.io/corporate-card` |
+| Empresas (after, formerly Small Business) | `https://clara-seo-challenge.webflow.io/empresas` |
 
 The demo is built in a real Webflow project using Clara's production CSS classes (`fbl-`/`uui-` naming system). Both pages include the four mandatory improvements plus full narrative interlinking, a logos strip (11 enterprise clients), and reusable Navbar/Footer components.
 
@@ -176,7 +176,8 @@ ClaraSEOChallenge/
 ├── part-b/
 │   └── keyword-strategy.md       ← keyword strategy and content architecture
 ├── part-c/
-│   └── geo-ai-search.md          ← GEO baseline and AI search proposal
+│   ├── geo-ai-search.md          ← GEO baseline and AI search proposal
+│   └── llms.txt                  ← multilingual LLM retrieval source file
 └── part-d/
     ├── before/                   ← real site structure captured via Webflow MCP
     ├── after/                    ← improved versions with all four changes implemented
