@@ -24,6 +24,27 @@ The documentation set in this repository now tracks the latest Designer state us
 
 ---
 
+## Designer API Limitation Note (CMS / DynamoWrapper)
+
+During the latest `/empresas` "Casos de uso" implementation pass, a hard API limitation was confirmed:
+
+- Webflow Designer API can create a `CMSCollection` wrapper (`DynamoWrapper`) via `element_builder`.
+- The same API does **not** allow inserting template children programmatically inside `DynamoItem` using common node types (`Link`, `DivBlock`, `BY_CUSTOM_TAG`, etc.).
+- Attempted inserts are rejected with: `"cannot be placed in a Collection List Wrapper."`
+
+### Practical outcome
+
+To keep momentum without blocking delivery, the section was implemented as static markup (WHTML) using real content from the "Casos de uso" collection:
+
+- 6 static tabs (`fbl-proof-tab`, `data-tab="0..5"`)
+- 6 static panels (`fbl-proof-panel`, `data-panel="0..5"`)
+- SmartFit active by default (`is-active` on tab/panel `0`)
+- Existing tabs JS remains valid and operational
+
+This workaround is intentional and documented for future sessions, until Webflow exposes programmatic template population for collection items.
+
+---
+
 ## Changes Implemented — corporate-card.html
 
 ### 1. hreflang `es-MX` and canonical — relative URL fix

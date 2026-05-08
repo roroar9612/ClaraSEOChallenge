@@ -62,7 +62,7 @@
 
 1. ✅ **Hero** — H1 "Control financiero para empresas que están creciendo", lead copy, CTA "Regístrate gratis" + "Ver tarjetas Clara", mockup panel de gasto (Gasto mensual $1,546,736 + chips: Tarjetas por equipo, Límites por colaborador, Pagos y gastos visibles)
 2. ✅ **Logos strip** — componente `049962a7`
-3. ✅ **Casos de uso (editorial cards)** — H2 "Historias reales para mostrar dónde Clara genera valor", grid de tarjetas con caso destacado + casos de apoyo. Empresas integradas: SmartFit, 99 Minutos, MCM Telecom, Runa, Terranova y Truora.
+3. ✅ **Casos de uso (tab switcher estático)** — 6 pills `fbl-proof-tab` con `data-tab="0..5"` + 6 panels `fbl-proof-panel` con `data-panel="0..5"`, SmartFit activo por defecto (`is-active`), contenido real de la colección de casos integrado como markup estático.
 4. ✅ **Perfiles** — "Para empresas que necesitan ordenar su operación financiera", 3 perfiles: Fundadores con operación activa, Equipos financieros pequeños, Empresas en crecimiento
 5. ✅ **Features** — "Capacidades para controlar gastos sin frenar a tu equipo", 4 features: Tarjetas para todo el equipo, Reembolsos centralizados, Visibilidad en tiempo real, Alta 100% digital
 6. ✅ **CTA final** — "Empieza a centralizar la operación financiera de tu empresa" (componente `CTA Section Clara`)
@@ -128,11 +128,22 @@
 - Casos integrados: SmartFit, 99 Minutos, MCM Telecom, Runa, Terranova y Truora
 - **Estado: aplicado en Designer, pendiente de publicar**
 
+### Iteración 6 — Casos de uso tabs estáticos + limitación CMS API (mayo 8, 2026)
+- Eliminación de estáticos anteriores: no aplicó (ya no existían)
+- Limpieza de DynamoWrappers huérfanos: 2 eliminados
+- Tabs estáticos creados: 6 pills con `fbl-proof-tab` + `data-tab` (`0..5`)
+- Panels estáticos creados: 6 panels con `fbl-proof-panel` + `data-panel` (`0..5`)
+- Estado inicial: SmartFit activo (`is-active`) en tab/panel `0`
+- JS de tabs activo y compatible con atributos `data-tab` / `data-panel`
+- **Limitación confirmada:** la API Designer no permite poblar templates dentro de `DynamoItem` programáticamente. `element_builder` con `CMSCollection` crea el wrapper, pero rechaza hijos con error: `"cannot be placed in a Collection List Wrapper."`
+- **Workaround vigente:** implementación estática con `whtml_builder` usando datos reales de la colección "Casos de uso"
+- **Estado: aplicado en Designer, pendiente de publicar**
+
 ---
 
-## Pendiente — Iteración 6
+## Pendiente — Iteración 7
 
-- [ ] **Publicar** — correr `/safe-publish` para subir iteraciones 3+4+5+6 a `clara-seo-challenge.webflow.io`
+- [ ] **Publicar** — correr `/safe-publish` para subir iteraciones 3+4+5+6+7 a `clara-seo-challenge.webflow.io`
 - [ ] **og:image** — Open Graph image en ambas páginas vía Page Settings
 - [ ] **hreflang estático** — mover de JS a `<link>` HTML en Page Settings > Custom Code > Head
 - [ ] **Responsive review** — navbar y footer a tablet/mobile
