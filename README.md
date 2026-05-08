@@ -142,12 +142,12 @@ The copy follows Clara's documented tone of voice principles: tuteo, concrete be
 
 ## Live Demo
 
-**Webflow demo site:** [clara-seo-challenge.webflow.io](https://clara-seo-challenge.webflow.io)
+**Review starting point (do not use home):** [https://clara-seo-challenge.webflow.io/empresas](https://clara-seo-challenge.webflow.io/empresas)
 
 | Page | URL |
 |---|---|
-| Corporate Card (after) | `https://clara-seo-challenge.webflow.io/corporate-card` |
 | Empresas (after, formerly Small Business) | `https://clara-seo-challenge.webflow.io/empresas` |
+| Corporate Card (after) | `https://clara-seo-challenge.webflow.io/corporate-card` |
 
 The demo is built in a real Webflow project using Clara's production CSS classes (`fbl-`/`uui-` naming system). Both pages include the four mandatory improvements plus full narrative interlinking, a logos strip (11 enterprise clients), and reusable Navbar/Footer components.
 
@@ -202,6 +202,6 @@ ClaraSEOChallenge/
 See `CLAUDE.md` for the Webflow MCP setup and agent configuration.  
 See `ROADMAP.md` for the full status checklist.
 
-**Current status (May 2026):** Parts A-D are complete. Webflow demo published at `clara-seo-challenge.webflow.io` with both pages live. Navbar and Footer extracted as reusable Webflow components. Iteration 3 completed: compliance fix (removed non-compliant messaging from meta description), 10-node copy/tone pass across both pages, and full font migration to `Arial, "Helvetica Neue", Helvetica, sans-serif`. See `ROADMAP.md` for iteration 4 checklist.
+**Current status (May 2026):** Parts A-D are complete. Review should start on `/empresas` and then move to `/corporate-card` (the homepage is not used as the evaluation entry point for this challenge). Navbar and Footer were extracted as reusable Webflow components, and copy/metadata updates were applied to both pages.
 
 **Latest sync (May 8, 2026):** The Webflow page previously labeled "Small Business" now uses slug `/empresas` (page ID `69fc967c3d0867342deac6eb`). Documentation and navigation references were updated accordingly.
